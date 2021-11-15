@@ -1,0 +1,68 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ PROJECT_TITLE|safe }}{% endblock title %}</title>
+
+  {% include "includes/favicons.html" %}
+
+  {% block css %}
+  <!-- Boostrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css"
+    integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+  <link href="{% static 'customadmin/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
+  <!-- Styles -->
+  <link href="{% static 'css/project.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/pre-registration.min.css' %}" rel="stylesheet">
+  {% endblock css %}
+
+  {% block js_head %}
+  {% endblock js_head %}
+</head>
+
+<body id="{% block body_id %}{% endblock body_id %}" class="d-flex flex-column h-100">
+
+  {% block header %}
+  <header class="border-bottom">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 d-flex align-items-center">
+          <img id="logo" src="{% static 'img/unisign-logo-color.png' %}" alt="{{ PROJECT_TITLE|safe }}">
+          <div class="flex-grow-1"></div>
+          <img id="logo" src="{% static 'img/uc-logo.png' %}" alt="">
+        </div>
+      </div>
+    </div>
+
+  </header>
+  {% endblock header %}
+
+  {% if messages %}
+  <div class="container my-3">
+      {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+      {% endfor %}
+  </div>
+  {% endif %}
+
+  {% block content %}{% endblock content %}
+
+  {% block footer %}
+  <footer class="border-top">
+    {% comment %} <p class="text-center"><b>CONFIDENTIAL & TRADE SECRET</b> Universal Creative&trade; &bull; Universal elements and all related indicia &trade; & &copy; {% now 'Y' %} Universal Studios. All Rights Reserved. <a href="https://www.nbcuniversal.com/privacy" target="_blank">Privacy Policy</a></p> {% endcomment %}
+  </footer>
+  {% endblock footer %}
+
+  {% block js %}
+  <!-- scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  {% endblock js %}
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+{% extends "base_error.html" %}
+
+{% load static i18n %}
+
+{% block title %}Server Error (500){% endblock %}
+
+{% block error_page_content %}
+<h1>Server Error (500)</h1>
+
+<p class="lead">Looks like something went wrong!</p>
+
+<img src="{% static 'img/500.jpg' %}" class="img-fluid" />
+{% endblock error_page_content %}
