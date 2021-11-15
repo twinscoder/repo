@@ -37,7 +37,9 @@ class AccountManager(BaseUserManager):
 
 class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
     email = models.EmailField(null=True, blank=True, unique=True)
-    username = models.CharField(max_length=40, blank=True, null=True, default="", unique=True)
+    username = models.CharField(
+        max_length=40, blank=True, null=True, default="", unique=True
+    )
     first_name = models.CharField(max_length=40, blank=True)
     last_name = models.CharField(max_length=40, blank=True)
     profile_image = models.ImageField(
@@ -49,14 +51,17 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
     )
     description = models.CharField(max_length=255, blank=True)
 
-    address = models.TextField(default="", blank=True)
+    address = models.CharField(max_length=255, default="", blank=True)
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(max_length=50, blank=True)
     country = models.CharField(max_length=30, blank=True)
     pincode = models.CharField(max_length=8, blank=True)
 
     unique_id = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True, verbose_name=_("Unique Id"),
+        default=uuid.uuid4,
+        editable=False,
+        unique=True,
+        verbose_name=_("Unique Id"),
     )
 
     is_active = models.BooleanField(default=True)
@@ -81,7 +86,7 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
         ordering = ["-created_at"]
 
     def get_absolute_url(self):
-        return reverse("customadmin:user-list")
+        return reverse("customadmin:users:user-list")
 
 
 class UserCard(ActivityTracking):

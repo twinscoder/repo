@@ -8,7 +8,7 @@
 
 
 {% block title %}
-    {% if object.pk %}Change{% else %}Add{% endif %} {{ opts.verbose_name|capfirst }} - {{ opts.verbose_name_plural|capfirst }}
+    {% if object.pk %}Change{% else %}Add{% endif %} {{ opts.verbose_name|capfirst }}
 {% endblock%}
 
 
@@ -25,7 +25,7 @@
     {% if has_view_permission %}<a href="{% url opts|admin_urlname:'list' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
 </li>
 <li class="breadcrumb-item active">
-    {% if add %}{% blocktrans with name=opts.verbose_name %}Add {{ name }}{% endblocktrans %}{% else %}{{ object|truncatewords:"18" }}{% endif %}
+    {% if add %}{% blocktrans with name=opts.verbose_name %}Add {{ name }}{% endblocktrans %}{% else %}{{ object|truncatewords:"18"|capfirst}}{% endif %}
 </li>
 {% endblock %}
 

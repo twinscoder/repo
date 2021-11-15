@@ -44,6 +44,8 @@ def as_json(obj):
 @register.filter
 def admin_urlname(value, arg):
     pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
+    if value.model_name == "user":
+        pattern = "%s:%s-%s" % ("customadmin:users", "user", arg)
     # print(pattern)
     return pattern
 

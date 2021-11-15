@@ -74,5 +74,7 @@ def admin_urlname(value, arg):
     """Given model opts (model._meta) and a url name, return a named pattern.
     URLs should be named as: customadmin:app_label:model_name-list"""
     pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
+    if value.model_name == "user":
+        pattern = "%s:%s-%s" % ("customadmin:users", "user", arg)
     # print(pattern)
     return pattern

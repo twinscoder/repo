@@ -35,15 +35,20 @@
                 </div>
             </li>
             {% if perms.users or perms.auth %}
-            <li {% if 'auth/' in request.path %}class="active" {% endif %}>
+            <li {% if 'users' in request.path or 'groups' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <i class="fas fa-users fa-fw fa-2x"></i>
                     <span class="nav-label">Users &amp; Groups</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
+                    {% if perms.users %}
+                        <li {% if 'users/' in request.path %}class="active" {% endif %}>
+                            <a href="{% url 'customadmin:users:user-list' %}">Users</a>
+                        </li>
+                    {% endif %}
                     {% if perms.auth %}
-                    <li {% if 'auth/groups/' in request.path %}class="active" {% endif %}>
+                    <li {% if 'groups/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:auth:group-list' %}">Groups</a>
                     </li>
                     {% endif %}

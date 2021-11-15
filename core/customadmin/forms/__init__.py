@@ -1,1 +1,1 @@
-from .users import MyGroupForm
+from .users import MyUserCreationForm, MyUserChangeForm, MyGroupForm
