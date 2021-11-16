@@ -36,6 +36,9 @@ class AccountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
+
+    GENDER_CHOICES = (("Male", "MALE"), ("Female", "FEMALE"))
+
     email = models.EmailField(null=True, blank=True, unique=True)
     username = models.CharField(
         max_length=40, blank=True, null=True, default="", unique=True
@@ -51,7 +54,9 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
     )
     description = models.CharField(max_length=255, blank=True)
 
+    birth_date = models.CharField(max_length=10, default="", blank=True)
     address = models.CharField(max_length=255, default="", blank=True)
+    phone = models.CharField(max_length=20, default="", blank=True)
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(max_length=50, blank=True)
     country = models.CharField(max_length=30, blank=True)
@@ -69,7 +74,8 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
 
     objects = AccountManager()
 
-    USERNAME_FIELD = "username"
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def __unicode__(self):
         return self.email

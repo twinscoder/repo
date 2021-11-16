@@ -1,11 +1,11 @@
-.icon-input-btn{
+.icon-input-btn {
   display: inline-block;
   position: relative;
 }
-.icon-input-btn input[type="submit"]{
+.icon-input-btn input[type="submit"] {
   padding-left: 2em;
 }
-.icon-input-btn .fa{
+.icon-input-btn .fa {
   display: inline-block;
   position: absolute;
   left: 0.65em;
@@ -138,14 +138,6 @@ table {
 /* -------------------------------------------------------------------------- */
 /* UNIVERSAL STYLES */
 /* -------------------------------------------------------------------------- */
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/2967B9A0E7E4EDC83.woff2) format("woff2"),
-    url(../fonts/gotham/2967B9A0E7E4EDC83.woff) format("woff");
-  font-weight: 100;
-  font-style: normal;
-}
-
 @font-face {
   font-family: "HCo Gotham";
   src: url(../fonts/gotham/CF9B3AC6C5090E643.woff2) format("woff2"),

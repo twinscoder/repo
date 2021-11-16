@@ -44,7 +44,7 @@
                 <ul class="nav nav-second-level">
                     {% if perms.users %}
                         <li {% if 'users/' in request.path %}class="active" {% endif %}>
-                            <a href="{% url 'customadmin:users:user-list' %}">Users</a>
+                            <a href="{% url 'customadmin:user-list' %}">Users</a>
                         </li>
                     {% endif %}
                     {% if perms.auth %}
@@ -55,7 +55,22 @@
                 </ul>
             </li>
             {% endif %}
-
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'customers/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:customer-list' %}"> 
+                    <i class="fa fa-user fa-fw fa-2x"></i>
+                    <span class="nav-label">Customers</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'stores/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:store-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Stores</span>
+                </a>
+            </li>
+            {% endif %}
     
         </ul>
 
