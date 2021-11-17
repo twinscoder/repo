@@ -1,9 +1,13 @@
 import uuid
-from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.contrib.auth.models import BaseUserManager
-from django.utils.translation import gettext as _
+
 from config.models import ActivityTracking
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
+from django.db import models
+from django.utils.translation import gettext as _
 
 # Create your models here.
 
@@ -39,12 +43,21 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
 
     GENDER_CHOICES = (("Male", "MALE"), ("Female", "FEMALE"))
 
-    email = models.EmailField(null=True, blank=True, unique=True)
-    username = models.CharField(
-        max_length=40, blank=True, null=True, default="", unique=True
+    email = models.EmailField(
+        null=True, blank=True, unique=True, verbose_name=_("Email")
     )
-    first_name = models.CharField(max_length=40, blank=True)
-    last_name = models.CharField(max_length=40, blank=True)
+    username = models.CharField(
+        max_length=40,
+        blank=True,
+        null=True,
+        default="",
+        unique=True,
+        verbose_name=_("Username"),
+    )
+    first_name = models.CharField(
+        max_length=40, blank=True, verbose_name=_("Firstname")
+    )
+    last_name = models.CharField(max_length=40, blank=True, verbose_name=_("Lastname"))
     profile_image = models.ImageField(
         upload_to="profile_image",
         default="sample.jpg",
@@ -52,15 +65,23 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
         blank=True,
         verbose_name=_("Profile Image"),
     )
-    description = models.CharField(max_length=255, blank=True)
+    description = models.CharField(
+        max_length=255, blank=True, verbose_name=_("Description")
+    )
 
-    birth_date = models.CharField(max_length=10, default="", blank=True)
-    address = models.CharField(max_length=255, default="", blank=True)
-    phone = models.CharField(max_length=20, default="", blank=True)
-    city = models.CharField(max_length=50, blank=True)
-    state = models.CharField(max_length=50, blank=True)
-    country = models.CharField(max_length=30, blank=True)
-    pincode = models.CharField(max_length=8, blank=True)
+    birth_date = models.CharField(
+        max_length=10, default="", blank=True, verbose_name=_("Birthdate")
+    )
+    address = models.CharField(
+        max_length=255, default="", blank=True, verbose_name=_("Address")
+    )
+    phone = models.CharField(
+        max_length=20, default="", blank=True, verbose_name=_("Phone")
+    )
+    city = models.CharField(max_length=50, blank=True, verbose_name=_("City"))
+    state = models.CharField(max_length=50, blank=True, verbose_name=_("State"))
+    country = models.CharField(max_length=30, blank=True, verbose_name=_("Country"))
+    pincode = models.CharField(max_length=8, blank=True, verbose_name=_("Pincode"))
 
     unique_id = models.UUIDField(
         default=uuid.uuid4,
@@ -69,8 +90,8 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
         verbose_name=_("Unique Id"),
     )
 
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_staff = models.BooleanField(default=True, verbose_name=_("Is Staff"))
 
     objects = AccountManager()
 
@@ -93,20 +114,3 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
 
     def get_absolute_url(self):
         return reverse("customadmin:users:user-list")
-
-
-class UserCard(ActivityTracking):
-    user = models.ForeignKey(
-        "user.User", on_delete=models.CASCADE, related_name="user_credit_card_detail"
-    )
-    card_number = models.CharField(max_length=19, blank=True, null=True)
-    expiry_month_year = models.CharField(max_length=7, blank=True, null=True)
-    stripe_token = models.CharField(max_length=255, blank=True, null=True)
-
-    def __str__(self):
-        return self.card_number
-
-    class Meta:
-        verbose_name = "User Card Detail"
-        verbose_name_plural = "User Card Details"
-        ordering = ["-created_at"]

@@ -1,21 +1,44 @@
 import uuid
-from django.db import models
-from django.db.models.deletion import SET_NULL
-from django.utils.translation import gettext as _
+
 from config.models import ActivityTracking
+from django.db import models
+from django.utils.translation import gettext as _
+
 
 # Create your models here.
 class Product(ActivityTracking):
 
-    name = models.CharField(max_length=50, blank=True, null=True, default="")
-    alias = models.CharField(max_length=50, blank=True, null=True, default="")
+    name = models.CharField(
+        max_length=50, blank=True, null=True, default="", verbose_name=_("Name")
+    )
+    alias = models.CharField(
+        max_length=50, blank=True, null=True, default="", verbose_name=_("Alias")
+    )
     category = models.ForeignKey(
-        "Category", on_delete=models.CASCADE, blank=True, null=True, default=""
+        "Category",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name=_("Category"),
+    )
+    subcategory = models.ForeignKey(
+        "SubCategory",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name=_("Subcategory"),
     )
     store = models.ForeignKey(
-        "Store", on_delete=models.SET_NULL, blank=True, null=True, default=""
+        "Store",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name=_("Store"),
     )
-    coupon = models.ManyToManyField("Coupon", blank=True)
+    coupon = models.ManyToManyField("Coupon", blank=True, verbose_name=_("Coupons"))
     image = models.ImageField(
         upload_to="product_image",
         default="sample.jpg",
@@ -23,18 +46,30 @@ class Product(ActivityTracking):
         blank=True,
         verbose_name=_("Product Image"),
     )
-    description = models.CharField(max_length=255, blank=True)
+    description = models.CharField(
+        max_length=255, blank=True, verbose_name=_("Description")
+    )
 
-    purchase_price = models.FloatField(default=0, blank=True, null=True)
-    selling_price = models.FloatField(default=0, blank=True, null=True)
-    membership_price = models.FloatField(default=0, blank=True, null=True)
+    purchase_price = models.FloatField(
+        default=0, blank=True, null=True, verbose_name=_("Purchase Price")
+    )
+    selling_price = models.FloatField(
+        default=0, blank=True, null=True, verbose_name=_("Selling Price")
+    )
+    membership_price = models.FloatField(
+        default=0, blank=True, null=True, verbose_name=_("Membership Price")
+    )
 
-    stock = models.BooleanField(default=True)
-    unit = models.IntegerField(default=0)
+    stock = models.BooleanField(default=True, verbose_name=_("Stock"))
+    unit = models.IntegerField(default=0, verbose_name=_("Unit"))
 
-    cancle_available = models.BooleanField(default=True)
-    free_shipping = models.BooleanField(default=True)
-    cash_on_delivery = models.BooleanField(default=True)
+    cancel_available = models.BooleanField(
+        default=True, verbose_name=_("Cancel Available")
+    )
+    free_shipping = models.BooleanField(default=True, verbose_name=_("Free Shipping"))
+    cash_on_delivery = models.BooleanField(
+        default=True, verbose_name=_("Cash on Delivery")
+    )
 
     unique_id = models.UUIDField(
         default=uuid.uuid4,
@@ -42,7 +77,8 @@ class Product(ActivityTracking):
         unique=True,
         verbose_name=_("Unique Id"),
     )
-    is_active = models.BooleanField(default=True)
+    is_deleted = models.BooleanField(default=False, verbose_name=_("Is Deleted"))
+    is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
     def __unicode__(self):
         return self.name

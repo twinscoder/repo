@@ -1,1 +1,1 @@
-from .users import User, UserCard
+from .users import User
