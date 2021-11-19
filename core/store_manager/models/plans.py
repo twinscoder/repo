@@ -15,8 +15,11 @@ class Plan(ActivityTracking):
     description = models.CharField(
         max_length=255, default="", blank=True, null=True, verbose_name=_("Description")
     )
-    validity = models.IntegerField(
-        default=0, blank=True, null=True, verbose_name=_("Validity")
+    days = models.IntegerField(
+        default=0, blank=True, null=True, verbose_name=_("Number of days")
+    )
+    months = models.IntegerField(
+        default=0, blank=True, null=True, verbose_name=_("Number of months")
     )
 
     unique_id = models.UUIDField(

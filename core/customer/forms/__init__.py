@@ -1,1 +1,2 @@
 from .customers import MyCustomerCreationForm, MyCustomerChangeForm
+from .membership import MyMembershipCreationForm, MyMembershipChangeForm

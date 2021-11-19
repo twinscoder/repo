@@ -43,13 +43,28 @@ def as_json(obj):
 
 @register.filter
 def admin_urlname(value, arg):
-    pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
     if value.model_name == "user":
         pattern = "%s:%s-%s" % ("customadmin", "user", arg)
-    if value.model_name == "customer":
+    elif value.model_name == "customer":
         pattern = "%s:%s-%s" % ("customadmin", "customer", arg)
-    if value.model_name == "store":
+    elif value.model_name == "store":
         pattern = "%s:%s-%s" % ("customadmin", "store", arg)
+    elif value.model_name == "category":
+        pattern = "%s:%s-%s" % ("customadmin", "category", arg)
+    elif value.model_name == "subcategory":
+        pattern = "%s:%s-%s" % ("customadmin", "subcategory", arg)
+    elif value.model_name == "deliverycharge":
+        pattern = "%s:%s-%s" % ("customadmin", "deliverycharge", arg)
+    elif value.model_name == "coupon":
+        pattern = "%s:%s-%s" % ("customadmin", "coupon", arg)
+    elif value.model_name == "expense":
+        pattern = "%s:%s-%s" % ("customadmin", "expense", arg)
+    elif value.model_name == "expensetype":
+        pattern = "%s:%s-%s" % ("customadmin", "expensetype", arg)
+    elif value.model_name == "plan":
+        pattern = "%s:%s-%s" % ("customadmin", "plan", arg)
+    else:
+        pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
     # print(pattern)
     return pattern
 

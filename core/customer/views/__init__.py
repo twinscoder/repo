@@ -5,3 +5,10 @@ from .customers import (
     CustomerListView,
     CustomerUpdateView,
 )
+from .membership import (
+    MembershipAjaxPagination,
+    MembershipCreateView,
+    MembershipDeleteView,
+    MembershipListView,
+    MembershipUpdateView,
+)

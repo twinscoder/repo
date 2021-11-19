@@ -19,27 +19,22 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-sm-6">
-                        {{ form.first_name|as_crispy_field }}
+                        {{ form.name|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.last_name|as_crispy_field }}
+                        {{ form.business_email|as_crispy_field }}
                     </div>
 
                     <div class="col-sm-6">
-                        {{ form.username|as_crispy_field }}
+                        {{ form.phone|as_crispy_field }}
                     </div>
 
                     <div class="col-sm-6">
-                        {{ form.email|as_crispy_field }}
+                        {{ form.image|as_crispy_field }}
                     </div>
-                    <div class="col-sm-6">
-                        {{ form.profile_image|as_crispy_field }}
-                    </div>
-
                     <div class="col-sm-6">
                         {{ form.description|as_crispy_field }}
                     </div>
-
                     <div class="col-sm-6">
                         {{ form.address|as_crispy_field }}
                     </div>
@@ -54,6 +49,27 @@
                     </div>
                     <div class="col-sm-6">
                         {{ form.pincode|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.account_name|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.account_number|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.bank_name|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.branch_name|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.branch_address|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.ifsc_code|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.upi_qr_code|as_crispy_field }}
                     </div>
                     <div class="col-sm-12 mt-2">
                         {% input_icheck form.is_active %}
@@ -78,7 +94,7 @@
 
 <script>
     $(function() {
-        userroles.customers.details();
+        userroles.stores.details();
     });
 </script>
 {% endblock %}

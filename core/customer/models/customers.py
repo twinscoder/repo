@@ -55,6 +55,9 @@ class Customer(ActivityTracking):
     pincode = models.CharField(verbose_name=_("Pincode"), max_length=8, blank=True)
 
     otp = models.CharField(verbose_name=_("OTP"), max_length=6, blank=True, default="")
+    fcm_token = models.CharField(
+        verbose_name=_("FCM Token"), max_length=6, blank=True, default=""
+    )
     refer_code = models.CharField(
         verbose_name=_("Refer Code"), max_length=8, blank=True, default=""
     )

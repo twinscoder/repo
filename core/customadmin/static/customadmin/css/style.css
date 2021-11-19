@@ -11982,22 +11982,6 @@ table tbody td.row-actions {
 /* UNIVERSAL STYLES */
 /* -------------------------------------------------------------------------- */
 
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/9F83F41298FA3D4A1.woff2) format("woff2"),
-    url(../fonts/gotham/9F83F41298FA3D4A1.woff) format("woff");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/6330A3369D395850E.woff2) format("woff2"),
-    url(../fonts/gotham/6330A3369D395850E.woff) format("woff");
-  font-weight: 800;
-  font-style: normal;
-}
-
 body {
   font-family: "HCo Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

@@ -80,5 +80,19 @@ def admin_urlname(value, arg):
         pattern = "%s:%s-%s" % ("customadmin", "customer", arg)
     if value.model_name == "store":
         pattern = "%s:%s-%s" % ("customadmin", "store", arg)
+    if value.model_name == "category":
+        pattern = "%s:%s-%s" % ("customadmin", "category", arg)
+    if value.model_name == "subcategory":
+        pattern = "%s:%s-%s" % ("customadmin", "subcategory", arg)
+    if value.model_name == "deliverycharge":
+        pattern = "%s:%s-%s" % ("customadmin", "deliverycharge", arg)
+    if value.model_name == "coupon":
+        pattern = "%s:%s-%s" % ("customadmin", "coupon", arg)
+    if value.model_name == "expense":
+        pattern = "%s:%s-%s" % ("customadmin", "expense", arg)
+    if value.model_name == "expensetype":
+        pattern = "%s:%s-%s" % ("customadmin", "expensetype", arg)
+    if value.model_name == "plan":
+        pattern = "%s:%s-%s" % ("customadmin", "plan", arg)
     # print(pattern)
     return pattern

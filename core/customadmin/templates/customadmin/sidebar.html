@@ -64,6 +64,62 @@
             </li>
             {% endif %}
             {% if perms.users or request.user.is_staff %}
+            <li {% if '/categories/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:category-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Categories</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'sub-categories/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:subcategory-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Subcategories</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'delivery-charges/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:deliverycharge-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Delivery Charges</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'coupons/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:coupon-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Coupons</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'expenses/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:expense-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Expenses</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'expense-types/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:expensetype-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Expense Types</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'plans/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:plan-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Plans</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
             <li {% if 'stores/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:store-list' %}"> 
                     <i class="fa fa-home fa-fw fa-2x"></i>

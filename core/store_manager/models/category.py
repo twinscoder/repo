@@ -33,6 +33,9 @@ class Category(ActivityTracking):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "categories"

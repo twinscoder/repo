@@ -25,7 +25,7 @@ class CustomerListView(MyListView):
     # paginate_by = 25
     ordering = ["username"]
     model = Customer
-    # queryset = model.objects.exclude(username="manifestingest")
+    queryset = model.objects.all()
     template_name = "customadmin/customers/customer_list.html"
     permission_required = ("customers.view_customer",)
 
@@ -55,7 +55,7 @@ class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
     https://bitbucket.org/pigletto/django-datatables-view."""
 
     model = Customer
-    queryset = Customer.objects.all().order_by("last_name")
+    queryset = Customer.objects.all().order_by("-created_at")
 
     def _get_is_superuser(self, obj):
         """Get boolean column markup."""
