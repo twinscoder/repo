@@ -18,26 +18,26 @@ var userroles = {
                 },],
 
                 // Ajax for pagination
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: window.pagination_url,
-                    type: 'get',
-                    beforeSend: function(xhr) {                      
-                        xhr.setRequestHeader(
-                            "X-CSRFToken",
-                            $("input[name=csrfmiddlewaretoken]").val()
-                          );
-                    },
-                },
-                columns: [
-                    { data: 'username', name: 'username' },
-                    { data: 'first_name', name: 'first_name' },
-                    { data: 'last_name', name: 'last_name' },
-                    { data: 'is_superuser', name: 'is_superuser' },
-                    // { data: 'modified', name: 'modified' },
-                    { data: 'actions', name: 'actions' }
-                ],
+                // processing: true,
+                // serverSide: true,
+                // ajax: {
+                //     url: window.pagination_url,
+                //     type: 'get',
+                //     beforeSend: function(xhr) {                      
+                //         xhr.setRequestHeader(
+                //             "X-CSRFToken",
+                //             $("input[name=csrfmiddlewaretoken]").val()
+                //           );
+                //     },
+                // },
+                // columns: [
+                //     { data: 'username', name: 'username' },
+                //     { data: 'first_name', name: 'first_name' },
+                //     { data: 'last_name', name: 'last_name' },
+                //     { data: 'is_superuser', name: 'is_superuser' },
+                //     // { data: 'modified', name: 'modified' },
+                //     { data: 'actions', name: 'actions' }
+                // ],
             });
 
         },

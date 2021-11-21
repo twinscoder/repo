@@ -9,7 +9,12 @@ from django.utils.translation import gettext as _
 class Category(ActivityTracking):
 
     name = models.CharField(
-        max_length=50, blank=True, null=True, default="", verbose_name=_("Name")
+        max_length=50,
+        unique=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name=_("Name"),
     )
     image = models.ImageField(
         upload_to="category_image",
@@ -29,9 +34,6 @@ class Category(ActivityTracking):
         verbose_name=_("Unique Id"),
     )
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
-
-    def __unicode__(self):
-        return self.name
 
     def __str__(self):
         return self.name
@@ -56,7 +58,12 @@ class SubCategory(ActivityTracking):
         verbose_name=_("Parent Category"),
     )
     name = models.CharField(
-        max_length=50, blank=True, null=True, default="", verbose_name=_("Name")
+        max_length=50,
+        unique=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name=_("Name"),
     )
     image = models.ImageField(
         upload_to="subcategory_image",
@@ -77,7 +84,7 @@ class SubCategory(ActivityTracking):
     )
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:

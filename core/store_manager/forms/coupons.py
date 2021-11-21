@@ -27,6 +27,10 @@ class MyCouponCreationForm(forms.ModelForm):
             "is_active",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True
 
 class MyCouponChangeForm(forms.ModelForm):
     """Custom UserChangeForm."""
@@ -46,3 +50,8 @@ class MyCouponChangeForm(forms.ModelForm):
             "count",
             "is_active",
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True

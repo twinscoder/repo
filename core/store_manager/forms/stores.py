@@ -34,6 +34,11 @@ class MyStoreCreationForm(forms.ModelForm):
             "is_active",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True
+
 
 class MyStoreChangeForm(forms.ModelForm):
     """Custom UserChangeForm."""
@@ -60,3 +65,8 @@ class MyStoreChangeForm(forms.ModelForm):
             "upi_qr_code",
             "is_active",
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True

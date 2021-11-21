@@ -98,7 +98,7 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.email
 
     def get_full_name(self):

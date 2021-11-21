@@ -29,7 +29,7 @@ class UserListView(MyListView):
     # paginate_by = 25
     ordering = ["username"]
     model = User
-    queryset = model.objects.none()
+    queryset = model.objects.all()
     template_name = "customadmin/adminuser/user_list.html"
     permission_required = ("users.view_user",)
 

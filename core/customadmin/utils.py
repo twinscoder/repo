@@ -10,24 +10,12 @@ from django.utils.text import capfirst
 from django.urls.exceptions import NoReverseMatch
 
 # -----------------------------------------------------------------------------
+import string
+import random
 
 
-def update_order(order_data, model):
-    """Parse json data and update model order.
-    Object keys should be: id, order"""
-    jsondata = json.loads(order_data)
-    for s in jsondata:
-        # This may occur if we have an empty placeholder, it's ok
-        if "id" not in s or s["id"] == "None":
-            continue
-        try:
-            instance = model.objects.get(pk=s["id"])
-            if instance.the_order != s["order"]:
-                instance.the_order = s["order"]
-                instance.save()
-        except model.DoesNotExist:
-            # Object may have been deleted, so just keep going
-            continue
+def refer_code_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return "".join(random.choice(chars) for _ in range(size))
 
 
 def get_upload_to_uuid(self, filename):

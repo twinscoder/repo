@@ -78,8 +78,8 @@ class Customer(ActivityTracking):
 
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
-    def __unicode__(self):
-        return self.email
+    def __str__(self):
+        return self.username
 
     def get_full_name(self):
         return " ".join([self.first_name, self.last_name])
@@ -104,7 +104,7 @@ class CustomerStatusHistory(ActivityTracking):
     status = models.BooleanField(default=False, verbose_name=_("Status"))
     reason = models.CharField(max_length=255, blank=True, verbose_name=_("Reason"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.customer.username
 
     class Meta:

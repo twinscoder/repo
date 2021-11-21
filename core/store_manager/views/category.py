@@ -14,10 +14,8 @@ from core.customadmin.views.generic import (
 )
 
 from ..forms import (
-    MyCategoryChangeForm,
-    MyCategoryCreationForm,
-    MySubCategoryChangeForm,
-    MySubCategoryCreationForm,
+    MyCategoryForm,
+    MySubCategoryForm,
 )
 from ..models import Category, SubCategory
 
@@ -36,14 +34,14 @@ class CategoryListView(MyListView):
 
 class CategoryCreateView(MyCreateView):
     model = Category
-    form_class = MyCategoryCreationForm
+    form_class = MyCategoryForm
     template_name = "customadmin/categories/category_form.html"
     permission_required = ("categorys.add_category",)
 
 
 class CategoryUpdateView(MyUpdateView):
     model = Category
-    form_class = MyCategoryChangeForm
+    form_class = MyCategoryForm
     template_name = "customadmin/categories/category_form.html"
     permission_required = ("categorys.change_category",)
 
@@ -103,14 +101,14 @@ class SubCategoryListView(MyListView):
 
 class SubCategoryCreateView(MyCreateView):
     model = SubCategory
-    form_class = MySubCategoryCreationForm
+    form_class = MySubCategoryForm
     template_name = "customadmin/subcategories/subcategory_form.html"
     permission_required = ("subcategorys.add_subcategory",)
 
 
 class SubCategoryUpdateView(MyUpdateView):
     model = SubCategory
-    form_class = MySubCategoryChangeForm
+    form_class = MySubCategoryForm
     template_name = "customadmin/subcategories/subcategory_form.html"
     permission_required = ("subcategorys.change_subcategory",)
 

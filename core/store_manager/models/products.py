@@ -80,7 +80,7 @@ class Product(ActivityTracking):
     is_deleted = models.BooleanField(default=False, verbose_name=_("Is Deleted"))
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:

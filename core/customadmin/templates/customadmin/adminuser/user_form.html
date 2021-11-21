@@ -67,13 +67,6 @@
                         {{ form.profile_image|as_crispy_field }}
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        {{ form.description|as_crispy_field }}
-                    </div>
-                </div>
-
                 <div class="row">
                     <div class="col-sm-6">
                         {{ form.address|as_crispy_field }}
@@ -89,6 +82,9 @@
                     </div>
                     <div class="col-sm-6">
                         {{ form.pincode|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.description|as_crispy_field }}
                     </div>
                 </div>
             </div>

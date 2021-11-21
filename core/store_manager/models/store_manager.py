@@ -69,7 +69,7 @@ class StoreManager(ActivityTracking):
 
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.email
 
     def get_full_name(self):

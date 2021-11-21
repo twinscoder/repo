@@ -19,7 +19,7 @@ class CustomerWallet(ActivityTracking):
     )
     is_active = models.BooleanField(default=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -65,7 +65,7 @@ class CustomerWalletHistory(ActivityTracking):
     )
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:

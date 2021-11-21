@@ -30,6 +30,9 @@
                     </div>
 
                     <div class="col-sm-6">
+                        {{ form.count|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
                         {{ form.min_amount|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
@@ -43,16 +46,13 @@
                     <div class="col-sm-6">
                         {{ form.expiry_date|as_crispy_field }}
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         {{ form.description|as_crispy_field }}
                     </div>
-                    <div class="col-sm-6">
-                        {{ form.count|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-12 mt-2">
+                    <div class="col-sm-6 mt-2">
                         {% input_icheck form.is_repeatable %}
                     </div>
-                    <div class="col-sm-12 mt-2">
+                    <div class="col-sm-6 mt-2">
                         {% input_icheck form.is_active %}
                     </div>
                 </div>

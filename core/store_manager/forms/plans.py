@@ -8,7 +8,7 @@ from ..models import Plan
 # # -----------------------------------------------------------------------------
 
 
-class MyPlanCreationForm(forms.ModelForm):
+class MyPlanForm(forms.ModelForm):
     """Custom UserCreationForm."""
 
     class Meta:
@@ -22,17 +22,6 @@ class MyPlanCreationForm(forms.ModelForm):
             "is_active",
         ]
 
-
-class MyPlanChangeForm(forms.ModelForm):
-    """Custom UserChangeForm."""
-
-    class Meta:
-        model = Plan
-        fields = [
-            "name",
-            "price",
-            "description",
-            "days",
-            "months",
-            "is_active",
-        ]
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].required = True

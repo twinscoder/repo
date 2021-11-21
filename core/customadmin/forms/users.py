@@ -52,7 +52,8 @@ class MyUserCreationForm(UserCreationForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
-
+        self.fields["description"].widget.attrs["rows"] = 4
+        self.fields["description"].widget.attrs["columns"] = 15
         # filter out the permissions we don't want the user to see
         if not self.user.is_superuser:
             self.fields["user_permissions"].queryset = filter_perms()

@@ -8,7 +8,7 @@ from ..models import Category, SubCategory
 # # -----------------------------------------------------------------------------
 
 
-class MyCategoryCreationForm(forms.ModelForm):
+class MyCategoryForm(forms.ModelForm):
     """Custom UserCreationForm."""
 
     class Meta:
@@ -20,35 +20,12 @@ class MyCategoryCreationForm(forms.ModelForm):
             "is_active",
         ]
 
-
-class MyCategoryChangeForm(forms.ModelForm):
-    """Custom UserChangeForm."""
-
-    class Meta:
-        model = Category
-        fields = [
-            "name",
-            "image",
-            "description",
-            "is_active",
-        ]
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].required = True
 
 
-class MySubCategoryCreationForm(forms.ModelForm):
-    """Custom UserCreationForm."""
-
-    class Meta:
-        model = SubCategory
-        fields = [
-            "parent_category",
-            "name",
-            "image",
-            "description",
-            "is_active",
-        ]
-
-
-class MySubCategoryChangeForm(forms.ModelForm):
+class MySubCategoryForm(forms.ModelForm):
     """Custom UserChangeForm."""
 
     class Meta:
@@ -60,3 +37,8 @@ class MySubCategoryChangeForm(forms.ModelForm):
             "description",
             "is_active",
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in ["parent_category", "name"]:
+            self.fields[field].required = True

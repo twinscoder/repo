@@ -14,8 +14,7 @@ from core.customadmin.views.generic import (
 )
 
 from ..forms import (
-    MyDeliveryChargeChangeForm,
-    MyDeliveryChargeCreationForm,
+    MyDeliveryChargeForm,
 )
 from ..models import DeliveryCharge
 
@@ -34,14 +33,14 @@ class DeliveryChargeListView(MyListView):
 
 class DeliveryChargeCreateView(MyCreateView):
     model = DeliveryCharge
-    form_class = MyDeliveryChargeCreationForm
+    form_class = MyDeliveryChargeForm
     template_name = "customadmin/delivery-charges/deliverycharge_form.html"
     permission_required = ("deliverycharges.add_deliverycharge",)
 
 
 class DeliveryChargeUpdateView(MyUpdateView):
     model = DeliveryCharge
-    form_class = MyDeliveryChargeChangeForm
+    form_class = MyDeliveryChargeForm
     template_name = "customadmin/delivery-charges/deliverycharge_form.html"
     permission_required = ("deliverycharges.change_deliverycharge",)
 

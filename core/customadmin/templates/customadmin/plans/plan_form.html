@@ -25,15 +25,15 @@
                         {{ form.price|as_crispy_field }}
                     </div>
 
-                    <div class="col-sm-6">
-                        {{ form.description|as_crispy_field }}
-                    </div>
 
                     <div class="col-sm-6">
                         {{ form.days|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
                         {{ form.months|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.description|as_crispy_field }}
                     </div>
                     <div class="col-sm-12 mt-2">
                         {% input_icheck form.is_active %}

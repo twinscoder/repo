@@ -18,7 +18,7 @@
 
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         {{ form.parent_category|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
@@ -29,10 +29,10 @@
                         {{ form.image|as_crispy_field }}
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         {{ form.description|as_crispy_field }}
                     </div>
-                    <div class="col-sm-12 mt-2">
+                    <div class="col-sm-6 mt-2">
                         {% input_icheck form.is_active %}
                     </div>
                 </div>

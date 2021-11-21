@@ -8,7 +8,7 @@ from ..models import DeliveryCharge
 # # -----------------------------------------------------------------------------
 
 
-class MyDeliveryChargeCreationForm(forms.ModelForm):
+class MyDeliveryChargeForm(forms.ModelForm):
     """Custom UserCreationForm."""
 
     class Meta:
@@ -19,14 +19,8 @@ class MyDeliveryChargeCreationForm(forms.ModelForm):
             "charge_amount",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True
 
-class MyDeliveryChargeChangeForm(forms.ModelForm):
-    """Custom UserChangeForm."""
-
-    class Meta:
-        model = DeliveryCharge
-        fields = [
-            "min_amount",
-            "max_amount",
-            "charge_amount",
-        ]

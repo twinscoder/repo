@@ -14,8 +14,7 @@ from core.customadmin.views.generic import (
 )
 
 from ..forms import (
-    MyPlanChangeForm,
-    MyPlanCreationForm,
+    MyPlanForm,
 )
 from ..models import Plan
 
@@ -34,14 +33,14 @@ class PlanListView(MyListView):
 
 class PlanCreateView(MyCreateView):
     model = Plan
-    form_class = MyPlanCreationForm
+    form_class = MyPlanForm
     template_name = "customadmin/plans/plan_form.html"
     permission_required = ("plans.add_plan",)
 
 
 class PlanUpdateView(MyUpdateView):
     model = Plan
-    form_class = MyPlanChangeForm
+    form_class = MyPlanForm
     template_name = "customadmin/plans/plan_form.html"
     permission_required = ("plans.change_plan",)
 

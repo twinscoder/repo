@@ -114,7 +114,7 @@ class DeliveryBoy(ActivityTracking):
 
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.email
 
     def get_full_name(self):
@@ -143,7 +143,7 @@ class DeliveryBoyStatusHistory(ActivityTracking):
     status = models.BooleanField(default=False, verbose_name=_("Status"))
     reason = models.CharField(max_length=255, blank=True, verbose_name=_("Reason"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.delivery_boy.username
 
     class Meta:

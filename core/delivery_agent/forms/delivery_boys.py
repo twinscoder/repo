@@ -41,6 +41,11 @@ class MyDeliveryBoyCreationForm(forms.ModelForm):
             "is_active",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True
+
 
 class MyDeliveryBoyChangeForm(forms.ModelForm):
     """Custom UserChangeForm."""
@@ -74,3 +79,9 @@ class MyDeliveryBoyChangeForm(forms.ModelForm):
             "order_accept_limit",
             "is_active",
         ]
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True

@@ -18,28 +18,19 @@
 
             <div class="ibox-content">
                 <div class="row">
+
+                    <div class="col-sm-6">
+                        {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.email|as_crispy_field }}
+                    </div>
                     <div class="col-sm-6">
                         {{ form.first_name|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
                         {{ form.last_name|as_crispy_field }}
                     </div>
-
-                    <div class="col-sm-6">
-                        {{ form.username|as_crispy_field }}
-                    </div>
-
-                    <div class="col-sm-6">
-                        {{ form.email|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.profile_image|as_crispy_field }}
-                    </div>
-
-                    <div class="col-sm-6">
-                        {{ form.description|as_crispy_field }}
-                    </div>
-
                     <div class="col-sm-6">
                         {{ form.address|as_crispy_field }}
                     </div>
@@ -55,7 +46,13 @@
                     <div class="col-sm-6">
                         {{ form.pincode|as_crispy_field }}
                     </div>
-                    <div class="col-sm-12 mt-2">
+                    <div class="col-sm-6">
+                        {{ form.profile_image|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6 mt-4">
                         {% input_icheck form.is_active %}
                     </div>
                 </div>

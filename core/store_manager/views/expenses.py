@@ -14,10 +14,8 @@ from core.customadmin.views.generic import (
 )
 
 from ..forms import (
-    MyExpenseChangeForm,
-    MyExpenseCreationForm,
-    MyExpenseTypeChangeForm,
-    MyExpenseTypeCreationForm,
+    MyExpenseForm,
+    MyExpenseTypeForm,
 )
 from ..models import Expense, ExpenseType
 
@@ -36,14 +34,14 @@ class ExpenseListView(MyListView):
 
 class ExpenseCreateView(MyCreateView):
     model = Expense
-    form_class = MyExpenseCreationForm
+    form_class = MyExpenseForm
     template_name = "customadmin/expenses/expense_form.html"
     permission_required = ("expenses.add_expense",)
 
 
 class ExpenseUpdateView(MyUpdateView):
     model = Expense
-    form_class = MyExpenseChangeForm
+    form_class = MyExpenseForm
     template_name = "customadmin/expenses/expense_form.html"
     permission_required = ("expenses.change_expense",)
 
@@ -119,14 +117,14 @@ class ExpenseTypeListView(MyListView):
 
 class ExpenseTypeCreateView(MyCreateView):
     model = ExpenseType
-    form_class = MyExpenseTypeCreationForm
+    form_class = MyExpenseTypeForm
     template_name = "customadmin/expense-types/expensetype_form.html"
     permission_required = ("expensetypes.add_expensetype",)
 
 
 class ExpenseTypeUpdateView(MyUpdateView):
     model = ExpenseType
-    form_class = MyExpenseTypeChangeForm
+    form_class = MyExpenseTypeForm
     template_name = "customadmin/expense-types/expensetype_form.html"
     permission_required = ("expensetypes.change_expensetype",)
 

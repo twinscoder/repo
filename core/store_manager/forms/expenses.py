@@ -8,7 +8,7 @@ from ..models import Expense, ExpenseType
 # # -----------------------------------------------------------------------------
 
 
-class MyExpenseTypeCreationForm(forms.ModelForm):
+class MyExpenseTypeForm(forms.ModelForm):
     """Custom UserCreationForm."""
 
     class Meta:
@@ -18,33 +18,11 @@ class MyExpenseTypeCreationForm(forms.ModelForm):
             "is_active",
         ]
 
-
-class MyExpenseTypeChangeForm(forms.ModelForm):
-    """Custom UserChangeForm."""
-
-    class Meta:
-        model = ExpenseType
-        fields = [
-            "name",
-            "is_active",
-        ]
-
-
-class MyExpenseCreationForm(forms.ModelForm):
-    """Custom UserCreationForm."""
-
-    class Meta:
-        model = Expense
-        fields = [
-            "type",
-            "store",
-            "amount",
-            "description",
-            "is_active",
-        ]
-
-
-class MyExpenseChangeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True
+class MyExpenseForm(forms.ModelForm):
     """Custom UserChangeForm."""
 
     class Meta:
@@ -56,3 +34,8 @@ class MyExpenseChangeForm(forms.ModelForm):
             "description",
             "is_active",
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True
