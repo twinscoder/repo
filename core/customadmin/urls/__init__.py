@@ -52,6 +52,11 @@ urlpatterns = [
         customer_views.CustomerAjaxPagination.as_view(),
         name="customer-list-ajax",
     ),
+    path(
+        "customers/change-status/<int:customer_id>",
+        customer_views.CustomerChangeStatus.as_view(),
+        name="customer-change-status",
+    ),
     # ----------------------------------------------------------------------------------
     # Membership
     path(

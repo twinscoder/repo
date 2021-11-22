@@ -82,5 +82,9 @@ def admin_urlname(value, arg):
         pattern = "%s:%s-%s" % ("customadmin", "expensetype", arg)
     if value.model_name == "plan":
         pattern = "%s:%s-%s" % ("customadmin", "plan", arg)
+    if value.model_name == "product":
+        pattern = "%s:%s-%s" % ("customadmin", "product", arg)
+    if value.model_name == "storemanager":
+        pattern = "%s:%s-%s" % ("customadmin", "storemanager", arg)
     # print(pattern)
     return pattern

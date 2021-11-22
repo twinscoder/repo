@@ -64,6 +64,14 @@
             </li>
             {% endif %}
             {% if perms.users or request.user.is_staff %}
+            <li {% if 'stores/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:store-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Stores</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
             <li {% if '/categories/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:category-list' %}"> 
                     <i class="fa fa-home fa-fw fa-2x"></i>
@@ -76,6 +84,14 @@
                 <a href="{% url 'customadmin:subcategory-list' %}"> 
                     <i class="fa fa-home fa-fw fa-2x"></i>
                     <span class="nav-label">Subcategories</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'products/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:product-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Products</span>
                 </a>
             </li>
             {% endif %}
@@ -116,14 +132,6 @@
                 <a href="{% url 'customadmin:plan-list' %}"> 
                     <i class="fa fa-home fa-fw fa-2x"></i>
                     <span class="nav-label">Plans</span>
-                </a>
-            </li>
-            {% endif %}
-            {% if perms.users or request.user.is_staff %}
-            <li {% if 'stores/' in request.path %}class="active" {% endif %}>
-                <a href="{% url 'customadmin:store-list' %}"> 
-                    <i class="fa fa-home fa-fw fa-2x"></i>
-                    <span class="nav-label">Stores</span>
                 </a>
             </li>
             {% endif %}

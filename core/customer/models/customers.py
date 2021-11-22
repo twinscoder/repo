@@ -8,7 +8,7 @@ from django.utils.translation import gettext as _
 # Create your models here.
 class Customer(ActivityTracking):
 
-    GENDER_CHOICES = (("Male", "MALE"), ("Female", "FEMALE"))
+    GENDER_CHOICES = (("Male", "Male"), ("Female", "Female"))
 
     first_name = models.CharField(
         verbose_name=_("Firstname"), max_length=40, blank=True

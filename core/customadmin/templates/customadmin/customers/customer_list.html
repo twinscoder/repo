@@ -8,7 +8,7 @@
 {% block page_content %}
     {% csrf_token %}
 
-    {% include "customadmin/includes/list_header_card.html" with title="Create a new user" subtitle="Create a new user and assign them individual or group permissions." show_button=True %}
+    {% include "customadmin/includes/list_header_card.html" with title="Create a new customer" subtitle="Create a new customer." show_button=True %}
 
     <div class="ibox float-e-margins">
         {% comment %} <div class="ibox-title">
@@ -25,16 +25,16 @@
                     <thead>
                         <tr>
                             <th>Username</th>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Username</th>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -42,8 +42,10 @@
                         {% for o in object_list %}
                         <tr>
                             <td>{{ o.username }}</td>
-                            <td>{{ o.first_name }}</td>
-                            <td>{{ o.last_name }}</td>
+                            <td>{{ o.email }}</td>
+                            <td>
+                                <a href="{% url "customadmin:customer-change-status" customer_id=o.id %}" class="btn btn-secondary btn-sm">{% if o.is_active %}Active{% else %}Deactive{% endif %}</a>
+                            </td>
                             </td>
                             <td class="row-actions">
                                 {% include "customadmin/partials/list_row_actions.html" %}

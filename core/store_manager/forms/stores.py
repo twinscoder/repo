@@ -14,6 +14,8 @@ class MyStoreCreationForm(forms.ModelForm):
     class Meta:
         model = Store
         fields = [
+            "store_manager",
+            "delivery_boys",
             "name",
             "business_email",
             "phone",
@@ -36,7 +38,7 @@ class MyStoreCreationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
+        for field in ["name", "business_email"]:
             self.fields[field].required = True
 
 
@@ -46,6 +48,8 @@ class MyStoreChangeForm(forms.ModelForm):
     class Meta:
         model = Store
         fields = [
+            "store_manager",
+            "delivery_boys",
             "name",
             "business_email",
             "phone",
@@ -68,5 +72,5 @@ class MyStoreChangeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
+        for field in ["name", "business_email"]:
             self.fields[field].required = True

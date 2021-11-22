@@ -40,5 +40,8 @@ class MySubCategoryForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["parent_category"].queryset = Category.objects.filter(
+            is_active=True
+        )
         for field in ["parent_category", "name"]:
             self.fields[field].required = True

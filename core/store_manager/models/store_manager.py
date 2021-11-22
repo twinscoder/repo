@@ -3,74 +3,17 @@ import uuid
 from config.models import ActivityTracking
 from django.db import models
 from django.utils.translation import gettext as _
-
+from core.user.models import User
 
 # Create your models here.
-class StoreManager(ActivityTracking):
-
+class StoreManager(User, ActivityTracking):
     GENDER_CHOICES = (("Male", "MALE"), ("Female", "FEMALE"))
-
-    store = models.ForeignKey(
-        "Store", on_delete=models.CASCADE, blank=True, verbose_name=_("Store")
-    )
-
-    first_name = models.CharField(
-        max_length=40, blank=True, verbose_name=_("Firstname")
-    )
-    last_name = models.CharField(max_length=40, blank=True, verbose_name=_("Lastname"))
     gender = models.CharField(
         choices=GENDER_CHOICES, max_length=40, blank=True, verbose_name=_("Gender")
     )
-    birth_date = models.CharField(
-        max_length=10, default="", blank=True, verbose_name=_("Birthdate")
-    )
-    email = models.EmailField(
-        null=True, blank=True, unique=True, verbose_name=_("Email")
-    )
-    phone = models.CharField(
-        max_length=20, default="", blank=True, verbose_name=_("Phone")
-    )
-
-    username = models.CharField(
-        max_length=40,
-        blank=True,
-        null=True,
-        default="",
-        unique=True,
-        verbose_name=_("Username"),
-    )
-    profile_image = models.ImageField(
-        upload_to="delivery_boy_image",
-        default="sample.jpg",
-        null=True,
-        blank=True,
-        verbose_name=_("Delivery Boy Image"),
-    )
-    description = models.CharField(
-        max_length=255, blank=True, verbose_name=_("Description")
-    )
-
-    address = models.CharField(
-        max_length=255, default="", blank=True, verbose_name=_("Address")
-    )
-    city = models.CharField(max_length=50, blank=True, verbose_name=_("City"))
-    state = models.CharField(max_length=50, blank=True, verbose_name=_("State"))
-    country = models.CharField(max_length=30, blank=True, verbose_name=_("Country"))
-    pincode = models.CharField(max_length=8, blank=True, verbose_name=_("Pincode"))
-
-    otp = models.CharField(max_length=6, blank=True, default="", verbose_name=_("OTP"))
-
-    unique_id = models.UUIDField(
-        default=uuid.uuid4,
-        editable=False,
-        unique=True,
-        verbose_name=_("Unique Id"),
-    )
-
-    is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def get_full_name(self):
         return " ".join([self.first_name, self.last_name])

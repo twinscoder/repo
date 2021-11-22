@@ -4,7 +4,7 @@ from config.models import ActivityTracking
 from core.delivery_agent.models import DeliveryBoy
 from django.db import models
 from django.utils.translation import gettext as _
-
+from core.user.models import User
 
 # Create your models here.
 class Store(ActivityTracking):
@@ -22,7 +22,7 @@ class Store(ActivityTracking):
     )
     phone = models.CharField(max_length=20, blank=True, verbose_name=_("Phone"))
     store_manager = models.ForeignKey(
-        "StoreManager",
+        User,
         on_delete=models.CASCADE,
         blank=True,
         related_name="store_manager",

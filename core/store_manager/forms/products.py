@@ -1,7 +1,7 @@
 # # -*- coding: utf-8 -*-
 
 from django import forms
-from ..models import Product
+from ..models import Product, Category, SubCategory
 
 # # -----------------------------------------------------------------------------
 # # Users
@@ -34,6 +34,18 @@ class MyProductCreationForm(forms.ModelForm):
             "is_active",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["category"].queryset = Category.objects.filter(is_active=True)
+        self.fields["subcategory"].queryset = SubCategory.objects.filter(is_active=True)
+        for field in [
+            "name",
+            "category",
+            "subcategory",
+            "store",
+        ]:
+            self.fields[field].required = True
+
 
 class MyProductChangeForm(forms.ModelForm):
     """Custom UserChangeForm."""
@@ -60,3 +72,15 @@ class MyProductChangeForm(forms.ModelForm):
             "is_deleted",
             "is_active",
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["category"].queryset = Category.objects.filter(is_active=True)
+        self.fields["subcategory"].queryset = SubCategory.objects.filter(is_active=True)
+        for field in [
+            "name",
+            "category",
+            "subcategory",
+            "store",
+        ]:
+            self.fields[field].required = True

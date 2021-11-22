@@ -92,7 +92,7 @@ var userroles = {
     // Customers
     // ------------------------------------------------------------------------
     customers: {
-
+        
         index: function () {
             $('#customer-table').DataTable({
                 pageLength: 25,
@@ -134,6 +134,12 @@ var userroles = {
                 selectedListLabel: 'Chosen user permissions',
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false
+            });
+            $('#id_birth_date').daterangepicker({
+                singleDatePicker: true,
+                locale: {
+                    format: 'MM/DD/YYYY'
+                }
             });
         }
 
@@ -221,6 +227,33 @@ var userroles = {
             });
 
         },
+        details: function () {
+            $('#id_start_date').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 15,
+                singleDatePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().add(1, 'hour'),
+                minDate: moment(),
+                autoUpdateInput: true,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            });
+            $('#id_expiry_date').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 15,
+                singleDatePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().add(1, 'hour'),
+                minDate: moment(),
+                autoUpdateInput: true,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            });
+
+        },
 
     },
     // expense
@@ -280,6 +313,38 @@ var userroles = {
 
         index: function () {
             $('#store-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+
+    },
+    // products
+    // ------------------------------------------------------------------------
+    products: {
+        index: function () {
+            $('#product-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+
+    },
+    // storemanagers
+    // ------------------------------------------------------------------------
+    storemanagers: {
+        index: function () {
+            $('#storemanager-table').DataTable({
                 pageLength: 25,
                 responsive: true,
                 columnDefs: [{

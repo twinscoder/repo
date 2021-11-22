@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.core.checks import messages
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AdminPasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.http.response import HttpResponseRedirect
+from django.http import JsonResponse
 from django.template.loader import get_template
 from django_datatables_too.mixins import DataTableMixin
 
@@ -14,61 +16,59 @@ from core.customadmin.views.generic import (
     MyUpdateView,
     MyView,
 )
-from django.urls import reverse
-from ..forms import MyCustomerChangeForm, MyCustomerCreationForm
-from ..models import Customer
+
+from ..forms import MyStoreManagerChangeForm, MyStoreManagerCreationForm
+from core.store_manager.models import StoreManager
 
 # -----------------------------------------------------------------------------
 # Users
 # -----------------------------------------------------------------------------
 
 
-class CustomerChangeStatus(MyView):
-    permission_required = ("customers.change_customer",)
-
-    def get(self, request, customer_id, *args, **kwargs):
-        instance = Customer.objects.get(id=customer_id)
-        instance.is_active = not instance.is_active
-        instance.save()
-        messages.Info(request, "Status updated successfully.")
-        return HttpResponseRedirect(reverse("customadmin:customer-list"))
-
-
-class CustomerListView(MyListView):
+class StoreManagerListView(MyListView):
     # paginate_by = 25
     ordering = ["username"]
-    model = Customer
+    model = StoreManager
     queryset = model.objects.all()
-    template_name = "customadmin/customers/customer_list.html"
-    permission_required = ("customers.view_customer",)
+    template_name = "customadmin/store-manager/storemanager_list.html"
+    permission_required = ("storemanagers.view_storemanager",)
 
 
-class CustomerCreateView(MyCreateView):
-    model = Customer
-    form_class = MyCustomerCreationForm
-    template_name = "customadmin/customers/customer_form.html"
-    permission_required = ("customers.add_customer",)
+class StoreManagerCreateView(MyCreateView):
+    model = StoreManager
+    form_class = MyStoreManagerCreationForm
+    template_name = "customadmin/store-manager/storemanager_form.html"
+    permission_required = ("storemanagers.add_storemanager",)
 
 
-class CustomerUpdateView(MyUpdateView):
-    model = Customer
-    form_class = MyCustomerChangeForm
-    template_name = "customadmin/customers/customer_form.html"
-    permission_required = ("customers.change_customer",)
+class StoreManagerUpdateView(MyUpdateView):
+    model = StoreManager
+    form_class = MyStoreManagerChangeForm
+    template_name = "customadmin/store-manager/storemanager_form.html"
+    permission_required = ("storemanagers.change_storemanager",)
 
 
-class CustomerDeleteView(MyDeleteView):
-    model = Customer
+class StoreManagerDeleteView(MyDeleteView):
+    model = StoreManager
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("customers.delete_customer",)
+    permission_required = ("storemanagers.delete_storemanager",)
 
 
-class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):
+class StoreManagerPasswordView(MyUpdateView):
+    model = StoreManager
+    form_class = AdminPasswordChangeForm
+    template_name = "customadmin/adminuser/password_change_form.html"
+    permission_required = ("users.change_user",)
+
+
+class StoreManagerAjaxPagination(
+    DataTableMixin, HasPermissionsMixin, MyLoginRequiredView
+):
     """Built this before realizing there is
     https://bitbucket.org/pigletto/django-datatables-view."""
 
-    model = Customer
-    queryset = Customer.objects.all().order_by("-created_at")
+    model = StoreManager
+    queryset = StoreManager.objects.all().order_by("-created_at")
 
     def _get_is_superuser(self, obj):
         """Get boolean column markup."""
@@ -77,11 +77,19 @@ class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
 
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
-        # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        user_perms = {
+            "view_perm": True
+            if self.request.user.has_perm("%s.%s" % ("core", "view_invite"))
+            else False,
+            "change_perm": True
+            if self.request.user.has_perm("%s.%s" % ("core", "change_invite"))
+            else False,
+            "delete_perm": True
+            if self.request.user.has_perm("%s.%s" % ("core", "delete_invite"))
+            else False,
+        }
+        return t.render({"obj": obj, "user_perms": user_perms})
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
@@ -91,8 +99,6 @@ class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
                 Q(username__icontains=self.search)
                 | Q(first_name__icontains=self.search)
                 | Q(last_name__icontains=self.search)
-                # | Q(state__icontains=self.search)
-                # | Q(year__icontains=self.search)
             )
         return qs
 

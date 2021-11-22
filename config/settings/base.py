@@ -58,6 +58,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [
+    # "config.middleware.exception_middleware.ExceptionMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -185,6 +186,7 @@ STATICFILES_FINDERS = (
 LOGIN_URL = "customadmin:auth_login"
 
 LOGOUT_REDIRECT_URL = "customadmin:auth_login"
+LOGIN_REDIRECT_URL = "customadmin:index"
 
 SITE_ID = 1
 
@@ -220,3 +222,9 @@ ADMIN_HIDE_PERMS = [
     "socialaccount",
     "django_celery_beat",
 ]
+
+SUPER_USER = {
+    "ADMIN_EMAIL": os.getenv("ADMIN_EMAIL"),
+    "ADMIN_USERNAME": os.getenv("ADMIN_USERNAME"),
+    "ADMIN_PASSWORD": os.getenv("ADMIN_PASSWORD"),
+}

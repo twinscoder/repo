@@ -41,7 +41,10 @@ class AccountManager(BaseUserManager):
 
 class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
 
-    GENDER_CHOICES = (("Male", "MALE"), ("Female", "FEMALE"))
+    ROLE_CHOICES = (
+        (("Admin"), ("Admin")),
+        (("Manager"), ("Manager")),
+    )
 
     email = models.EmailField(
         null=True, blank=True, unique=True, verbose_name=_("Email")
@@ -58,6 +61,9 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
         max_length=40, blank=True, verbose_name=_("Firstname")
     )
     last_name = models.CharField(max_length=40, blank=True, verbose_name=_("Lastname"))
+    role = models.CharField(
+        choices=ROLE_CHOICES, max_length=40, blank=True, verbose_name=_("Role")
+    )
     profile_image = models.ImageField(
         upload_to="profile_image",
         default="sample.jpg",
@@ -99,7 +105,7 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
     REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def get_full_name(self):
         return " ".join([self.first_name, self.last_name])

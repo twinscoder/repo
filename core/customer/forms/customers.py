@@ -19,6 +19,9 @@ class MyCustomerCreationForm(forms.ModelForm):
             "username",
             "first_name",
             "last_name",
+            "gender",
+            "birth_date",
+            "phone",
             "profile_image",
             "description",
             "address",
@@ -26,12 +29,24 @@ class MyCustomerCreationForm(forms.ModelForm):
             "state",
             "country",
             "pincode",
+            "refer_from",
             "is_active",
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
+        for field in [
+            "username",
+            "email",
+            "first_name",
+            "gender",
+            "phone",
+            "address",
+            "city",
+            "state",
+            "country",
+            "pincode",
+        ]:
             self.fields[field].required = True
 
     def save(self, commit=True):
@@ -54,6 +69,9 @@ class MyCustomerChangeForm(forms.ModelForm):
             "username",
             "first_name",
             "last_name",
+            "gender",
+            "birth_date",
+            "phone",
             "profile_image",
             "description",
             "address",
@@ -61,10 +79,25 @@ class MyCustomerChangeForm(forms.ModelForm):
             "state",
             "country",
             "pincode",
+            "refer_from",
             "is_active",
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
+        for field in [
+            "username",
+            "email",
+            "first_name",
+            "gender",
+            "phone",
+            "address",
+            "city",
+            "state",
+            "country",
+            "pincode",
+        ]:
             self.fields[field].required = True
+        self.fields["refer_from"].queryset = Customer.objects.all().exclude(
+            pk=self.instance.pk
+        )

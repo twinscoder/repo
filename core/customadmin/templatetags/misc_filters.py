@@ -63,6 +63,10 @@ def admin_urlname(value, arg):
         pattern = "%s:%s-%s" % ("customadmin", "expensetype", arg)
     elif value.model_name == "plan":
         pattern = "%s:%s-%s" % ("customadmin", "plan", arg)
+    elif value.model_name == "product":
+        pattern = "%s:%s-%s" % ("customadmin", "product", arg)
+    elif value.model_name == "storemanager":
+        pattern = "%s:%s-%s" % ("customadmin", "storemanager", arg)
     else:
         pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
     # print(pattern)

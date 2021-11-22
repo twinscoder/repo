@@ -18,53 +18,59 @@
 
             <div class="ibox-content">
                 <div class="row">
+                    <div class="col-sm-6">
+                        {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.alias|as_crispy_field }}
+                    </div>
+
 
                     <div class="col-sm-6">
-                        {{ form.username|as_crispy_field }}
+                        {{ form.category|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.email|as_crispy_field }}
+                        {{ form.subcategory|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.first_name|as_crispy_field }}
+                        {{ form.store|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.last_name|as_crispy_field }}
+                        {{ form.image|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.gender|as_crispy_field }}
+                        {{ form.purchase_price|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.birth_date|as_crispy_field }}
+                        {{ form.selling_price|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.phone|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.address|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.city|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.state|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.country|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.pincode|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.refer_from|as_crispy_field }}
+                        {{ form.membership_price|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
                         {{ form.description|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.profile_image|as_crispy_field }}
+                        {{ form.coupon|as_crispy_field }}
                     </div>
-                    <div class="col-sm-6 mt-4">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.cancel_available %}
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.free_shipping %}
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.cash_on_delivery %}
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.stock %}
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.is_deleted %}
+                    </div>
+                    <div class="col-sm-6 mt-2">
                         {% input_icheck form.is_active %}
                     </div>
                 </div>
@@ -87,9 +93,8 @@
 
 <script>
     $(function() {
-        userroles.customers.details();
+        userroles.products.details();
     });
-    
 </script>
 {% endblock %}
 
