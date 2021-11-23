@@ -89,6 +89,3 @@ class Store(ActivityTracking):
         verbose_name = "Store"
         verbose_name_plural = "stores"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:store-list")

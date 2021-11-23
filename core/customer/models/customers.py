@@ -1,14 +1,26 @@
 import uuid
+import logging
 
 from config.models import ActivityTracking
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext as _
+from core.customadmin.utils import human_datetime
+from django.conf import settings
 
+from core.customadmin.tasks import (
+    send_sms,
+    send_welcome_email,
+)
 
+logger = logging.getLogger()
 # Create your models here.
 class Customer(ActivityTracking):
+    """Customer."""
 
-    GENDER_CHOICES = (("Male", "Male"), ("Female", "Female"))
+    MALE = "male"
+    FEMALE = "female"
+
+    GENDER_CHOICES = ((MALE, "Male"), (FEMALE, "Female"))
 
     first_name = models.CharField(
         verbose_name=_("Firstname"), max_length=40, blank=True
@@ -87,13 +99,31 @@ class Customer(ActivityTracking):
     def get_short_name(self):
         return self.first_name
 
+    @property
+    def birth_date_human(self):
+        # Format the date for human display
+        if self.meeting_date:
+            return human_datetime(self.birth_date)
+
+    def send_sms(self):
+        """Send SMS to host to notify of guest arrival."""
+        if self.host.phone and self.host.notify_via_sms:
+            logger.info("Create SMS task")
+            message = f"{settings.PROJECT_TITLE}: {self.get_full_name}."
+            task = send_sms.delay(to=str(self.phone), body=message)
+            logger.info(f"Task ID: {task.id}, {task.status}")
+
+    def send_welcome_email(self):
+        """Send welcome email to guest."""
+        if self.visitor_type.visitor_emails:
+            logger.info("Create send welcome email task")
+            task = send_welcome_email.delay(self.pk)
+            logger.info(f"Task ID: {task.id}, {task.status}")
+
     class Meta:
         verbose_name = "Customer"
         verbose_name_plural = "customers"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:customer-list")
 
 
 class CustomerStatusHistory(ActivityTracking):
@@ -111,6 +141,3 @@ class CustomerStatusHistory(ActivityTracking):
         verbose_name = "Customer Status History"
         verbose_name_plural = "customers status history"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:customerstatushistory-list")

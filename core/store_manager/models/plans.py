@@ -37,6 +37,3 @@ class Plan(ActivityTracking):
         verbose_name = "Plan"
         verbose_name_plural = "plans"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:plan-list")

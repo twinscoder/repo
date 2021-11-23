@@ -27,9 +27,6 @@ class CustomerWallet(ActivityTracking):
         verbose_name_plural = "customer wallet"
         ordering = ["-created_at"]
 
-    def get_absolute_url(self):
-        return reverse("customadmin:customerwallet-list")
-
 
 # Create your models here.
 class CustomerWalletHistory(ActivityTracking):
@@ -73,5 +70,3 @@ class CustomerWalletHistory(ActivityTracking):
         verbose_name_plural = "customer wallet history"
         ordering = ["-created_at"]
 
-    def get_absolute_url(self):
-        return reverse("customadmin:customerwallethistory-list")

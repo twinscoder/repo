@@ -128,9 +128,6 @@ class DeliveryBoy(ActivityTracking):
         verbose_name_plural = "delivery boys"
         ordering = ["-created_at"]
 
-    def get_absolute_url(self):
-        return reverse("customadmin:deliveryboy-list")
-
 
 class DeliveryBoyStatusHistory(ActivityTracking):
 
@@ -150,6 +147,3 @@ class DeliveryBoyStatusHistory(ActivityTracking):
         verbose_name = "DeliveryBoy Status History"
         verbose_name_plural = "DeliveryBoys status history"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:deliveryboystatushistory-list")

@@ -26,9 +26,6 @@ class StoreManager(User, ActivityTracking):
         verbose_name_plural = "store managers"
         ordering = ["-created_at"]
 
-    def get_absolute_url(self):
-        return reverse("customadmin:storemanager-list")
-
 
 class StoreManagerStatusHistory(ActivityTracking):
 
@@ -48,6 +45,3 @@ class StoreManagerStatusHistory(ActivityTracking):
         verbose_name = "StoreManager Status History"
         verbose_name_plural = "StoreManagers status history"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:storemanagerstatushistory-list")

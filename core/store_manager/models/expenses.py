@@ -28,9 +28,6 @@ class ExpenseType(ActivityTracking):
         verbose_name_plural = "expense types"
         ordering = ["-created_at"]
 
-    def get_absolute_url(self):
-        return reverse("customadmin:expensetype-list")
-
 
 # Create your models here.
 class Expense(ActivityTracking):
@@ -71,6 +68,3 @@ class Expense(ActivityTracking):
         verbose_name = "Expense"
         verbose_name_plural = "expense"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:expense-list")

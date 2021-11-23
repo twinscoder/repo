@@ -8,6 +8,7 @@ from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.text import capfirst
 from django.urls.exceptions import NoReverseMatch
+from django.utils.timezone import localtime
 
 # -----------------------------------------------------------------------------
 import string
@@ -88,3 +89,8 @@ def admin_urlname(value, arg):
         pattern = "%s:%s-%s" % ("customadmin", "storemanager", arg)
     # print(pattern)
     return pattern
+
+
+def human_datetime(dt):
+    """Return local time in a human friendly format for consitency."""
+    return localtime(dt).strftime("%A, %B %d at %-I:%M %p")

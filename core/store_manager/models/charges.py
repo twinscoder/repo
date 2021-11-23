@@ -34,6 +34,3 @@ class DeliveryCharge(ActivityTracking):
         verbose_name = "Delivery Charge"
         verbose_name_plural = "delivery charges"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:deliverycharge-list")

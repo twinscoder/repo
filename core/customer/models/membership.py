@@ -29,6 +29,3 @@ class Membership(ActivityTracking):
         verbose_name = "Membership"
         verbose_name_plural = "membership"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:membership-list")

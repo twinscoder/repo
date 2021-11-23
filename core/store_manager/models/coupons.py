@@ -59,6 +59,3 @@ class Coupon(ActivityTracking):
         verbose_name = "Coupon"
         verbose_name_plural = "coupons"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:coupon-list")

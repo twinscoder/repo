@@ -32,9 +32,6 @@ class DeliveryBoyWallet(ActivityTracking):
         verbose_name_plural = "delivery boy wallet"
         ordering = ["-created_at"]
 
-    def get_absolute_url(self):
-        return reverse("customadmin:deliveryboywallet-list")
-
 
 # Create your models here.
 class DeliveryBoyWalletHistory(ActivityTracking):
@@ -78,6 +75,3 @@ class DeliveryBoyWalletHistory(ActivityTracking):
         verbose_name = "Delivery Boy Wallet History"
         verbose_name_plural = "delivery boy wallet history"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:deliveryboywallethistory-list")

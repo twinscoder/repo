@@ -117,6 +117,3 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
         verbose_name = "User"
         verbose_name_plural = "Users"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:users:user-list")

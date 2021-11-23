@@ -38,6 +38,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
 THIRD_PARTY_APPS = [
@@ -73,7 +74,10 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            path.join(APPS_DIR, "customadmin", "templates", "customadmin"),
+            path.join(
+                APPS_DIR,
+                "templates",
+            ),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -166,6 +170,9 @@ MEDIA_URL = "/media/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+# FIXTURES
+# ------------------------------------------------------------------------------
+FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -228,3 +235,28 @@ SUPER_USER = {
     "ADMIN_USERNAME": os.getenv("ADMIN_USERNAME"),
     "ADMIN_PASSWORD": os.getenv("ADMIN_PASSWORD"),
 }
+
+# TWILIO (PROD)
+# ------------------------------------------------------------------------------
+TWILIO_FROM = ""
+TWILIO_API_KEY = ""
+TWILIO_TOKEN = ""
+
+# Celery
+# ------------------------------------------------------------------------------
+if USE_TZ:
+    CELERY_TIMEZONE = TIME_ZONE
+# CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+# TODO: set to whatever value is adequate in your circumstances
+CELERY_TASK_TIME_LIMIT = 5 * 60
+# TODO: set to whatever value is adequate in your circumstances
+CELERY_TASK_SOFT_TIME_LIMIT = 60
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+# https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html
+CELERY_RESULT_BACKEND = "django-db"

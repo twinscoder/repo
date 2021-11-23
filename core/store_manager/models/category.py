@@ -43,9 +43,6 @@ class Category(ActivityTracking):
         verbose_name_plural = "categories"
         ordering = ["-created_at"]
 
-    def get_absolute_url(self):
-        return reverse("customadmin:category-list")
-
 
 # Create your models here.
 class SubCategory(ActivityTracking):
@@ -91,6 +88,3 @@ class SubCategory(ActivityTracking):
         verbose_name = "Sub Category"
         verbose_name_plural = "sub categories"
         ordering = ["-created_at"]
-
-    def get_absolute_url(self):
-        return reverse("customadmin:subcategory-list")
