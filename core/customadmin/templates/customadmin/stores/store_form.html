@@ -25,9 +25,6 @@
                         {{ form.store_manager|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.delivery_boys|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6">
                         {{ form.business_email|as_crispy_field }}
                     </div>
 
@@ -35,9 +32,6 @@
                         {{ form.phone|as_crispy_field }}
                     </div>
 
-                    <div class="col-sm-6">
-                        {{ form.image|as_crispy_field }}
-                    </div>
                     <div class="col-sm-6">
                         {{ form.address|as_crispy_field }}
                     </div>
@@ -72,10 +66,19 @@
                         {{ form.ifsc_code|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.image|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
                         {{ form.upi_qr_code|as_crispy_field }}
                     </div>
                     <div class="col-sm-12">
-                        {{ form.description|as_crispy_field }}
+                        {{ form.delivery_boys|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.products|as_crispy_field }}
                     </div>
                     <div class="col-sm-12 mt-2">
                         {% input_icheck form.is_active %}

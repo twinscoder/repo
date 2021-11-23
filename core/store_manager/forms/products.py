@@ -18,7 +18,6 @@ class MyProductCreationForm(forms.ModelForm):
             "alias",
             "category",
             "subcategory",
-            "store",
             "coupon",
             "image",
             "description",
@@ -42,7 +41,6 @@ class MyProductCreationForm(forms.ModelForm):
             "name",
             "category",
             "subcategory",
-            "store",
         ]:
             self.fields[field].required = True
 
@@ -57,7 +55,6 @@ class MyProductChangeForm(forms.ModelForm):
             "alias",
             "category",
             "subcategory",
-            "store",
             "coupon",
             "image",
             "description",
@@ -81,6 +78,5 @@ class MyProductChangeForm(forms.ModelForm):
             "name",
             "category",
             "subcategory",
-            "store",
         ]:
             self.fields[field].required = True

@@ -33,6 +33,11 @@ class Store(ActivityTracking):
         blank=True,
         verbose_name=_("Delivery Boys"),
     )
+    products = models.ManyToManyField(
+        "Product",
+        blank=True,
+        verbose_name=_("Products"),
+    )
     image = models.ImageField(
         upload_to="store_image",
         default="sample.jpg",

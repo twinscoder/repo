@@ -30,14 +30,6 @@ class Product(ActivityTracking):
         default="",
         verbose_name=_("Subcategory"),
     )
-    store = models.ForeignKey(
-        "Store",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        default="",
-        verbose_name=_("Store"),
-    )
     coupon = models.ManyToManyField("Coupon", blank=True, verbose_name=_("Coupons"))
     image = models.ImageField(
         upload_to="product_image",

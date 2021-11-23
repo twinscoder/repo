@@ -322,6 +322,20 @@ var userroles = {
             });
 
         },
+        details: function () {
+            $('#id_delivery_boys').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Delivery Boys',
+                selectedListLabel: 'Chosen Delivery Boys',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
+            $('#id_products').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Products',
+                selectedListLabel: 'Chosen Products',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
+        },
 
     },
     // products
@@ -337,6 +351,14 @@ var userroles = {
                 },],
             });
 
+        },
+        details: function () {
+            $('#id_coupon').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Coupons',
+                selectedListLabel: 'Chosen Coupons',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
         },
 
     },
