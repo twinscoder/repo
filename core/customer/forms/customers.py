@@ -1,8 +1,8 @@
 # # -*- coding: utf-8 -*-
-
-from django import forms
-from ..models import Customer
 from core.customadmin.utils import refer_code_generator
+from django import forms
+
+from ..models import Customer
 
 # # -----------------------------------------------------------------------------
 # # Users

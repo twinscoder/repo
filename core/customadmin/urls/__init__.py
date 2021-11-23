@@ -53,7 +53,7 @@ urlpatterns = [
         name="customer-list-ajax",
     ),
     path(
-        "customers/change-status/<int:customer_id>",
+        "customers/change-status/",
         customer_views.CustomerChangeStatus.as_view(),
         name="customer-change-status",
     ),

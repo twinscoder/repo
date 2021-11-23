@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.core.checks import messages
+from django.contrib import messages
 from django.db.models import Q
 from django.http.response import HttpResponseRedirect
 from django.template.loader import get_template
@@ -16,7 +16,7 @@ from core.customadmin.views.generic import (
 )
 from django.urls import reverse
 from ..forms import MyCustomerChangeForm, MyCustomerCreationForm
-from ..models import Customer
+from ..models import Customer, CustomerStatusHistory
 
 # -----------------------------------------------------------------------------
 # Users
@@ -26,11 +26,19 @@ from ..models import Customer
 class CustomerChangeStatus(MyView):
     permission_required = ("customers.change_customer",)
 
-    def get(self, request, customer_id, *args, **kwargs):
-        instance = Customer.objects.get(id=customer_id)
-        instance.is_active = not instance.is_active
-        instance.save()
-        messages.Info(request, "Status updated successfully.")
+    def post(self, request, *args, **kwargs):
+        customer_id = request.POST.get("customer_id")
+        reason = request.POST.get("reason")
+        if customer_id and reason:
+            instance = Customer.objects.get(id=customer_id)
+            instance.is_active = not instance.is_active
+            instance.save()
+            status_obj = CustomerStatusHistory()
+            status_obj.customer = instance
+            status_obj.status = instance.is_active
+            status_obj.reason = "{0} : By - {1}".format(reason, request.user.username)
+            status_obj.save()
+            messages.success(request, "Status updated successfully.")
         return HttpResponseRedirect(reverse("customadmin:customer-list"))
 
 

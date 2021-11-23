@@ -44,7 +44,7 @@
                             <td>{{ o.username }}</td>
                             <td>{{ o.email }}</td>
                             <td>
-                                <a href="{% url "customadmin:customer-change-status" customer_id=o.id %}" class="btn btn-secondary btn-sm">{% if o.is_active %}Active{% else %}Deactive{% endif %}</a>
+                                <button type="button" onclick="changeStatus({{o.pk}}, '{{o.username|capfirst}}')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">{% if o.is_active %}Active{% else %}Deactive{% endif %}</button>
                             </td>
                             </td>
                             <td class="row-actions">
@@ -55,6 +55,29 @@
                     </tbody>
 
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Customer Status</h5>
+                </div>
+                <form action="{% url 'customadmin:customer-change-status' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                            <input type="hidden" class="form-control" name="customer_id" id="customer_id">
+                            <div class="mb-3">
+                                <label for="reason" class="col-form-label">Reason:</label>
+                                <textarea class="form-control" id="reason" name="reason"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -71,6 +94,11 @@
     $(function () {
         userroles.customers.index();
     });
+    function changeStatus(pk, userName){
+        console.log("➡ userName :", userName)
+        $('input#customer_id').val(pk)
+        $('h5#exampleModalLabel').html(`Change Customer ( ${userName} ) Status`)
+    }
 </script>
 {% endblock %}
 

@@ -74,10 +74,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            path.join(
-                APPS_DIR,
-                "templates",
-            ),
+            path.join(APPS_DIR, "customadmin", "templates", "customadmin"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
