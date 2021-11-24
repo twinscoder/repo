@@ -41,9 +41,12 @@ class AccountManager(BaseUserManager):
 
 class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
 
+    ADMIN = "Admin"
+    MANAGER = "Manager"
+
     ROLE_CHOICES = (
-        (("Admin"), ("Admin")),
-        (("Manager"), ("Manager")),
+        (ADMIN, "Admin"),
+        (MANAGER, "Manager"),
     )
 
     email = models.EmailField(

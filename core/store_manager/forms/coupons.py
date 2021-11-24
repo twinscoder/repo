@@ -15,22 +15,27 @@ class MyCouponCreationForm(forms.ModelForm):
         model = Coupon
         fields = [
             "code",
-            "amount",
+            "discount_amount",
+            "discount_percentage",
             "discount_type",
             "is_repeatable",
             "min_amount",
-            "max_amount",
-            "start_date",
-            "expiry_date",
+            "buy_product_count",
+            "get_free_product_count",
             "description",
             "count",
+            "category",
+            "sub_category",
+            "product",
+            "is_billable",
             "is_active",
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].required = True
+        # for field in self.fields:
+        #     self.fields[field].required = True
+
 
 class MyCouponChangeForm(forms.ModelForm):
     """Custom UserChangeForm."""
@@ -39,19 +44,23 @@ class MyCouponChangeForm(forms.ModelForm):
         model = Coupon
         fields = [
             "code",
-            "amount",
+            "discount_amount",
+            "discount_percentage",
             "discount_type",
             "is_repeatable",
             "min_amount",
-            "max_amount",
-            "start_date",
-            "expiry_date",
+            "buy_product_count",
+            "get_free_product_count",
             "description",
             "count",
+            "category",
+            "sub_category",
+            "product",
+            "is_billable",
             "is_active",
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].required = True
+        # for field in self.fields:
+        #     self.fields[field].required = True

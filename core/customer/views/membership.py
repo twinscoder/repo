@@ -25,7 +25,7 @@ class MembershipListView(MyListView):
     # paginate_by = 25
     model = Membership
     queryset = model.objects.all()
-    template_name = "customadmin/memberships/memberships_list.html"
+    template_name = "customadmin/memberships/membership_list.html"
     permission_required = ("memberships.view_membership",)
 
 

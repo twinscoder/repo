@@ -30,7 +30,6 @@ class Product(ActivityTracking):
         default="",
         verbose_name=_("Subcategory"),
     )
-    coupon = models.ManyToManyField("Coupon", blank=True, verbose_name=_("Coupons"))
     image = models.ImageField(
         upload_to="product_image",
         default="sample.jpg",

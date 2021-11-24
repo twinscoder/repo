@@ -33,6 +33,9 @@
                         {{ form.subcategory|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
+                        {{ form.unit|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
                         {{ form.purchase_price|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
@@ -46,9 +49,6 @@
                     </div>
                     <div class="col-sm-6">
                         {{ form.image|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-12">
-                        {{ form.coupon|as_crispy_field }}
                     </div>
                     <div class="col-sm-6 mt-2">
                         {% input_icheck form.cancel_available %}

@@ -26,21 +26,21 @@ class DeliveryBoyListView(MyListView):
     ordering = ["username"]
     model = DeliveryBoy
     queryset = model.objects.all()
-    template_name = "customadmin/deliveryboys/deliveryboy_list.html"
+    template_name = "customadmin/delivery-boys/deliveryboy_list.html"
     permission_required = ("deliveryboys.view_deliveryboy",)
 
 
 class DeliveryBoyCreateView(MyCreateView):
     model = DeliveryBoy
     form_class = MyDeliveryBoyCreationForm
-    template_name = "customadmin/deliveryboys/deliveryboy_form.html"
+    template_name = "customadmin/delivery-boys/deliveryboy_form.html"
     permission_required = ("deliveryboys.add_deliveryboy",)
 
 
 class DeliveryBoyUpdateView(MyUpdateView):
     model = DeliveryBoy
     form_class = MyDeliveryBoyChangeForm
-    template_name = "customadmin/deliveryboys/deliveryboy_form.html"
+    template_name = "customadmin/delivery-boys/deliveryboy_form.html"
     permission_required = ("deliveryboys.change_deliveryboy",)
 
 

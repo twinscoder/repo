@@ -8,7 +8,11 @@ from django.utils.translation import gettext as _
 # Create your models here.
 class DeliveryBoy(ActivityTracking):
 
-    GENDER_CHOICES = (("Male", "MALE"), ("Female", "FEMALE"))
+    MALE = "male"
+    FEMALE = "female"
+    OTHER = "other"
+
+    GENDER_CHOICES = ((MALE, "Male"), (FEMALE, "Female"), (OTHER, "Other"))
 
     first_name = models.CharField(
         max_length=40, blank=True, verbose_name=_("Firstname")

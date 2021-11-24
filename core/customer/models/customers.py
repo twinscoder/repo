@@ -19,24 +19,29 @@ class Customer(ActivityTracking):
 
     MALE = "male"
     FEMALE = "female"
+    OTHER = "other"
 
-    GENDER_CHOICES = ((MALE, "Male"), (FEMALE, "Female"))
+    GENDER_CHOICES = ((MALE, "Male"), (FEMALE, "Female"), (OTHER, "Other"))
 
     first_name = models.CharField(
-        verbose_name=_("Firstname"), max_length=40, blank=True
+        verbose_name=_("Firstname"), max_length=20, blank=True, null=True
     )
-    last_name = models.CharField(verbose_name=_("Lastname"), max_length=40, blank=True)
+    last_name = models.CharField(
+        verbose_name=_("Lastname"), max_length=20, blank=True, null=True
+    )
     gender = models.CharField(
-        verbose_name=_("Gender"), choices=GENDER_CHOICES, max_length=40, blank=True
+        verbose_name=_("Gender"),
+        choices=GENDER_CHOICES,
+        max_length=6,
+        blank=True,
+        null=True,
     )
-    birth_date = models.CharField(
-        verbose_name=_("Birthdate"), max_length=10, default="", blank=True
-    )
+    birth_date = models.DateField(verbose_name=_("Birthdate"), blank=True, null=True)
     email = models.EmailField(
         verbose_name=_("Email"), null=True, blank=True, unique=True
     )
     phone = models.CharField(
-        verbose_name=_("Phone"), max_length=20, default="", blank=True
+        verbose_name=_("Phone"), max_length=12, default="", blank=True, null=True
     )
 
     username = models.CharField(
@@ -55,23 +60,31 @@ class Customer(ActivityTracking):
         verbose_name=_("Profile Image"),
     )
     description = models.CharField(
-        verbose_name=_("Description"), max_length=255, blank=True
+        verbose_name=_("Description"), max_length=255, blank=True, null=True
     )
 
     address = models.CharField(
-        verbose_name=_("Address"), max_length=255, default="", blank=True
+        verbose_name=_("Address"), max_length=255, default="", blank=True, null=True
     )
-    city = models.CharField(verbose_name=_("City"), max_length=50, blank=True)
-    state = models.CharField(verbose_name=_("State"), max_length=50, blank=True)
-    country = models.CharField(verbose_name=_("Country"), max_length=30, blank=True)
-    pincode = models.CharField(verbose_name=_("Pincode"), max_length=8, blank=True)
+    city = models.CharField(
+        verbose_name=_("City"), max_length=30, blank=True, null=True
+    )
+    state = models.CharField(
+        verbose_name=_("State"), max_length=20, blank=True, null=True
+    )
+    country = models.CharField(
+        verbose_name=_("Country"), max_length=20, blank=True, null=True
+    )
+    pincode = models.CharField(
+        verbose_name=_("Pincode"), max_length=6, blank=True, null=True
+    )
 
-    otp = models.CharField(verbose_name=_("OTP"), max_length=6, blank=True, default="")
+    otp = models.CharField(verbose_name=_("OTP"), max_length=6, blank=True, null=True)
     fcm_token = models.CharField(
-        verbose_name=_("FCM Token"), max_length=6, blank=True, default=""
+        verbose_name=_("FCM Token"), max_length=30, blank=True, null=True
     )
     refer_code = models.CharField(
-        verbose_name=_("Refer Code"), max_length=8, blank=True, default=""
+        verbose_name=_("Refer Code"), max_length=8, blank=True, null=True
     )
     refer_from = models.ForeignKey(
         "Customer",

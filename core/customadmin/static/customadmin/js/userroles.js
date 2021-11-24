@@ -228,31 +228,39 @@ var userroles = {
 
         },
         details: function () {
-            $('#id_start_date').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 15,
-                singleDatePicker: true,
-                startDate: moment().startOf('hour'),
-                endDate: moment().add(1, 'hour'),
-                minDate: moment(),
-                autoUpdateInput: true,
-                locale: {
-                    format: 'MM/DD/YYYY hh:mm A'
+            $('#id_category').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Categories',
+                selectedListLabel: 'Chosen Categories',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
+            $('#id_sub_category').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Sub Categories',
+                selectedListLabel: 'Chosen Sub Categories',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
+            $('#id_product').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Product',
+                selectedListLabel: 'Chosen Product',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
+            $('#id_discount_type').on('change', function(){
+                var typeValue = $(this).val()
+                if(typeValue == "Fixed"){
+                    $('#div_id_discount_amount').parent().show()
+                    $('#div_id_discount_percentage, #div_id_buy_product_count, #div_id_get_free_product_count').parent().hide()
+                }else if(typeValue == "Percentage"){
+                    $('#div_id_discount_amount, #div_id_buy_product_count, #div_id_get_free_product_count').parent().hide()
+                    $('#div_id_discount_percentage').parent().show()
+                }else if(typeValue == "Special"){
+                    $('#div_id_discount_amount, #div_id_discount_percentage').parent().hide()
+                    $('#div_id_buy_product_count, #div_id_get_free_product_count').parent().show()
+                }else{
+                    $('#div_id_discount_amount, #div_id_discount_percentage, #div_id_buy_product_count, #div_id_get_free_product_count').parent().show()
                 }
             });
-            $('#id_expiry_date').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 15,
-                singleDatePicker: true,
-                startDate: moment().startOf('hour'),
-                endDate: moment().add(1, 'hour'),
-                minDate: moment(),
-                autoUpdateInput: true,
-                locale: {
-                    format: 'MM/DD/YYYY hh:mm A'
-                }
-            });
-
         },
 
     },
@@ -353,12 +361,7 @@ var userroles = {
 
         },
         details: function () {
-            $('#id_coupon').bootstrapDualListbox({
-                nonSelectedListLabel: 'Available Coupons',
-                selectedListLabel: 'Chosen Coupons',
-                preserveSelectionOnMove: 'moved',
-                moveOnSelect: false
-            });
+
         },
 
     },
@@ -375,6 +378,46 @@ var userroles = {
                 },],
             });
 
+        },
+
+    },
+    // memberships
+    // ------------------------------------------------------------------------
+    memberships: {
+        index: function () {
+            $('#membership-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+
+    },
+    // deliveryboys
+    // ------------------------------------------------------------------------
+    deliveryboys: {
+        index: function () {
+            $('#deliveryboy-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+        details: function () {
+            $('#id_birth_date').daterangepicker({
+                singleDatePicker: true,
+                locale: {
+                    format: 'MM/DD/YYYY'
+                }
+            });
         },
 
     },

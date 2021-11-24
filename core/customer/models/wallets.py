@@ -31,10 +31,14 @@ class CustomerWallet(ActivityTracking):
 # Create your models here.
 class CustomerWalletHistory(ActivityTracking):
 
+    CREDIT = "Credit"
+    DEBIT = "Debit"
+    OTHER = "Other"
+
     PAYMENT_TYPES_CHOICES = (
-        (("Credit"), ("Credit")),
-        (("Debit"), ("Debit")),
-        (("Other"), ("Other")),
+        (CREDIT, "Credit"),
+        (DEBIT, "Debit"),
+        (OTHER, "Other"),
     )
 
     wallet = models.ForeignKey(
@@ -63,10 +67,9 @@ class CustomerWalletHistory(ActivityTracking):
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
     def __str__(self):
-        return self.name
+        return self.wallet.customer.username
 
     class Meta:
         verbose_name = "Customer Wallet History"
         verbose_name_plural = "customer wallet history"
         ordering = ["-created_at"]
-

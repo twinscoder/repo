@@ -1,5 +1,6 @@
 # # -*- coding: utf-8 -*-
 
+import datetime
 from django import forms
 from ..models import Membership
 
@@ -16,10 +17,19 @@ class MyMembershipCreationForm(forms.ModelForm):
         fields = [
             "customer",
             "plan",
-            "start_date",
-            "end_date",
             "is_active",
         ]
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if commit:
+            days = instance.plan.days + instance.plan.months * 30
+            instance.start_date = datetime.datetime.now
+            instance.end_date = datetime.timedelta(days=days)
+            instance.save()
+
+        return instance
 
 
 class MyMembershipChangeForm(forms.ModelForm):
@@ -30,7 +40,5 @@ class MyMembershipChangeForm(forms.ModelForm):
         fields = [
             "customer",
             "plan",
-            "start_date",
-            "end_date",
             "is_active",
         ]

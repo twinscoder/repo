@@ -85,7 +85,7 @@ urlpatterns = [
         name="membership-list-ajax",
     ),
     # ----------------------------------------------------------------------------------
-    # Membership
+    # deliveryboys
     path(
         "delivery-boys/",
         delivery_agent_views.DeliveryBoyListView.as_view(),

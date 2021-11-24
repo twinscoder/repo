@@ -7,7 +7,12 @@ from core.user.models import User
 
 # Create your models here.
 class StoreManager(User, ActivityTracking):
-    GENDER_CHOICES = (("Male", "MALE"), ("Female", "FEMALE"))
+    MALE = "male"
+    FEMALE = "female"
+    OTHER = "other"
+
+    GENDER_CHOICES = ((MALE, "Male"), (FEMALE, "Female"), (OTHER, "Other"))
+    
     gender = models.CharField(
         choices=GENDER_CHOICES, max_length=40, blank=True, verbose_name=_("Gender")
     )

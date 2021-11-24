@@ -1,6 +1,8 @@
 # # -*- coding: utf-8 -*-
 
 from django import forms
+
+from core.user.models.users import User
 from ..models import Store
 
 # # -----------------------------------------------------------------------------
@@ -41,6 +43,7 @@ class MyStoreCreationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in ["name", "business_email", "store_manager"]:
             self.fields[field].required = True
+        self.fields["store_manager"].queryset = User.objects.filter(role=User.MANAGER)
 
 
 class MyStoreChangeForm(forms.ModelForm):

@@ -36,15 +36,14 @@ class MyDeliveryBoyCreationForm(forms.ModelForm):
             "pan_card",
             "driving_lincense",
             "per_order_charge",
-            "activity_status",
             "order_accept_limit",
             "is_active",
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].required = True
+        # for field in self.fields:
+        #     self.fields[field].required = True
 
 
 class MyDeliveryBoyChangeForm(forms.ModelForm):
@@ -75,13 +74,11 @@ class MyDeliveryBoyChangeForm(forms.ModelForm):
             "pan_card",
             "driving_lincense",
             "per_order_charge",
-            "activity_status",
             "order_accept_limit",
             "is_active",
         ]
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].required = True
+        # for field in self.fields:
+        #     self.fields[field].required = True

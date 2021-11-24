@@ -69,7 +69,7 @@ class DeliveryBoyWalletHistory(ActivityTracking):
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
     def __str__(self):
-        return self.name
+        return self.wallet.delivery_boy.username
 
     class Meta:
         verbose_name = "Delivery Boy Wallet History"
