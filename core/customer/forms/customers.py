@@ -80,7 +80,6 @@ class MyCustomerChangeForm(forms.ModelForm):
             "country",
             "pincode",
             "refer_from",
-            "is_active",
         ]
 
     def __init__(self, *args, **kwargs):

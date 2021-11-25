@@ -4,4 +4,5 @@ from .delivery_boys import (
     DeliveryBoyDeleteView,
     DeliveryBoyListView,
     DeliveryBoyUpdateView,
+    DeliveryBoyChangeStatus,
 )

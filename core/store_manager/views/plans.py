@@ -28,27 +28,27 @@ class PlanListView(MyListView):
     model = Plan
     queryset = model.objects.all()
     template_name = "customadmin/plans/plan_list.html"
-    permission_required = ("plans.view_plan",)
+    permission_required = ("store_manager.view_plan",)
 
 
 class PlanCreateView(MyCreateView):
     model = Plan
     form_class = MyPlanForm
     template_name = "customadmin/plans/plan_form.html"
-    permission_required = ("plans.add_plan",)
+    permission_required = ("store_manager.add_plan",)
 
 
 class PlanUpdateView(MyUpdateView):
     model = Plan
     form_class = MyPlanForm
     template_name = "customadmin/plans/plan_form.html"
-    permission_required = ("plans.change_plan",)
+    permission_required = ("store_manager.change_plan",)
 
 
 class PlanDeleteView(MyDeleteView):
     model = Plan
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("plans.delete_plan",)
+    permission_required = ("store_manager.delete_plan",)
 
 
 class PlanAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):

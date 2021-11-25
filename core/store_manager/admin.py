@@ -9,8 +9,6 @@ from .models import (
     Plan,
     Product,
     Store,
-    StoreManager,
-    StoreManagerStatusHistory,
     SubCategory,
 )
 
@@ -22,5 +20,3 @@ admin.site.register(Coupon)
 admin.site.register(Expense)
 admin.site.register(ExpenseType)
 admin.site.register(Plan)
-admin.site.register(StoreManager)
-admin.site.register(StoreManagerStatusHistory)

@@ -75,7 +75,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Send message</button>
+                        <button type="submit" class="btn btn-primary">Change Status</button>
                     </div>
                 </form>
             </div>
@@ -95,7 +95,6 @@
         userroles.customers.index();
     });
     function changeStatus(pk, userName){
-        console.log("➡ userName :", userName)
         $('input#customer_id').val(pk)
         $('h5#exampleModalLabel').html(`Change Customer ( ${userName} ) Status`)
     }

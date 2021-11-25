@@ -26,27 +26,27 @@ class MembershipListView(MyListView):
     model = Membership
     queryset = model.objects.all()
     template_name = "customadmin/memberships/membership_list.html"
-    permission_required = ("memberships.view_membership",)
+    permission_required = ("customer.view_membership",)
 
 
 class MembershipCreateView(MyCreateView):
     model = Membership
     form_class = MyMembershipCreationForm
     template_name = "customadmin/memberships/membership_form.html"
-    permission_required = ("memberships.add_membership",)
+    permission_required = ("customer.add_membership",)
 
 
 class MembershipUpdateView(MyUpdateView):
     model = Membership
     form_class = MyMembershipChangeForm
     template_name = "customadmin/memberships/membership_form.html"
-    permission_required = ("memberships.change_membership",)
+    permission_required = ("customer.change_membership",)
 
 
 class MembershipDeleteView(MyDeleteView):
     model = Membership
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("memberships.delete_membership",)
+    permission_required = ("customer.delete_membership",)
 
 
 class MembershipAjaxPagination(

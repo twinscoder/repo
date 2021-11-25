@@ -26,27 +26,27 @@ class StoreListView(MyListView):
     model = Store
     # queryset = model.objects.exclude(username="manifestingest")
     template_name = "customadmin/stores/store_list.html"
-    permission_required = ("stores.view_store",)
+    permission_required = ("store_manager.view_store",)
 
 
 class StoreCreateView(MyCreateView):
     model = Store
     form_class = MyStoreCreationForm
     template_name = "customadmin/stores/store_form.html"
-    permission_required = ("stores.add_store",)
+    permission_required = ("store_manager.add_store",)
 
 
 class StoreUpdateView(MyUpdateView):
     model = Store
     form_class = MyStoreChangeForm
     template_name = "customadmin/stores/store_form.html"
-    permission_required = ("stores.change_store",)
+    permission_required = ("store_manager.change_store",)
 
 
 class StoreDeleteView(MyDeleteView):
     model = Store
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("stores.delete_store",)
+    permission_required = ("store_manager.delete_store",)
 
 
 class StoreAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):

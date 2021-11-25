@@ -33,10 +33,10 @@ class Store(ActivityTracking):
         blank=True,
         verbose_name=_("Delivery Boys"),
     )
-    products = models.ManyToManyField(
-        "Product",
+    categories = models.ManyToManyField(
+        "Category",
         blank=True,
-        verbose_name=_("Products"),
+        verbose_name=_("Categories"),
     )
     image = models.ImageField(
         upload_to="store_image",

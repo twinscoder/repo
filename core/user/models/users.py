@@ -8,6 +8,7 @@ from django.contrib.auth.models import (
 )
 from django.db import models
 from django.utils.translation import gettext as _
+from django.urls import reverse
 
 # Create your models here.
 
@@ -99,6 +100,7 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
         verbose_name=_("Unique Id"),
     )
 
+    is_manager = models.BooleanField(default=False, verbose_name=_("Is Manager"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     is_staff = models.BooleanField(default=True, verbose_name=_("Is Staff"))
 
@@ -115,6 +117,9 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name
+
+    def get_absolute_url(self):
+        return reverse("customadmin:index")
 
     class Meta:
         verbose_name = "User"

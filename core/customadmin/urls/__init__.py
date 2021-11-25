@@ -22,6 +22,7 @@ urlpatterns = [
     path("users/", views.UserListView.as_view(), name="user-list"),
     path("users/create/", views.UserCreateView.as_view(), name="user-create"),
     path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="user-update"),
+    path("users/<int:pk>/profile/update/", views.UserProfileUpdateView.as_view(), name="user-profile-update"),
     path("users/<int:pk>/delete/", views.UserDeleteView.as_view(), name="user-delete"),
     path(
         "users/<int:pk>/password/",
@@ -110,6 +111,11 @@ urlpatterns = [
         "delivery-boys/ajax-Memberships",
         delivery_agent_views.DeliveryBoyAjaxPagination.as_view(),
         name="deliveryboy-list-ajax",
+    ),
+    path(
+        "delivery-boys/change-status/",
+        delivery_agent_views.DeliveryBoyChangeStatus.as_view(),
+        name="deliveryboy-change-status",
     ),
     # ----------------------------------------------------------------------------------
     # Store

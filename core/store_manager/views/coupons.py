@@ -29,27 +29,27 @@ class CouponListView(MyListView):
     model = Coupon
     queryset = model.objects.all()
     template_name = "customadmin/coupons/coupon_list.html"
-    permission_required = ("coupons.view_coupon",)
+    permission_required = ("store_manager.view_coupon",)
 
 
 class CouponCreateView(MyCreateView):
     model = Coupon
     form_class = MyCouponCreationForm
     template_name = "customadmin/coupons/coupon_form.html"
-    permission_required = ("coupons.add_coupon",)
+    permission_required = ("store_manager.add_coupon",)
 
 
 class CouponUpdateView(MyUpdateView):
     model = Coupon
     form_class = MyCouponChangeForm
     template_name = "customadmin/coupons/coupon_form.html"
-    permission_required = ("coupons.change_coupon",)
+    permission_required = ("store_manager.change_coupon",)
 
 
 class CouponDeleteView(MyDeleteView):
     model = Coupon
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("coupons.delete_coupon",)
+    permission_required = ("store_manager.delete_coupon",)
 
 
 class CouponAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):

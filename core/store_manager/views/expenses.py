@@ -29,27 +29,27 @@ class ExpenseListView(MyListView):
     model = Expense
     queryset = model.objects.all()
     template_name = "customadmin/expenses/expense_list.html"
-    permission_required = ("expenses.view_expense",)
+    permission_required = ("store_manager.view_expense",)
 
 
 class ExpenseCreateView(MyCreateView):
     model = Expense
     form_class = MyExpenseForm
     template_name = "customadmin/expenses/expense_form.html"
-    permission_required = ("expenses.add_expense",)
+    permission_required = ("store_manager.add_expense",)
 
 
 class ExpenseUpdateView(MyUpdateView):
     model = Expense
     form_class = MyExpenseForm
     template_name = "customadmin/expenses/expense_form.html"
-    permission_required = ("expenses.change_expense",)
+    permission_required = ("store_manager.change_expense",)
 
 
 class ExpenseDeleteView(MyDeleteView):
     model = Expense
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("expenses.delete_expense",)
+    permission_required = ("store_manager.delete_expense",)
 
 
 class ExpenseAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):
@@ -112,27 +112,27 @@ class ExpenseTypeListView(MyListView):
     model = ExpenseType
     queryset = model.objects.all()
     template_name = "customadmin/expense-types/expensetype_list.html"
-    permission_required = ("expensetypes.view_expensetype",)
+    permission_required = ("store_manager.view_expensetype",)
 
 
 class ExpenseTypeCreateView(MyCreateView):
     model = ExpenseType
     form_class = MyExpenseTypeForm
     template_name = "customadmin/expense-types/expensetype_form.html"
-    permission_required = ("expensetypes.add_expensetype",)
+    permission_required = ("store_manager.add_expensetype",)
 
 
 class ExpenseTypeUpdateView(MyUpdateView):
     model = ExpenseType
     form_class = MyExpenseTypeForm
     template_name = "customadmin/expense-types/expensetype_form.html"
-    permission_required = ("expensetypes.change_expensetype",)
+    permission_required = ("store_manager.change_expensetype",)
 
 
 class ExpenseTypeDeleteView(MyDeleteView):
     model = ExpenseType
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("expensetypes.delete_expensetype",)
+    permission_required = ("store_manager.delete_expensetype",)
 
 
 class ExpenseTypeAjaxPagination(

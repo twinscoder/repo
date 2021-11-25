@@ -7,5 +7,6 @@ from .users import (
     UserListView,
     UserPasswordView,
     UserUpdateView,
+    UserProfileUpdateView,
 )
 from .views import IndexView

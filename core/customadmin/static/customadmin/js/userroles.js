@@ -138,7 +138,7 @@ var userroles = {
             $('#id_birth_date').daterangepicker({
                 singleDatePicker: true,
                 locale: {
-                    format: 'MM/DD/YYYY'
+                    format: 'YYYY-MM-DD'
                 }
             });
         }
@@ -337,9 +337,9 @@ var userroles = {
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false
             });
-            $('#id_products').bootstrapDualListbox({
-                nonSelectedListLabel: 'Available Products',
-                selectedListLabel: 'Chosen Products',
+            $('#id_categories').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Categories',
+                selectedListLabel: 'Chosen Categories',
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false
             });
@@ -415,7 +415,7 @@ var userroles = {
             $('#id_birth_date').daterangepicker({
                 singleDatePicker: true,
                 locale: {
-                    format: 'MM/DD/YYYY'
+                    format: 'YYYY-MM-DD'
                 }
             });
         },
