@@ -5,7 +5,7 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
       <div class="login-logo">
         <img
-          src="{% static 'customadmin/logo.png' %}"
+          src="{% static 'img/logo.png' %}"
           class="animated fadeInDown"
         />
       </div>
@@ -25,7 +25,7 @@
       >
         {% csrf_token %}
         <div class="form-group">
-          {{ form.username|attr:"required"|attr:"autofocus"|attr:"placeholder:Username"|attr:"class:form-control" }}
+          {{ form.username|attr:"required"|attr:"autofocus"|attr:"placeholder:Email"|attr:"class:form-control" }}
         </div>
         <div class="form-group">
           {{ form.password|attr:"required"|attr:"placeholder:Password"|attr:"class:form-control" }}
@@ -39,10 +39,11 @@
     </div>
 
     <p class="text-center">
+      <a href="{% url 'customadmin:auth_password_reset' %}">Forgot Password ?</a>
+    </p>
+    <p class="text-center">
       Quickly eCommerce
     </p>
   </div>
 </div>
-{% endblock%} {% block js %} {{ block.super }}
-<script src="{% static 'customadmin/js/login.js' %}"></script>
 {% endblock%}

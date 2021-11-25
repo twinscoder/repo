@@ -29,7 +29,7 @@ class UserListView(MyListView):
     # paginate_by = 25
     ordering = ["username"]
     model = User
-    # queryset = model.objects.exclude(username="manifestingest")
+    queryset = model.objects.all()
     template_name = "customadmin/adminuser/user_list.html"
     permission_required = ("users.view_user",)
 
@@ -82,7 +82,7 @@ class UserAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVie
     https://bitbucket.org/pigletto/django-datatables-view."""
 
     model = User
-    queryset = User.objects.all().order_by("last_name")
+    queryset = User.objects.all().order_by("-created_at")
 
     def _get_is_superuser(self, obj):
         """Get boolean column markup."""
@@ -91,11 +91,19 @@ class UserAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVie
 
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
-        # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        user_perms = {
+            "view_perm": True
+            if self.request.user.has_perm("%s.%s" % ("core", "view_invite"))
+            else False,
+            "change_perm": True
+            if self.request.user.has_perm("%s.%s" % ("core", "change_invite"))
+            else False,
+            "delete_perm": True
+            if self.request.user.has_perm("%s.%s" % ("core", "delete_invite"))
+            else False,
+        }
+        return t.render({"obj": obj, "user_perms": user_perms})
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
@@ -105,8 +113,6 @@ class UserAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVie
                 Q(username__icontains=self.search)
                 | Q(first_name__icontains=self.search)
                 | Q(last_name__icontains=self.search)
-                # | Q(state__icontains=self.search)
-                # | Q(year__icontains=self.search)
             )
         return qs
 

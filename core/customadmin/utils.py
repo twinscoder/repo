@@ -8,26 +8,15 @@ from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.text import capfirst
 from django.urls.exceptions import NoReverseMatch
+from django.utils.timezone import localtime
 
 # -----------------------------------------------------------------------------
+import string
+import random
 
 
-def update_order(order_data, model):
-    """Parse json data and update model order.
-    Object keys should be: id, order"""
-    jsondata = json.loads(order_data)
-    for s in jsondata:
-        # This may occur if we have an empty placeholder, it's ok
-        if "id" not in s or s["id"] == "None":
-            continue
-        try:
-            instance = model.objects.get(pk=s["id"])
-            if instance.the_order != s["order"]:
-                instance.the_order = s["order"]
-                instance.save()
-        except model.DoesNotExist:
-            # Object may have been deleted, so just keep going
-            continue
+def refer_code_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return "".join(random.choice(chars) for _ in range(size))
 
 
 def get_upload_to_uuid(self, filename):
@@ -75,6 +64,37 @@ def admin_urlname(value, arg):
     URLs should be named as: customadmin:app_label:model_name-list"""
     pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
     if value.model_name == "user":
-        pattern = "%s:%s-%s" % ("customadmin:users", "user", arg)
+        pattern = "%s:%s-%s" % ("customadmin", "user", arg)
+    if value.model_name == "customer":
+        pattern = "%s:%s-%s" % ("customadmin", "customer", arg)
+    if value.model_name == "store":
+        pattern = "%s:%s-%s" % ("customadmin", "store", arg)
+    if value.model_name == "category":
+        pattern = "%s:%s-%s" % ("customadmin", "category", arg)
+    if value.model_name == "subcategory":
+        pattern = "%s:%s-%s" % ("customadmin", "subcategory", arg)
+    if value.model_name == "deliverycharge":
+        pattern = "%s:%s-%s" % ("customadmin", "deliverycharge", arg)
+    if value.model_name == "coupon":
+        pattern = "%s:%s-%s" % ("customadmin", "coupon", arg)
+    if value.model_name == "expense":
+        pattern = "%s:%s-%s" % ("customadmin", "expense", arg)
+    if value.model_name == "expensetype":
+        pattern = "%s:%s-%s" % ("customadmin", "expensetype", arg)
+    if value.model_name == "plan":
+        pattern = "%s:%s-%s" % ("customadmin", "plan", arg)
+    if value.model_name == "product":
+        pattern = "%s:%s-%s" % ("customadmin", "product", arg)
+    if value.model_name == "storemanager":
+        pattern = "%s:%s-%s" % ("customadmin", "storemanager", arg)
+    if value.model_name == "deliveryboy":
+        pattern = "%s:%s-%s" % ("customadmin", "deliveryboy", arg)
+    if value.model_name == "membership":
+        pattern = "%s:%s-%s" % ("customadmin", "membership", arg)
     # print(pattern)
     return pattern
+
+
+def human_datetime(dt):
+    """Return local time in a human friendly format for consitency."""
+    return localtime(dt).strftime("%A, %B %d at %-I:%M %p")

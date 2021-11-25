@@ -7,32 +7,8 @@
 
             <li class="nav-header">
                 <a href="{% url 'customadmin:index' %}" class="home-logo-link">
-                <img class="nav-image" src="{% static 'customadmin/logo.png' %}" width="100%" />
+                <img class="nav-image" src="{% static 'img/logo.png' %}" width="100%" />
                 </a>
-                {% comment %} <div class="dropdown profile-element">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="clear">
-                            <span class="block m-t-xs">
-                                <strong class="font-bold">
-                                    {% if request.user.is_authenticated %}{{ request.user }} {% endif%}
-                                </strong>
-                            </span>
-                            <span class="text-muted text-xs block">Co-Founder
-                                <b class="caret"></b>
-                            </span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        {% if request.user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'customadmin:auth_logout' %}" class="nav-label">Logout</a>
-                        </li>
-                        {% endif%}
-                    </ul>
-                </div> {% endcomment %}
-                <div class="logo-element">
-                    UC
-                </div>
             </li>
             {% if perms.users or perms.auth %}
             <li {% if 'users' in request.path or 'groups' in request.path %}class="active" {% endif %}>
@@ -44,7 +20,7 @@
                 <ul class="nav nav-second-level">
                     {% if perms.users %}
                         <li {% if 'users/' in request.path %}class="active" {% endif %}>
-                            <a href="{% url 'customadmin:users:user-list' %}">Users</a>
+                            <a href="{% url 'customadmin:user-list' %}">Users</a>
                         </li>
                     {% endif %}
                     {% if perms.auth %}
@@ -55,7 +31,102 @@
                 </ul>
             </li>
             {% endif %}
-
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'customers/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:customer-list' %}"> 
+                    <i class="fa fa-user fa-fw fa-2x"></i>
+                    <span class="nav-label">Customers</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'memberships/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:membership-list' %}"> 
+                    <i class="fa fa-user fa-fw fa-2x"></i>
+                    <span class="nav-label">Memberships</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'delivery-boys/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:deliveryboy-list' %}"> 
+                    <i class="fa fa-user fa-fw fa-2x"></i>
+                    <span class="nav-label">Delivery Boys</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'stores/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:store-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Stores</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if '/categories/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:category-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Categories</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'sub-categories/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:subcategory-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Subcategories</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'products/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:product-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Products</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'delivery-charges/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:deliverycharge-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Delivery Charges</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'coupons/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:coupon-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Coupons</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'expenses/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:expense-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Expenses</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'expense-types/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:expensetype-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Expense Types</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if perms.users or request.user.is_staff %}
+            <li {% if 'plans/' in request.path %}class="active" {% endif %}>
+                <a href="{% url 'customadmin:plan-list' %}"> 
+                    <i class="fa fa-home fa-fw fa-2x"></i>
+                    <span class="nav-label">Plans</span>
+                </a>
+            </li>
+            {% endif %}
     
         </ul>
 

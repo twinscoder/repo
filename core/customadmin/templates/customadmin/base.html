@@ -27,6 +27,8 @@
 
   <link href="{% static 'customadmin/css/animate.css' %}" rel="stylesheet">
   <link href="{% static 'customadmin/css/style.min.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/css/plugins/daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+
   <!-- End bare minimum -->
   {% endblock css %}
 
@@ -60,7 +62,7 @@
           <ul class="nav navbar-top-links navbar-right">
             {% if request.user.is_authenticated %}
             <li>
-                <a href="{% url 'customadmin:users:user-update' pk=request.user.pk %}">
+                <a href="{% url 'customadmin:user-update' pk=request.user.pk %}">
                 <i class="fa fa-user"></i> {{ request.user }}
                 </a>
             </li>
@@ -95,7 +97,7 @@
               <div class="modal-content animated flipInY">
                   <div class="modal-header">
                       {% comment %} <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> {% endcomment %}
-                      <img class="nav-image" src="{% static 'customadmin/logo.png' %}" width="100%" />
+                      <img class="nav-image" src="{% static 'img/logo.png' %}" width="100%" />
                       <p>Developed with Quickly eCommerce&trade; Team Members in mind.</p>
                   </div>
                   <div class="modal-body text-center">
@@ -143,6 +145,9 @@
 
   <!-- Project -->
   <script src="{% static 'customadmin/js/customadmin.js' %}"></script>
+  <script src="{% static 'customadmin/js/customadmin.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/daterangepicker/daterangepicker.min.js' %}"></script>
+
   {% endblock js %}
 
 </body>

@@ -1,11 +1,11 @@
-.icon-input-btn{
+.icon-input-btn {
   display: inline-block;
   position: relative;
 }
-.icon-input-btn input[type="submit"]{
+.icon-input-btn input[type="submit"] {
   padding-left: 2em;
 }
-.icon-input-btn .fa{
+.icon-input-btn .fa {
   display: inline-block;
   position: absolute;
   left: 0.65em;
@@ -138,54 +138,6 @@ table {
 /* -------------------------------------------------------------------------- */
 /* UNIVERSAL STYLES */
 /* -------------------------------------------------------------------------- */
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/2967B9A0E7E4EDC83.woff2) format("woff2"),
-    url(../fonts/gotham/2967B9A0E7E4EDC83.woff) format("woff");
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/CF9B3AC6C5090E643.woff2) format("woff2"),
-    url(../fonts/gotham/CF9B3AC6C5090E643.woff) format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/9F83F41298FA3D4A1.woff2) format("woff2"),
-    url(../fonts/gotham/9F83F41298FA3D4A1.woff) format("woff");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/DA192960645B30FA9.woff2) format("woff2"),
-    url(../fonts/gotham/DA192960645B30FA9.woff) format("woff");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/6330A3369D395850E.woff2) format("woff2"),
-    url(../fonts/gotham/6330A3369D395850E.woff) format("woff");
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "HCo Gotham";
-  src: url(../fonts/gotham/8F62100A3BB6391A1.woff2) format("woff2"),
-    url(../fonts/gotham/8F62100A3BB6391A1.woff) format("woff");
-  font-weight: 900;
-  font-style: normal;
-}
-
 body {
   font-family: "HCo Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

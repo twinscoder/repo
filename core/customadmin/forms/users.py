@@ -36,10 +36,12 @@ class MyUserCreationForm(UserCreationForm):
             "username",
             "first_name",
             "last_name",
+            "role",
             "is_staff",
             "is_active",
             "is_superuser",
             "groups",
+            "user_permissions",
             "profile_image",
             "description",
             "address",
@@ -52,10 +54,9 @@ class MyUserCreationForm(UserCreationForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
-
         # filter out the permissions we don't want the user to see
-        if not self.user.is_superuser:
-            self.fields["user_permissions"].queryset = filter_perms()
+        for field in ["username", "email", "role"]:
+            self.fields[field].required = True
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -67,9 +68,6 @@ class MyUserCreationForm(UserCreationForm):
             # by default so we add back that functionality here
             for g in self.cleaned_data["groups"]:
                 instance.groups.add(g)
-
-            for p in self.cleaned_data["user_permissions"]:
-                instance.user_permissions.add(p)
 
         return instance
 
@@ -85,12 +83,8 @@ class MyUserChangeForm(UserChangeForm):
         super().__init__(*args, **kwargs)
         self.user = user
 
-        # if not self.user.is_superuser:
-        self.fields["user_permissions"].queryset = filter_perms()
-
-    # def save(self, commit=True):
-    #     instance = super().save(commit)
-    #     return instance
+        for field in ["username", "email", "role"]:
+            self.fields[field].required = True
 
 
 # # -----------------------------------------------------------------------------

@@ -38,6 +38,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
 THIRD_PARTY_APPS = [
@@ -58,6 +59,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [
+    # "config.middleware.exception_middleware.ExceptionMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -165,6 +167,9 @@ MEDIA_URL = "/media/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+# FIXTURES
+# ------------------------------------------------------------------------------
+FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -185,6 +190,7 @@ STATICFILES_FINDERS = (
 LOGIN_URL = "customadmin:auth_login"
 
 LOGOUT_REDIRECT_URL = "customadmin:auth_login"
+LOGIN_REDIRECT_URL = "customadmin:index"
 
 SITE_ID = 1
 
@@ -220,3 +226,34 @@ ADMIN_HIDE_PERMS = [
     "socialaccount",
     "django_celery_beat",
 ]
+
+SUPER_USER = {
+    "ADMIN_EMAIL": os.getenv("ADMIN_EMAIL"),
+    "ADMIN_USERNAME": os.getenv("ADMIN_USERNAME"),
+    "ADMIN_PASSWORD": os.getenv("ADMIN_PASSWORD"),
+}
+
+# TWILIO (PROD)
+# ------------------------------------------------------------------------------
+TWILIO_FROM = ""
+TWILIO_API_KEY = ""
+TWILIO_TOKEN = ""
+
+# Celery
+# ------------------------------------------------------------------------------
+if USE_TZ:
+    CELERY_TIMEZONE = TIME_ZONE
+# CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+# TODO: set to whatever value is adequate in your circumstances
+CELERY_TASK_TIME_LIMIT = 5 * 60
+# TODO: set to whatever value is adequate in your circumstances
+CELERY_TASK_SOFT_TIME_LIMIT = 60
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+# https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html
+CELERY_RESULT_BACKEND = "django-db"

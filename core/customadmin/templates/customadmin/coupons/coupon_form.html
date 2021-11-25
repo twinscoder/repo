@@ -1,0 +1,92 @@
+{% extends 'customadmin/change_form.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load admin_extras %}
+{% load misc_filters %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+{% block page_content %}
+    <form id="{{ opts.model_name }}-form" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+
+        {% include "customadmin/partials/form_hidden_fields.html" %}
+
+        <div class="ibox float-e-margins">
+
+            {% include "customadmin/partials/ibox_title.html" with ibox_title="Info" icon_class="fas fa-user" only %}
+
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ form.code|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.discount_type|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.discount_amount|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.discount_percentage|as_crispy_field }}
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        {{ form.count|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.min_amount|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.buy_product_count|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.get_free_product_count|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.category|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.sub_category|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.product|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.is_repeatable %}
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.is_billable %}
+                    </div>
+                    <div class="col-sm-6 mt-2">
+                        {% input_icheck form.is_active %}
+                    </div>
+                </div>
+            </div>
+            <!-- /ibox-content -->
+
+        </div>
+        <!-- /ibox -->
+
+        {% include "customadmin/partials/form_footer.html" %}
+
+    </form>
+
+{% endblock %}
+
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'customadmin/js/userroles.js' %}"></script>
+
+<script>
+    $(function() {
+        userroles.coupons.details();
+    });
+</script>
+{% endblock %}
+
