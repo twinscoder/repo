@@ -17,8 +17,8 @@ class MyStoreCreationForm(forms.ModelForm):
         model = Store
         fields = [
             "store_manager",
-            "products",
             "delivery_boys",
+            "categories",
             "name",
             "business_email",
             "phone",
@@ -53,7 +53,7 @@ class MyStoreChangeForm(forms.ModelForm):
         model = Store
         fields = [
             "store_manager",
-            "products",
+            "categories",
             "delivery_boys",
             "name",
             "business_email",

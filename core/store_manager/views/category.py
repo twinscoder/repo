@@ -29,27 +29,27 @@ class CategoryListView(MyListView):
     model = Category
     queryset = model.objects.all()
     template_name = "customadmin/categories/category_list.html"
-    permission_required = ("categorys.view_category",)
+    permission_required = ("store_manager.view_category",)
 
 
 class CategoryCreateView(MyCreateView):
     model = Category
     form_class = MyCategoryForm
     template_name = "customadmin/categories/category_form.html"
-    permission_required = ("categorys.add_category",)
+    permission_required = ("store_manager.add_category",)
 
 
 class CategoryUpdateView(MyUpdateView):
     model = Category
     form_class = MyCategoryForm
     template_name = "customadmin/categories/category_form.html"
-    permission_required = ("categorys.change_category",)
+    permission_required = ("store_manager.change_category",)
 
 
 class CategoryDeleteView(MyDeleteView):
     model = Category
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("categorys.delete_category",)
+    permission_required = ("store_manager.delete_category",)
 
 
 class CategoryAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):
@@ -61,7 +61,6 @@ class CategoryAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
 
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
-        print(""" :::::::: Get actions column markup.""")
 
         t = get_template("customadmin/partials/list_basic_actions.html")
         return t.render({"obj": obj})
@@ -96,27 +95,27 @@ class SubCategoryListView(MyListView):
     model = SubCategory
     queryset = model.objects.all()
     template_name = "customadmin/subcategories/subcategory_list.html"
-    permission_required = ("subcategorys.view_subcategory",)
+    permission_required = ("store_manager.view_subcategory",)
 
 
 class SubCategoryCreateView(MyCreateView):
     model = SubCategory
     form_class = MySubCategoryForm
     template_name = "customadmin/subcategories/subcategory_form.html"
-    permission_required = ("subcategorys.add_subcategory",)
+    permission_required = ("store_manager.add_subcategory",)
 
 
 class SubCategoryUpdateView(MyUpdateView):
     model = SubCategory
     form_class = MySubCategoryForm
     template_name = "customadmin/subcategories/subcategory_form.html"
-    permission_required = ("subcategorys.change_subcategory",)
+    permission_required = ("store_manager.change_subcategory",)
 
 
 class SubCategoryDeleteView(MyDeleteView):
     model = SubCategory
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("subcategorys.delete_subcategory",)
+    permission_required = ("store_manager.delete_subcategory",)
 
 
 class SubCategoryAjaxPagination(

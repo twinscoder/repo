@@ -29,27 +29,27 @@ class ProductListView(MyListView):
     model = Product
     queryset = model.objects.all()
     template_name = "customadmin/products/product_list.html"
-    permission_required = ("products.view_product",)
+    permission_required = ("store_manager.view_product",)
 
 
 class ProductCreateView(MyCreateView):
     model = Product
     form_class = MyProductCreationForm
     template_name = "customadmin/products/product_form.html"
-    permission_required = ("products.add_product",)
+    permission_required = ("store_manager.add_product",)
 
 
 class ProductUpdateView(MyUpdateView):
     model = Product
     form_class = MyProductChangeForm
     template_name = "customadmin/products/product_form.html"
-    permission_required = ("products.change_product",)
+    permission_required = ("store_manager.change_product",)
 
 
 class ProductDeleteView(MyDeleteView):
     model = Product
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("products.delete_product",)
+    permission_required = ("store_manager.delete_product",)
 
 
 class ProductAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):

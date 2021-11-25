@@ -16,8 +16,8 @@ from core.customadmin.views.generic import (
     MyUpdateView,
     MyView,
 )
-
-from ..forms import MyUserChangeForm, MyUserCreationForm
+from django.views.generic import UpdateView
+from ..forms import MyUserChangeForm, MyUserCreationForm, MyUserProfileChangeForm
 from core.user.models import User
 
 # -----------------------------------------------------------------------------
@@ -51,6 +51,17 @@ class UserUpdateView(MyUpdateView):
     form_class = MyUserChangeForm
     template_name = "customadmin/adminuser/user_form.html"
     permission_required = ("users.change_user",)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+
+class UserProfileUpdateView(UpdateView):
+    model = User
+    form_class = MyUserProfileChangeForm
+    template_name = "customadmin/adminuser/user_profile_form.html"
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

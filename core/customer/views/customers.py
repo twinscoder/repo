@@ -24,7 +24,7 @@ from ..models import Customer, CustomerStatusHistory
 
 
 class CustomerChangeStatus(MyView):
-    permission_required = ("customers.change_customer",)
+    permission_required = ("customer.change_customer",)
 
     def post(self, request, *args, **kwargs):
         customer_id = request.POST.get("customer_id")
@@ -48,27 +48,27 @@ class CustomerListView(MyListView):
     model = Customer
     queryset = model.objects.all()
     template_name = "customadmin/customers/customer_list.html"
-    permission_required = ("customers.view_customer",)
+    permission_required = ("customer.view_customer",)
 
 
 class CustomerCreateView(MyCreateView):
     model = Customer
     form_class = MyCustomerCreationForm
     template_name = "customadmin/customers/customer_form.html"
-    permission_required = ("customers.add_customer",)
+    permission_required = ("customer.add_customer",)
 
 
 class CustomerUpdateView(MyUpdateView):
     model = Customer
     form_class = MyCustomerChangeForm
     template_name = "customadmin/customers/customer_form.html"
-    permission_required = ("customers.change_customer",)
+    permission_required = ("customer.change_customer",)
 
 
 class CustomerDeleteView(MyDeleteView):
     model = Customer
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("customers.delete_customer",)
+    permission_required = ("customer.delete_customer",)
 
 
 class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):

@@ -37,6 +37,7 @@ class MyUserCreationForm(UserCreationForm):
             "first_name",
             "last_name",
             "role",
+            "is_manager",
             "is_staff",
             "is_active",
             "is_superuser",
@@ -85,6 +86,43 @@ class MyUserChangeForm(UserChangeForm):
 
         for field in ["username", "email", "role"]:
             self.fields[field].required = True
+
+
+class MyUserProfileChangeForm(UserChangeForm):
+    """Custom UserCreationForm."""
+
+    class Meta(UserChangeForm.Meta):
+        model = User
+        fields = [
+            "email",
+            "username",
+            "first_name",
+            "last_name",
+            "profile_image",
+            "description",
+            "address",
+            "city",
+            "state",
+            "country",
+            "pincode",
+        ]
+
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = user
+        # filter out the permissions we don't want the user to see
+        for field in [
+            "username",
+            "email",
+        ]:
+            self.fields[field].required = True
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if commit:
+            instance.save()
+        return instance
 
 
 # # -----------------------------------------------------------------------------

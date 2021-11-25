@@ -28,27 +28,27 @@ class DeliveryChargeListView(MyListView):
     model = DeliveryCharge
     queryset = model.objects.all()
     template_name = "customadmin/delivery-charges/deliverycharge_list.html"
-    permission_required = ("deliverycharges.view_deliverycharge",)
+    permission_required = ("store_manager.view_deliverycharge",)
 
 
 class DeliveryChargeCreateView(MyCreateView):
     model = DeliveryCharge
     form_class = MyDeliveryChargeForm
     template_name = "customadmin/delivery-charges/deliverycharge_form.html"
-    permission_required = ("deliverycharges.add_deliverycharge",)
+    permission_required = ("store_manager.add_deliverycharge",)
 
 
 class DeliveryChargeUpdateView(MyUpdateView):
     model = DeliveryCharge
     form_class = MyDeliveryChargeForm
     template_name = "customadmin/delivery-charges/deliverycharge_form.html"
-    permission_required = ("deliverycharges.change_deliverycharge",)
+    permission_required = ("store_manager.change_deliverycharge",)
 
 
 class DeliveryChargeDeleteView(MyDeleteView):
     model = DeliveryCharge
     template_name = "customadmin/confirm_delete.html"
-    permission_required = ("deliverycharges.delete_deliverycharge",)
+    permission_required = ("store_manager.delete_deliverycharge",)
 
 
 class DeliveryChargeAjaxPagination(
