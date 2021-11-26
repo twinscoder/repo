@@ -5,6 +5,11 @@ from .customers import (
     CustomerListView,
     CustomerUpdateView,
     CustomerChangeStatus,
+    CustomerAddressAjaxPagination,
+    CustomerAddressCreateView,
+    CustomerAddressDeleteView,
+    CustomerAddressListView,
+    CustomerAddressUpdateView,
 )
 from .membership import (
     MembershipAjaxPagination,

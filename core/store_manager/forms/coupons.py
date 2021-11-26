@@ -27,7 +27,7 @@ class MyCouponCreationForm(forms.ModelForm):
             "category",
             "sub_category",
             "product",
-            "is_billable",
+            "instance_discount",
             "is_active",
         ]
 
@@ -56,7 +56,7 @@ class MyCouponChangeForm(forms.ModelForm):
             "category",
             "sub_category",
             "product",
-            "is_billable",
+            "instance_discount",
             "is_active",
         ]
 

@@ -178,6 +178,23 @@ var userroles = {
         },
 
     },
+    // Customeraddresss
+    // ------------------------------------------------------------------------
+    customeraddresses: {
+
+        index: function () {
+            $('#customeraddress-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+
+    },
     // Customers
     // ------------------------------------------------------------------------
     subcategories: {
@@ -254,9 +271,18 @@ var userroles = {
                 }else if(typeValue == "Percentage"){
                     $('#div_id_discount_amount, #div_id_buy_product_count, #div_id_get_free_product_count').parent().hide()
                     $('#div_id_discount_percentage').parent().show()
-                }else if(typeValue == "Special"){
+                }else if(typeValue.length == "Buy Qty Get Qty Free".length){
                     $('#div_id_discount_amount, #div_id_discount_percentage').parent().hide()
                     $('#div_id_buy_product_count, #div_id_get_free_product_count').parent().show()
+                }else if(typeValue.length == "Buy More Than Amount Get Qty Free".length){
+                    $('#div_id_discount_amount, #div_id_discount_percentage, #div_id_buy_product_count').parent().hide()
+                    $('#div_id_get_free_product_count').parent().show()
+                }else if(typeValue.length == "Buy More Than Amount Get Amount Free".length){
+                    $('#div_id_discount_percentage, #div_id_buy_product_count, #div_id_get_free_product_count').parent().hide()
+                    $('#div_id_discount_amount').parent().show()
+                }else if(typeValue.length == "Buy More Than Amount Get Percentage Free".length){
+                    $('#div_id_discount_amount, #div_id_buy_product_count, #div_id_get_free_product_count').parent().hide()
+                    $('#div_id_discount_percentage').parent().show()
                 }else{
                     $('#div_id_discount_amount, #div_id_discount_percentage, #div_id_buy_product_count, #div_id_get_free_product_count').parent().show()
                 }

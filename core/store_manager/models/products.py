@@ -37,8 +37,11 @@ class Product(ActivityTracking):
         blank=True,
         verbose_name=_("Product Image"),
     )
-    description = models.CharField(
-        max_length=255, blank=True, verbose_name=_("Description")
+    small_description = models.CharField(
+        max_length=255, blank=True, verbose_name=_("Small Description")
+    )
+    long_description = models.CharField(
+        max_length=300, blank=True, verbose_name=_("Long Description")
     )
 
     purchase_price = models.FloatField(

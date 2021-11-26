@@ -13,10 +13,20 @@ from django.utils.timezone import localtime
 # -----------------------------------------------------------------------------
 import string
 import random
+from datetime import datetime
+
+currentDay = datetime.now().day
+currentMonth = datetime.now().month
+currentYear = datetime.now().year
 
 
-def refer_code_generator(size=6, chars=string.ascii_uppercase + string.digits):
-    return "".join(random.choice(chars) for _ in range(size))
+def refer_code_generator(num, str1, str2, size=6):
+    return f"{str1[:2]}y{currentYear[2:]}m{currentMonth}{str2[:2]}c{num}".upper()
+
+
+def membership_card_generator(num):
+    count = num + 1000
+    return f"qmc{count}".upper()
 
 
 def get_upload_to_uuid(self, filename):
@@ -67,6 +77,8 @@ def admin_urlname(value, arg):
         pattern = "%s:%s-%s" % ("customadmin", "user", arg)
     if value.model_name == "customer":
         pattern = "%s:%s-%s" % ("customadmin", "customer", arg)
+    if value.model_name == "customeraddress":
+        pattern = "%s:%s-%s" % ("customadmin", "customeraddress", arg)
     if value.model_name == "store":
         pattern = "%s:%s-%s" % ("customadmin", "store", arg)
     if value.model_name == "category":

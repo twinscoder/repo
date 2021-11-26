@@ -22,7 +22,11 @@ urlpatterns = [
     path("users/", views.UserListView.as_view(), name="user-list"),
     path("users/create/", views.UserCreateView.as_view(), name="user-create"),
     path("users/<int:pk>/update/", views.UserUpdateView.as_view(), name="user-update"),
-    path("users/<int:pk>/profile/update/", views.UserProfileUpdateView.as_view(), name="user-profile-update"),
+    path(
+        "users/<int:pk>/profile/update/",
+        views.UserProfileUpdateView.as_view(),
+        name="user-profile-update",
+    ),
     path("users/<int:pk>/delete/", views.UserDeleteView.as_view(), name="user-delete"),
     path(
         "users/<int:pk>/password/",
@@ -57,6 +61,33 @@ urlpatterns = [
         "customers/change-status/",
         customer_views.CustomerChangeStatus.as_view(),
         name="customer-change-status",
+    ),
+    # ----------------------------------------------------------------------------------
+    # Customer
+    path(
+        "customer-addresses/",
+        customer_views.CustomerAddressListView.as_view(),
+        name="customeraddress-list",
+    ),
+    path(
+        "customer-addresses/create/",
+        customer_views.CustomerAddressCreateView.as_view(),
+        name="customeraddress-create",
+    ),
+    path(
+        "customer-addresses/<int:pk>/update/",
+        customer_views.CustomerAddressUpdateView.as_view(),
+        name="customeraddress-update",
+    ),
+    path(
+        "customer-addresses/<int:pk>/delete/",
+        customer_views.CustomerAddressDeleteView.as_view(),
+        name="customeraddress-delete",
+    ),
+    path(
+        "customer-addresses/ajax-customers",
+        customer_views.CustomerAddressAjaxPagination.as_view(),
+        name="customeraddress-list-ajax",
     ),
     # ----------------------------------------------------------------------------------
     # Membership
