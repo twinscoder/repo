@@ -84,7 +84,7 @@ class Customer(ActivityTracking):
         verbose_name=_("FCM Token"), max_length=30, blank=True, null=True
     )
     refer_code = models.CharField(
-        verbose_name=_("Refer Code"), max_length=8, blank=True, null=True
+        verbose_name=_("Refer Code"), max_length=25, blank=True, null=True
     )
     refer_from = models.ForeignKey(
         "Customer",
@@ -138,6 +138,35 @@ class Customer(ActivityTracking):
         verbose_name_plural = "customers"
         ordering = ["-created_at"]
 
+
+class CustomerAddress(ActivityTracking):
+
+    customer = models.ForeignKey(
+        "Customer", on_delete=models.CASCADE, blank=True, verbose_name=_("Customer")
+    )
+    address = models.CharField(
+        verbose_name=_("Address"), max_length=255, default="", blank=True, null=True
+    )
+    city = models.CharField(
+        verbose_name=_("City"), max_length=30, blank=True, null=True
+    )
+    state = models.CharField(
+        verbose_name=_("State"), max_length=20, blank=True, null=True
+    )
+    country = models.CharField(
+        verbose_name=_("Country"), max_length=20, blank=True, null=True
+    )
+    pincode = models.CharField(
+        verbose_name=_("Pincode"), max_length=6, blank=True, null=True
+    )
+
+    def __str__(self):
+        return self.customer.username
+
+    class Meta:
+        verbose_name = "Customer Address"
+        verbose_name_plural = "customers addresses"
+        ordering = ["-created_at"]
 
 class CustomerStatusHistory(ActivityTracking):
 

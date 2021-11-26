@@ -15,8 +15,8 @@ from core.customadmin.views.generic import (
     MyView,
 )
 from django.urls import reverse
-from ..forms import MyCustomerChangeForm, MyCustomerCreationForm
-from ..models import Customer, CustomerStatusHistory
+from ..forms import MyCustomerChangeForm, MyCustomerCreationForm, MyCustomerAddressForm
+from ..models import Customer, CustomerStatusHistory, CustomerAddress
 
 # -----------------------------------------------------------------------------
 # Users
@@ -78,10 +78,73 @@ class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
     model = Customer
     queryset = Customer.objects.all().order_by("-created_at")
 
-    def _get_is_superuser(self, obj):
-        """Get boolean column markup."""
-        t = get_template("customadmin/partials/list_boolean.html")
-        return t.render({"bool_val": obj.is_superuser})
+    def _get_actions(self, obj, **kwargs):
+        """Get actions column markup."""
+        # ctx = super().get_context_data(**kwargs)
+        t = get_template("customadmin/partials/list_basic_actions.html")
+        # ctx.update({"obj": obj})
+        # print(ctx)
+        return t.render({"o": obj})
+
+    def filter_queryset(self, qs):
+        """Return the list of items for this view."""
+        # If a search term, filter the query
+        if self.search:
+            return qs.filter(Q(username__icontains=self.search))
+        return qs
+
+    def prepare_results(self, qs):
+        # Create row data for datatables
+        data = []
+        for o in qs:
+            data.append(
+                {
+                    "username": o.username,
+                }
+            )
+        return data
+
+
+# ---------------------------------------------------------------------------------
+# customer address
+# ---------------------------------------------------------------------------------
+class CustomerAddressListView(MyListView):
+    # paginate_by = 25
+    ordering = ["-created_at"]
+    model = CustomerAddress
+    queryset = model.objects.all()
+    template_name = "customadmin/customer-addresses/customeraddress_list.html"
+    permission_required = ("customer.view_customeraddress",)
+
+
+class CustomerAddressCreateView(MyCreateView):
+    model = CustomerAddress
+    form_class = MyCustomerAddressForm
+    template_name = "customadmin/customer-addresses/customeraddress_form.html"
+    permission_required = ("customer.add_customeraddress",)
+
+
+class CustomerAddressUpdateView(MyUpdateView):
+    model = CustomerAddress
+    form_class = MyCustomerAddressForm
+    template_name = "customadmin/customer-addresses/customeraddress_form.html"
+    permission_required = ("customer.change_customeraddress",)
+
+
+class CustomerAddressDeleteView(MyDeleteView):
+    model = CustomerAddress
+    template_name = "customadmin/confirm_delete.html"
+    permission_required = ("customer.delete_customeraddress",)
+
+
+class CustomerAddressAjaxPagination(
+    DataTableMixin, HasPermissionsMixin, MyLoginRequiredView
+):
+    """Built this before realizing there is
+    https://bitbucket.org/pigletto/django-datatables-view."""
+
+    model = CustomerAddress
+    queryset = CustomerAddress.objects.all().order_by("-created_at")
 
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
@@ -95,27 +158,12 @@ class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
         """Return the list of items for this view."""
         # If a search term, filter the query
         if self.search:
-            return qs.filter(
-                Q(username__icontains=self.search)
-                | Q(first_name__icontains=self.search)
-                | Q(last_name__icontains=self.search)
-                # | Q(state__icontains=self.search)
-                # | Q(year__icontains=self.search)
-            )
+            return qs.filter()
         return qs
 
     def prepare_results(self, qs):
         # Create row data for datatables
         data = []
         for o in qs:
-            data.append(
-                {
-                    "username": o.username,
-                    "first_name": o.first_name,
-                    "last_name": o.last_name,
-                    "is_superuser": self._get_is_superuser(o),
-                    # "modified": o.modified.strftime("%b. %d, %Y, %I:%M %p"),
-                    "actions": self._get_actions(o),
-                }
-            )
+            data.append({})
         return data

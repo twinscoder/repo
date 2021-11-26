@@ -2,6 +2,8 @@
 from core.customadmin.utils import refer_code_generator
 from django import forms
 
+from core.customer.models.customers import CustomerAddress
+
 from ..models import Customer
 
 # # -----------------------------------------------------------------------------
@@ -39,6 +41,7 @@ class MyCustomerCreationForm(forms.ModelForm):
             "username",
             "email",
             "first_name",
+            "last_name",
             "gender",
             "phone",
             "address",
@@ -53,7 +56,10 @@ class MyCustomerCreationForm(forms.ModelForm):
         instance = super().save(commit=False)
 
         if commit:
-            instance.refer_code = refer_code_generator()
+            instance.save()
+            instance.refer_code = refer_code_generator(
+                instance.id, instance.first_name, instance.last_name
+            )
             instance.save()
 
         return instance
@@ -88,6 +94,7 @@ class MyCustomerChangeForm(forms.ModelForm):
             "username",
             "email",
             "first_name",
+            "last_name",
             "gender",
             "phone",
             "address",
@@ -100,3 +107,23 @@ class MyCustomerChangeForm(forms.ModelForm):
         self.fields["refer_from"].queryset = Customer.objects.all().exclude(
             pk=self.instance.pk
         )
+
+
+class MyCustomerAddressForm(forms.ModelForm):
+    """Custom UserCreationForm."""
+
+    class Meta:
+        model = CustomerAddress
+        fields = [
+            "customer",
+            "address",
+            "city",
+            "state",
+            "country",
+            "pincode",
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = True

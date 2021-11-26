@@ -31,12 +31,25 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user.is_staff %}
-            <li {% if 'customers/' in request.path %}class="active" {% endif %}>
-                <a href="{% url 'customadmin:customer-list' %}"> 
-                    <i class="fa fa-user fa-fw fa-2x"></i>
+            {% if perms.users or perms.auth %}
+            <li {% if 'customers/' in request.path or 'customer-addresses/' in request.path %}class="active" {% endif %}>
+                <a href="">
+                    <i class="fas fa-users fa-fw fa-2x"></i>
                     <span class="nav-label">Customers</span>
+                    <span class="fa arrow"></span>
                 </a>
+                <ul class="nav nav-second-level">
+                    {% if perms.users %}
+                        <li {% if 'customers/' in request.path %}class="active" {% endif %}>
+                            <a href="{% url 'customadmin:customer-list' %}">Customers</a>
+                        </li>
+                    {% endif %}
+                    {% if perms.auth %}
+                    <li {% if 'customer-addresses/' in request.path %}class="active" {% endif %}>
+                        <a href="{% url 'customadmin:customeraddress-list' %}">Addresses</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </li>
             {% endif %}
             {% if perms.users or request.user.is_staff %}

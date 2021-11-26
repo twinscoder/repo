@@ -46,7 +46,6 @@
                             <td>
                                 <button type="button" onclick="changeStatus({{o.pk}}, '{{o.username|capfirst}}')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">{% if o.is_active %}Active{% else %}Deactive{% endif %}</button>
                             </td>
-                            </td>
                             <td class="row-actions">
                                 {% include "customadmin/partials/list_row_actions.html" %}
                             </td>
