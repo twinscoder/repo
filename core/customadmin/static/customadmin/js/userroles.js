@@ -407,6 +407,30 @@ var userroles = {
         },
 
     },
+    // orders
+    // ------------------------------------------------------------------------
+    orders: {
+        index: function () {
+            $('#order-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+        details: function () {
+            $('#id_product').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Product',
+                selectedListLabel: 'Chosen Product',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
+        },
+
+    },
     // memberships
     // ------------------------------------------------------------------------
     memberships: {

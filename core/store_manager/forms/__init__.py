@@ -11,3 +11,4 @@ from .expenses import (
 from .plans import MyPlanForm
 from .products import MyProductChangeForm, MyProductCreationForm
 from .stores import MyStoreChangeForm, MyStoreCreationForm
+from .orders import MyOrderChangeForm, MyOrderCreationForm

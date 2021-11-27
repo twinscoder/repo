@@ -10,6 +10,7 @@ from .models import (
     Product,
     Store,
     SubCategory,
+    Order,
 )
 
 admin.site.register(Store)
@@ -20,3 +21,4 @@ admin.site.register(Coupon)
 admin.site.register(Expense)
 admin.site.register(ExpenseType)
 admin.site.register(Plan)
+admin.site.register(Order)

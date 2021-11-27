@@ -387,4 +387,31 @@ urlpatterns = [
         store_manager_views.ProductAjaxPagination.as_view(),
         name="product-list-ajax",
     ),
+    # ----------------------------------------------------------------------------------
+    # order
+    path(
+        "orders/",
+        store_manager_views.OrderListView.as_view(),
+        name="order-list",
+    ),
+    path(
+        "orders/create/",
+        store_manager_views.OrderCreateView.as_view(),
+        name="order-create",
+    ),
+    path(
+        "orders/<int:pk>/update/",
+        store_manager_views.OrderUpdateView.as_view(),
+        name="order-update",
+    ),
+    path(
+        "orders/<int:pk>/delete/",
+        store_manager_views.OrderDeleteView.as_view(),
+        name="order-delete",
+    ),
+    path(
+        "orders/ajax-stores",
+        store_manager_views.OrderAjaxPagination.as_view(),
+        name="order-list-ajax",
+    ),
 ]

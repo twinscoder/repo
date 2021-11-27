@@ -5,3 +5,4 @@ from .expenses import Expense, ExpenseType
 from .plans import Plan
 from .products import Product
 from .stores import Store
+from .orders import Order

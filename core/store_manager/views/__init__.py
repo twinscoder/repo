@@ -57,3 +57,10 @@ from .products import (
     ProductListView,
     ProductUpdateView,
 )
+from .orders import (
+    OrderAjaxPagination,
+    OrderCreateView,
+    OrderDeleteView,
+    OrderListView,
+    OrderUpdateView,
+)
