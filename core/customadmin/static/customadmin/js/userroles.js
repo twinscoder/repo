@@ -391,6 +391,25 @@ var userroles = {
         },
 
     },
+    // storeproducts
+    // ------------------------------------------------------------------------
+    storeproducts: {
+        index: function () {
+            $('#storeproduct-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+        details: function () {
+
+        },
+
+    },
     // storemanagers
     // ------------------------------------------------------------------------
     storemanagers: {

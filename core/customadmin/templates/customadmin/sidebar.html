@@ -56,7 +56,7 @@
             </li>
             {% endif %}
             {% if perms.users or perms.auth %}
-            <li {% if 'categories/' in request.path or 'products/' in request.path or 'sub-categories/' in request.path %}class="active" {% endif %}>
+            <li {% if 'categories/' in request.path or '/products/' in request.path or 'sub-categories/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Categories & Products</span>
                     <span class="fa arrow"></span>
@@ -73,7 +73,7 @@
                     </li>
                     {% endif %}
                     {% if perms.auth %}
-                    <li {% if 'products/' in request.path %}class="active" {% endif %}>
+                    <li {% if '/products/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:product-list' %}">Products</a>
                     </li>
                     {% endif %}
@@ -120,11 +120,24 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user.is_staff %}
-            <li {% if 'stores/' in request.path %}class="active" {% endif %}>
-                <a href="{% url 'customadmin:store-list' %}">
-                    <span class="nav-label">Stores</span>
+            {% if perms.users or perms.auth %}
+            <li {% if 'stores/' in request.path or '/store-products/' in request.path %}class="active" {% endif %}>
+                <a href="">
+                    <span class="nav-label">Stores & Products</span>
+                    <span class="fa arrow"></span>
                 </a>
+                <ul class="nav nav-second-level">
+                    {% if perms.users %}
+                        <li {% if 'stores/' in request.path %}class="active" {% endif %}>
+                            <a href="{% url 'customadmin:store-list' %}">Stores</a>
+                        </li>
+                    {% endif %}
+                    {% if perms.auth %}
+                    <li {% if '/store-products/' in request.path %}class="active" {% endif %}>
+                        <a href="{% url 'customadmin:storeproduct-list' %}">Store Products</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </li>
             {% endif %}
             {% if perms.users or request.user.is_staff %}

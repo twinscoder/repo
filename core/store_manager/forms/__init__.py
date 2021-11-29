@@ -9,6 +9,11 @@ from .expenses import (
     MyExpenseTypeForm,
 )
 from .plans import MyPlanForm
-from .products import MyProductChangeForm, MyProductCreationForm
+from .products import (
+    MyProductChangeForm,
+    MyProductCreationForm,
+    MyStoreProductChangeForm,
+    MyStoreProductCreationForm,
+)
 from .stores import MyStoreChangeForm, MyStoreCreationForm
 from .orders import MyOrderChangeForm, MyOrderCreationForm

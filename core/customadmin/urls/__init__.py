@@ -388,6 +388,33 @@ urlpatterns = [
         name="product-list-ajax",
     ),
     # ----------------------------------------------------------------------------------
+    # StoreProduct
+    path(
+        "store-products/",
+        store_manager_views.StoreProductListView.as_view(),
+        name="storeproduct-list",
+    ),
+    path(
+        "store-products/create/",
+        store_manager_views.StoreProductCreateView.as_view(),
+        name="storeproduct-create",
+    ),
+    path(
+        "store-products/<int:pk>/update/",
+        store_manager_views.StoreProductUpdateView.as_view(),
+        name="storeproduct-update",
+    ),
+    path(
+        "store-products/<int:pk>/delete/",
+        store_manager_views.StoreProductDeleteView.as_view(),
+        name="storeproduct-delete",
+    ),
+    path(
+        "store-products/ajax-stores",
+        store_manager_views.StoreProductAjaxPagination.as_view(),
+        name="storeproduct-list-ajax",
+    ),
+    # ----------------------------------------------------------------------------------
     # order
     path(
         "orders/",

@@ -19,27 +19,41 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-sm-6">
-                        {{ form.name|as_crispy_field }}
+                        {{ form.store|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.alias|as_crispy_field }}
+                        {{ form.product|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.category|as_crispy_field }}
+                        {{ form.priority_index|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.subcategory|as_crispy_field }}
+                        {{ form.unit|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.small_description|as_crispy_field }}
+                        {{ form.purchase_price|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.long_description|as_crispy_field }}
+                        {{ form.selling_price|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.image|as_crispy_field }}
+                        {{ form.membership_price|as_crispy_field }}
                     </div>
-                    <div class="col-sm-6 mt-2">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
+                        {% input_icheck form.cancel_available %}
+                    </div>
+                    <div class="col-sm-6">
+                        {% input_icheck form.free_shipping %}
+                    </div>
+                    <div class="col-sm-6">
+                        {% input_icheck form.cash_on_delivery %}
+                    </div>
+                    <div class="col-sm-6">
+                        {% input_icheck form.stock %}
+                    </div>
+                    <div class="col-sm-6">
                         {% input_icheck form.is_active %}
                     </div>
                 </div>
@@ -62,7 +76,7 @@
 
 <script>
     $(function() {
-        userroles.products.details();
+        userroles.storeproducts.details();
     });
 </script>
 {% endblock %}
