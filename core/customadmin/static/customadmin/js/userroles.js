@@ -363,12 +363,6 @@ var userroles = {
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false
             });
-            $('#id_categories').bootstrapDualListbox({
-                nonSelectedListLabel: 'Available Categories',
-                selectedListLabel: 'Chosen Categories',
-                preserveSelectionOnMove: 'moved',
-                moveOnSelect: false
-            });
         },
 
     },

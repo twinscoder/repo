@@ -78,7 +78,7 @@ class StoreProduct(ActivityTracking):
         verbose_name=_("Product"),
     )
     priority_index = models.IntegerField(
-        default=0, blank=True, null=True, verbose_name=_("Priority Index")
+        default=1, blank=True, null=True, verbose_name=_("Priority Index")
     )
     stock = models.BooleanField(default=True, verbose_name=_("Stock"))
     unit = models.IntegerField(default=0, verbose_name=_("Unit"))

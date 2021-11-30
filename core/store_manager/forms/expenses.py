@@ -1,7 +1,8 @@
 # # -*- coding: utf-8 -*-
 
 from django import forms
-from ..models import Expense, ExpenseType
+
+from ..models import Expense, ExpenseType, Store
 
 # # -----------------------------------------------------------------------------
 # # Users
@@ -37,5 +38,7 @@ class MyExpenseForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['type'] = Expense.objects.filter(is_active=True)
+        self.fields['store'] = Store.objects.filter(is_active=True)
         for field in self.fields:
             self.fields[field].required = True

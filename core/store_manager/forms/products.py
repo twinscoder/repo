@@ -1,7 +1,7 @@
 # # -*- coding: utf-8 -*-
 
 from django import forms
-from ..models import Product, Category, SubCategory, StoreProduct
+from ..models import Product, Category, SubCategory, StoreProduct, Store
 
 # # -----------------------------------------------------------------------------
 # # Users
@@ -27,7 +27,9 @@ class MyProductCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["category"].queryset = Category.objects.filter(is_active=True)
-        self.fields["subcategory"].queryset = SubCategory.objects.filter(is_active=True)
+        self.fields["subcategory"].queryset = SubCategory.objects.filter(
+            is_active=True
+        ).filter(parent_category__is_active=True)
         for field in [
             "name",
             "category",
@@ -55,7 +57,9 @@ class MyProductChangeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["category"].queryset = Category.objects.filter(is_active=True)
-        self.fields["subcategory"].queryset = SubCategory.objects.filter(is_active=True)
+        self.fields["subcategory"].queryset = SubCategory.objects.filter(
+            is_active=True
+        ).filter(parent_category__is_active=True)
         for field in [
             "name",
             "category",
@@ -91,6 +95,12 @@ class MyStoreProductCreationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["store"].queryset = Store.objects.filter(is_active=True)
+        self.fields["product"].queryset = (
+            Product.objects.filter(is_active=True)
+            .filter(subcategory__is_active=True)
+            .filter(category__is_active=True)
+        )
         for field in [
             "store",
             "product",
@@ -102,20 +112,21 @@ class MyStoreProductCreationForm(forms.ModelForm):
             self.fields[field].required = True
 
     def clean_priority_index(self):
-        """Normalize emails to lowercase."""
+        """priority."""
         priority_index = self.cleaned_data["priority_index"]
-        store_product = StoreProduct.objects.filter(
-            priority_index=priority_index
-        ).first()
-        print("➡ store_product :", store_product)
+        store_product = (
+            StoreProduct.objects.filter(priority_index=priority_index)
+            .exclude(pk=self.instance.id)
+            .first()
+        )
         store_product_count = StoreProduct.objects.all().count()
-        print("➡ store_product_count :", store_product_count)
         if store_product:
+            return_index = store_product.priority_index
             store_product.priority_index = store_product_count
             store_product.save()
-            return priority_index
+            return return_index
         else:
-            return store_product_count
+            return priority_index
 
 
 class MyStoreProductChangeForm(forms.ModelForm):
@@ -140,6 +151,12 @@ class MyStoreProductChangeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["store"].queryset = Store.objects.filter(is_active=True)
+        self.fields["product"].queryset = (
+            Product.objects.filter(is_active=True)
+            .filter(subcategory__is_active=True)
+            .filter(category__is_active=True)
+        )
         for field in [
             "store",
             "product",
@@ -151,15 +168,18 @@ class MyStoreProductChangeForm(forms.ModelForm):
             self.fields[field].required = True
 
     def clean_priority_index(self):
-        """Normalize emails to lowercase."""
+        """priority."""
         priority_index = self.cleaned_data["priority_index"]
-        store_product = StoreProduct.objects.filter(
-            priority_index=priority_index
-        ).first()
+        store_product = (
+            StoreProduct.objects.filter(priority_index=priority_index)
+            .exclude(pk=self.instance.id)
+            .first()
+        )
         store_product_count = StoreProduct.objects.all().count()
         if store_product:
+            return_index = store_product.priority_index
             store_product.priority_index = store_product_count
             store_product.save()
-            return priority_index
+            return return_index
         else:
-            return store_product_count
+            return priority_index

@@ -1,5 +1,5 @@
 {% load static %}
-{% load admin_extras %}
+{% load admin_extras misc_filters %}
 
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
@@ -10,19 +10,19 @@
                 <img class="nav-image" src="{% static 'img/logo.png' %}" width="100%" />
                 </a>
             </li>
-            {% if perms.users or perms.auth %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'users' in request.path or 'groups' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Users &amp; Groups</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                         <li {% if 'users/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:user-list' %}">Users</a>
                         </li>
                     {% endif %}
-                    {% if perms.auth %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if 'groups/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:auth:group-list' %}">Groups</a>
                     </li>
@@ -30,24 +30,24 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or perms.auth %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'customers/' in request.path or 'customer-addresses/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Customers</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                         <li {% if 'customers/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:customer-list' %}">Customers</a>
                         </li>
                     {% endif %}
-                    {% if perms.auth %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if 'customer-addresses/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:customeraddress-list' %}">Addresses</a>
                     </li>
                     {% endif %}
-                    {% if perms.users or request.user.is_staff %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if 'memberships/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:membership-list' %}">Memberships</a>
                     </li>
@@ -55,7 +55,7 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or perms.auth %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'categories/' in request.path or '/products/' in request.path or 'sub-categories/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Categories & Products</span>
@@ -67,12 +67,12 @@
                             <a href="{% url 'customadmin:category-list' %}">Categories</a>
                         </li>
                     {% endif %}
-                    {% if perms.auth %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if 'sub-categories/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:subcategory-list' %}">Subcategories</a>
                     </li>
                     {% endif %}
-                    {% if perms.auth %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if '/products/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:product-list' %}">Products</a>
                     </li>
@@ -80,19 +80,19 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or perms.auth %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'expenses/' in request.path or 'expense-types/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Expences</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                         <li {% if 'expenses/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:expense-list' %}">Expenses</a>
                         </li>
                     {% endif %}
-                    {% if perms.auth %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if 'expense-types/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:expensetype-list' %}">Expense Types</a>
                     </li>
@@ -100,19 +100,19 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or perms.auth %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'coupons/' in request.path or 'plans/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Coupons & Plans</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                         <li {% if 'coupons/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:coupon-list' %}">Coupons</a>
                         </li>
                     {% endif %}
-                    {% if perms.auth %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if 'plans/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:plan-list' %}">Plans</a>
                     </li>
@@ -120,19 +120,19 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or perms.auth %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'stores/' in request.path or '/store-products/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Stores & Products</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                         <li {% if 'stores/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:store-list' %}">Stores</a>
                         </li>
                     {% endif %}
-                    {% if perms.auth %}
+                    {% if perms.users or request.user|has_group:"manager" %}
                     <li {% if '/store-products/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:storeproduct-list' %}">Store Products</a>
                     </li>
@@ -140,21 +140,21 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user.is_staff %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'delivery-boys/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:deliveryboy-list' %}">
                     <span class="nav-label">Delivery Boys</span>
                 </a>
             </li>
             {% endif %}
-            {% if perms.users or request.user.is_staff %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'delivery-charges/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:deliverycharge-list' %}">
                     <span class="nav-label">Delivery Charges</span>
                 </a>
             </li>
             {% endif %}    
-            {% if perms.users or request.user.is_staff %}
+            {% if perms.users or request.user|has_group:"manager" %}
             <li {% if 'orders/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:order-list' %}">
                     <span class="nav-label">Orders</span>
