@@ -1,0 +1,267 @@
+.icon-input-btn {
+  display: inline-block;
+  position: relative;
+}
+.icon-input-btn input[type="submit"] {
+  padding-left: 2em;
+}
+.icon-input-btn .fa {
+  display: inline-block;
+  position: absolute;
+  left: 0.65em;
+  top: 30%;
+}
+
+/* Login screen */
+.login-logo {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+/* Admin listing tables */
+table {
+  tbody {
+    td {
+      &.row-actions {
+        text-align: right;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+/* Override Sweet Alerts */
+.swal-text {
+  text-align: center;
+}
+
+.swal-footer {
+  text-align: center;
+}
+
+/* File Browse Fake */
+.file {
+  .file-name {
+    overflow: hidden;
+
+    height: 75px;
+
+    word-break: break-all;
+  }
+}
+
+.uploader {
+  position: relative;
+  .file-browse {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+
+    width: 300px;
+    height: 49px;
+
+    cursor: pointer;
+
+    opacity: 0;
+  }
+}
+
+/* Inline formset */
+.inline-formset {
+  input[type="checkbox"] {
+    display: none;
+  }
+  button {
+    outline: none;
+  }
+}
+
+/* Trix */
+.trix-button--icon-strike,
+.trix-button--icon-quote,
+.trix-button--icon-heading-1,
+.trix-button--icon-code,
+.trix-button--icon-decrease-nesting-level,
+.trix-button--icon-increase-nesting-level,
+.trix-button--icon-link {
+  display: none;
+}
+
+.fileinput {
+  margin-bottom: 1px !important;
+}
+
+/* Datatables pagination */
+.dataTables_wrapper {
+  .pagination {
+    display: inline-block;
+    li {
+      display: inline;
+    }
+  }
+}
+
+/* Override ibox-title */
+// .ibox-title {
+//   padding: 15px 15px 8px 15px;
+//   .ibox-tools {
+//     position: relative;
+//     right: 0;
+//     top: 0;
+//   }
+// }
+
+.breadcrumb-heading {
+  padding: 10px 0 10px 10px;
+  h2 {
+    margin: 0px 0 5px 0;
+  }
+}
+
+/* Override BS4 */
+.breadcrumb-item {
+  &::before {
+    font-weight: normal;
+  }
+  &.active {
+    font-weight: bold;
+  }
+}
+
+.section-header {
+  margin: 0 0 20px 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* UNIVERSAL STYLES */
+/* -------------------------------------------------------------------------- */
+body {
+  font-family: "HCo Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 900;
+}
+
+h1 {
+  font-size: 34px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 26px;
+}
+h4 {
+  font-size: 22px;
+}
+h5 {
+  font-size: 18px;
+}
+
+.ibox-title {
+  h5 {
+    font-size: 18px;
+  }
+}
+
+.navbar-default .nav > li > a:focus,
+.navbar-default .nav > li > a.home-logo-link:hover {
+  background-color: transparent;
+}
+
+// .nav-image {
+//   padding: 10px;
+// }
+
+.wrapper-content {
+  padding-bottom: 80px;
+}
+
+/* Sidebar nav overrides */
+.navbar-default {
+  background-color: transparent;
+  background: linear-gradient(to bottom, #3554a3 0, #1c3385 25%);
+}
+
+// body.fixed-sidebar .navbar-static-side {
+//   width: 300px;
+// }
+
+.nav > li.active,
+ul.nav-second-level {
+  background: none;
+}
+
+.nav {
+  .nav-header {
+    background-color: transparent;
+    a {
+      padding: 0;
+    }
+  }
+
+  li {
+    &.active {
+      border-left: 4px solid #0367d8;
+      background-color: transparent;
+    }
+  }
+}
+
+/* Top nav overrides */
+.nav {
+  &.navbar-right {
+    li {
+      a {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+/* Footer overrides */
+.footer {
+  strong {
+    // color: $secondary-color;
+  }
+  a {
+    &.hidden-link {
+      color: #676a6c;
+      cursor: default;
+      strong {
+        color: inherit;
+      }
+    }
+  }
+}
+
+label {
+  font-weight: bold;
+}
+
+.metismenu {
+  .arrow {
+    line-height: 2rem;
+  }
+  .fa-2x {
+    vertical-align: middle;
+    // padding-bottom: 0.2rem;
+  }
+}
+
+.bootstrap-duallistbox-container {
+  label {
+    font-weight: normal;
+  }
+}
+
+// body.fixed-sidebar #page-wrapper {
+//   margin: 0 0 0 300px;
+// }

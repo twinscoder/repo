@@ -1,0 +1,92 @@
+{% extends 'customadmin/change_list.html' %}
+{% load static %}
+{% load admin_extras %}
+{% load misc_filters %}
+{% load i18n %}
+
+
+{% block page_content %}
+    {% csrf_token %}
+
+    {% include "customadmin/includes/list_header_card.html" with title="Create a new delivery boy" subtitle="Create a new delivery boy." show_button=True %}
+
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" id="{{ opts.model_name }}-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Username</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for o in object_list %}
+                        <tr>
+                            <td>{{ o.username }}</td>
+                            <td>
+                                <button type="button" onclick="changeStatus({{o.pk}}, '{{o.username|capfirst}}')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">{% if o.is_active %}Active{% else %}Deactive{% endif %}</button>
+                            </td>
+                            <td class="row-actions">
+                                {% include "customadmin/partials/list_row_actions.html" %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Delivery Boy Status</h5>
+                </div>
+                <form action="{% url 'customadmin:deliveryboy-change-status' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                            <input type="hidden" class="form-control" name="deliveryboy_id" id="deliveryboy_id">
+                            <div class="mb-3">
+                                <label for="reason" class="col-form-label">Reason:</label>
+                                <textarea class="form-control" id="reason" name="reason"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Change Status</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'customadmin/js/userroles.js' %}"></script>
+
+<script>
+    var pagination_url = "{% url opts|admin_urlname:'list-ajax' %}";
+    $(function () {
+        userroles.deliveryboys.index();
+    });
+    function changeStatus(pk, userName){
+        $('input#deliveryboy_id').val(pk)
+        $('h5#exampleModalLabel').html(`Change Delivery Boy ( ${userName} ) Status`)
+    }
+</script>
+{% endblock %}
+

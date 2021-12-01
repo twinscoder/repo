@@ -1,0 +1,12 @@
+{% extends "base_error.html" %}
+{% load static i18n %}
+
+{% block title %}Bad Request (400){% endblock %}
+
+{% block error_page_content %}
+<h1>Bad Request (400)</h1>
+
+<p class="lead">The server cannot or will not process the request due to an apparent client error.</p>
+
+<img src="{% static 'img/500.jpg' %}" class="img-fluid" />
+{% endblock error_page_content %}
