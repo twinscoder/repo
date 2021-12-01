@@ -387,4 +387,58 @@ urlpatterns = [
         store_manager_views.ProductAjaxPagination.as_view(),
         name="product-list-ajax",
     ),
+    # ----------------------------------------------------------------------------------
+    # StoreProduct
+    path(
+        "store-products/",
+        store_manager_views.StoreProductListView.as_view(),
+        name="storeproduct-list",
+    ),
+    path(
+        "store-products/create/",
+        store_manager_views.StoreProductCreateView.as_view(),
+        name="storeproduct-create",
+    ),
+    path(
+        "store-products/<int:pk>/update/",
+        store_manager_views.StoreProductUpdateView.as_view(),
+        name="storeproduct-update",
+    ),
+    path(
+        "store-products/<int:pk>/delete/",
+        store_manager_views.StoreProductDeleteView.as_view(),
+        name="storeproduct-delete",
+    ),
+    path(
+        "store-products/ajax-stores",
+        store_manager_views.StoreProductAjaxPagination.as_view(),
+        name="storeproduct-list-ajax",
+    ),
+    # ----------------------------------------------------------------------------------
+    # order
+    path(
+        "orders/",
+        store_manager_views.OrderListView.as_view(),
+        name="order-list",
+    ),
+    path(
+        "orders/create/",
+        store_manager_views.OrderCreateView.as_view(),
+        name="order-create",
+    ),
+    path(
+        "orders/<int:pk>/update/",
+        store_manager_views.OrderUpdateView.as_view(),
+        name="order-update",
+    ),
+    path(
+        "orders/<int:pk>/delete/",
+        store_manager_views.OrderDeleteView.as_view(),
+        name="order-delete",
+    ),
+    path(
+        "orders/ajax-stores",
+        store_manager_views.OrderAjaxPagination.as_view(),
+        name="order-list-ajax",
+    ),
 ]

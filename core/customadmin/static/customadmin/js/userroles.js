@@ -363,12 +363,6 @@ var userroles = {
                 preserveSelectionOnMove: 'moved',
                 moveOnSelect: false
             });
-            $('#id_categories').bootstrapDualListbox({
-                nonSelectedListLabel: 'Available Categories',
-                selectedListLabel: 'Chosen Categories',
-                preserveSelectionOnMove: 'moved',
-                moveOnSelect: false
-            });
         },
 
     },
@@ -377,6 +371,25 @@ var userroles = {
     products: {
         index: function () {
             $('#product-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+        details: function () {
+
+        },
+
+    },
+    // storeproducts
+    // ------------------------------------------------------------------------
+    storeproducts: {
+        index: function () {
+            $('#storeproduct-table').DataTable({
                 pageLength: 25,
                 responsive: true,
                 columnDefs: [{
@@ -404,6 +417,30 @@ var userroles = {
                 },],
             });
 
+        },
+
+    },
+    // orders
+    // ------------------------------------------------------------------------
+    orders: {
+        index: function () {
+            $('#order-table').DataTable({
+                pageLength: 25,
+                responsive: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                },],
+            });
+
+        },
+        details: function () {
+            $('#id_product').bootstrapDualListbox({
+                nonSelectedListLabel: 'Available Product',
+                selectedListLabel: 'Chosen Product',
+                preserveSelectionOnMove: 'moved',
+                moveOnSelect: false
+            });
         },
 
     },

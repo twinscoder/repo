@@ -56,4 +56,16 @@ from .products import (
     ProductDeleteView,
     ProductListView,
     ProductUpdateView,
+    StoreProductAjaxPagination,
+    StoreProductCreateView,
+    StoreProductDeleteView,
+    StoreProductListView,
+    StoreProductUpdateView,
+)
+from .orders import (
+    OrderAjaxPagination,
+    OrderCreateView,
+    OrderDeleteView,
+    OrderListView,
+    OrderUpdateView,
 )

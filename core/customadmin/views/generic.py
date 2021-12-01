@@ -62,7 +62,6 @@ class MyFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
 
 class MyListView(
     LoginRequiredMixin,
-    PermissionRequiredMixin,
     ModelOptsMixin,
     HasPermissionsMixin,
     ListView,
@@ -72,9 +71,7 @@ class MyListView(
     pass
 
 
-class MyDetailView(
-    LoginRequiredMixin, PermissionRequiredMixin, ModelOptsMixin, DetailView
-):
+class MyDetailView(LoginRequiredMixin, ModelOptsMixin, DetailView):
     """DetailView CBV with LoginRequiredMixin and PermissionRequiredMixin."""
 
     pass
@@ -82,7 +79,6 @@ class MyDetailView(
 
 class MyCreateView(
     LoginRequiredMixin,
-    PermissionRequiredMixin,
     SuccessMessageMixin,
     ModelOptsMixin,
     HasPermissionsMixin,
@@ -102,7 +98,6 @@ class MyCreateView(
 
 class MyUpdateView(
     LoginRequiredMixin,
-    PermissionRequiredMixin,
     SuccessMessageMixin,
     ModelOptsMixin,
     HasPermissionsMixin,
@@ -140,7 +135,6 @@ class MyUpdateView(
 
 class MyDeleteView(
     LoginRequiredMixin,
-    PermissionRequiredMixin,
     SuccessMessageMixin,
     ModelOptsMixin,
     HasPermissionsMixin,

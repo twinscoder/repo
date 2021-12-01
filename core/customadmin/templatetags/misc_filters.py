@@ -36,6 +36,11 @@ def as_json(obj):
     return mark_safe(json.dumps(obj))
 
 
+@register.filter(name="has_group")
+def has_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
+
+
 # -----------------------------------------------------------------------------
 # Misc
 # -----------------------------------------------------------------------------
@@ -67,12 +72,16 @@ def admin_urlname(value, arg):
         pattern = "%s:%s-%s" % ("customadmin", "plan", arg)
     elif value.model_name == "product":
         pattern = "%s:%s-%s" % ("customadmin", "product", arg)
+    elif value.model_name == "storeproduct":
+        pattern = "%s:%s-%s" % ("customadmin", "storeproduct", arg)
     elif value.model_name == "storemanager":
         pattern = "%s:%s-%s" % ("customadmin", "storemanager", arg)
     elif value.model_name == "deliveryboy":
         pattern = "%s:%s-%s" % ("customadmin", "deliveryboy", arg)
     elif value.model_name == "membership":
         pattern = "%s:%s-%s" % ("customadmin", "membership", arg)
+    elif value.model_name == "order":
+        pattern = "%s:%s-%s" % ("customadmin", "order", arg)
     else:
         pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
     # print(pattern)

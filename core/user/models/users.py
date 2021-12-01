@@ -100,7 +100,6 @@ class User(AbstractBaseUser, ActivityTracking, PermissionsMixin):
         verbose_name=_("Unique Id"),
     )
 
-    is_manager = models.BooleanField(default=False, verbose_name=_("Is Manager"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     is_staff = models.BooleanField(default=True, verbose_name=_("Is Staff"))
 

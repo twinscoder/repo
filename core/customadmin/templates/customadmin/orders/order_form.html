@@ -19,66 +19,55 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-sm-6">
-                        {{ form.name|as_crispy_field }}
+                        {{ form.order_status|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.store_manager|as_crispy_field }}
+                        {{ form.customer|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.business_email|as_crispy_field }}
-                    </div>
-
-                    <div class="col-sm-6">
-                        {{ form.phone|as_crispy_field }}
-                    </div>
-
-                    <div class="col-sm-6">
-                        {{ form.address|as_crispy_field }}
+                        {{ form.store|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.city|as_crispy_field }}
+                        {{ form.total_qty|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.state|as_crispy_field }}
+                        {{ form.total_amount|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.country|as_crispy_field }}
+                        {{ form.order_datetime|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.pincode|as_crispy_field }}
+                        {{ form.reason|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.account_name|as_crispy_field }}
+                        {{ form.payment_method|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.account_number|as_crispy_field }}
+                        {{ form.discount_amount|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.bank_name|as_crispy_field }}
+                        {{ form.shipping_charge|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.branch_name|as_crispy_field }}
+                        {{ form.shipping_address|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.branch_address|as_crispy_field }}
+                        {{ form.coupon|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.ifsc_code|as_crispy_field }}
+                        {{ form.discount_type|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.description|as_crispy_field }}
+                        {{ form.order_number|as_crispy_field }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form.image|as_crispy_field }}
+                        {{ form.billing_number|as_crispy_field }}
                     </div>
-                    <div class="col-sm-6">
-                        {{ form.upi_qr_code|as_crispy_field }}
+                    <div class="col-sm-6 mt-4">
+                        {% input_icheck form.status %}
                     </div>
                     <div class="col-sm-12">
-                        {{ form.delivery_boys|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-12 mt-2">
-                        {% input_icheck form.is_active %}
+                        {{ form.product|as_crispy_field }}
                     </div>
                 </div>
             </div>
@@ -100,7 +89,7 @@
 
 <script>
     $(function() {
-        userroles.stores.details();
+        userroles.orders.details();
     });
 </script>
 {% endblock %}
