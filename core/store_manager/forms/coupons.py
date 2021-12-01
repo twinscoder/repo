@@ -1,7 +1,9 @@
 # # -*- coding: utf-8 -*-
 
 from django import forms
-from ..models import Coupon
+
+from core.store_manager.models import category
+from ..models import Coupon, Category, SubCategory, Product
 
 # # -----------------------------------------------------------------------------
 # # Users
@@ -33,6 +35,15 @@ class MyCouponCreationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["category"].queryset = Category.objects.filter(is_active=True)
+        self.fields["sub_category"].queryset = SubCategory.objects.filter(
+            is_active=True
+        ).filter(category__is_active=True)
+        self.fields["product"].queryset = (
+            Product.objects.filter(is_active=True)
+            .filter(category__is_active=True)
+            .filter(sub_category__is_active=True)
+        )
         # for field in self.fields:
         #     self.fields[field].required = True
 
@@ -62,5 +73,14 @@ class MyCouponChangeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["category"].queryset = Category.objects.filter(is_active=True)
+        self.fields["sub_category"].queryset = SubCategory.objects.filter(
+            is_active=True
+        ).filter(category__is_active=True)
+        self.fields["product"].queryset = (
+            Product.objects.filter(is_active=True)
+            .filter(category__is_active=True)
+            .filter(sub_category__is_active=True)
+        )
         # for field in self.fields:
         #     self.fields[field].required = True

@@ -21,7 +21,7 @@ currentYear = datetime.now().year
 
 
 def refer_code_generator(num, str1, str2, size=6):
-    return f"{str1[:2]}y{currentYear[2:]}m{currentMonth}{str2[:2]}c{num}".upper()
+    return f"{str1[:2]}y{currentYear}m{currentMonth}{str2[:2]}c{num}".upper()
 
 
 def membership_card_generator(num):
@@ -72,42 +72,13 @@ def get_deleted_objects(objs):
 def admin_urlname(value, arg):
     """Given model opts (model._meta) and a url name, return a named pattern.
     URLs should be named as: customadmin:app_label:model_name-list"""
-    pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
-    if value.model_name == "user":
-        pattern = "%s:%s-%s" % ("customadmin", "user", arg)
-    if value.model_name == "customer":
-        pattern = "%s:%s-%s" % ("customadmin", "customer", arg)
-    if value.model_name == "customeraddress":
-        pattern = "%s:%s-%s" % ("customadmin", "customeraddress", arg)
-    if value.model_name == "store":
-        pattern = "%s:%s-%s" % ("customadmin", "store", arg)
-    if value.model_name == "category":
-        pattern = "%s:%s-%s" % ("customadmin", "category", arg)
-    if value.model_name == "subcategory":
-        pattern = "%s:%s-%s" % ("customadmin", "subcategory", arg)
-    if value.model_name == "deliverycharge":
-        pattern = "%s:%s-%s" % ("customadmin", "deliverycharge", arg)
-    if value.model_name == "coupon":
-        pattern = "%s:%s-%s" % ("customadmin", "coupon", arg)
-    if value.model_name == "expense":
-        pattern = "%s:%s-%s" % ("customadmin", "expense", arg)
-    if value.model_name == "expensetype":
-        pattern = "%s:%s-%s" % ("customadmin", "expensetype", arg)
-    if value.model_name == "plan":
-        pattern = "%s:%s-%s" % ("customadmin", "plan", arg)
-    if value.model_name == "product":
-        pattern = "%s:%s-%s" % ("customadmin", "product", arg)
-    if value.model_name == "storeproduct":
-        pattern = "%s:%s-%s" % ("customadmin", "storeproduct", arg)
-    if value.model_name == "storemanager":
-        pattern = "%s:%s-%s" % ("customadmin", "storemanager", arg)
-    if value.model_name == "deliveryboy":
-        pattern = "%s:%s-%s" % ("customadmin", "deliveryboy", arg)
-    if value.model_name == "membership":
-        pattern = "%s:%s-%s" % ("customadmin", "membership", arg)
-    if value.model_name == "order":
-        pattern = "%s:%s-%s" % ("customadmin", "order", arg)
-    # print(pattern)
+    if type(value) != str:
+        if value.app_label == "auth":
+            pattern = "customadmin:%s:%s-%s" % (value.app_label, value.model_name, arg)
+        else:
+            pattern = "%s:%s-%s" % ("customadmin", value.model_name, arg)
+    else:
+        pattern = "%s:%s-%s" % ("customadmin", value, arg)
     return pattern
 
 

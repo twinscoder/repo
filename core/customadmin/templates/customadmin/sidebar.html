@@ -4,25 +4,24 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
-
             <li class="nav-header">
                 <a href="{% url 'customadmin:index' %}" class="home-logo-link">
                 <img class="nav-image" src="{% static 'img/logo.png' %}" width="100%" />
                 </a>
             </li>
-            {% if perms.users or request.user|has_group:"manager" %}
-            <li {% if 'users' in request.path or 'groups' in request.path %}class="active" {% endif %}>
+            {% if perms.users or "user.view_user" in request.user.get_group_permissions or "auth.view_group" in request.user.get_group_permissions %}
+            <li {% if 'users/' in request.path or 'groups/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Users &amp; Groups</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "user.view_user" in request.user.get_group_permissions %}
                         <li {% if 'users/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:user-list' %}">Users</a>
                         </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "auth.view_group" in request.user.get_group_permissions %}
                     <li {% if 'groups/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:auth:group-list' %}">Groups</a>
                     </li>
@@ -30,24 +29,24 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "customer.view_customer" in request.user.get_group_permissions  or "customer.view_customeraddress" in request.user.get_group_permissions or "customer.view_membership" in request.user.get_group_permissions %}
             <li {% if 'customers/' in request.path or 'customer-addresses/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Customers</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "customer.view_customer" in request.user.get_group_permissions %}
                         <li {% if 'customers/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:customer-list' %}">Customers</a>
                         </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "customer.view_customeraddress" in request.user.get_group_permissions %}
                     <li {% if 'customer-addresses/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:customeraddress-list' %}">Addresses</a>
                     </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "customer.view_membership" in request.user.get_group_permissions %}
                     <li {% if 'memberships/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:membership-list' %}">Memberships</a>
                     </li>
@@ -55,24 +54,24 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "store_manager.view_category" in request.user.get_group_permissions or "store_manager.view_subcategory" in request.user.get_group_permissions or "store_manager.view_product" in request.user.get_group_permissions %}
             <li {% if 'categories/' in request.path or '/products/' in request.path or 'sub-categories/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Categories & Products</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users %}
+                    {% if perms.users or "store_manager.view_category" in request.user.get_group_permissions %}
                         <li {% if '/categories/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:category-list' %}">Categories</a>
                         </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "store_manager.view_subcategory" in request.user.get_group_permissions %}
                     <li {% if 'sub-categories/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:subcategory-list' %}">Subcategories</a>
                     </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "store_manager.view_product" in request.user.get_group_permissions %}
                     <li {% if '/products/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:product-list' %}">Products</a>
                     </li>
@@ -80,39 +79,39 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "store_manager.view_expense" in request.user.get_group_permissions or "store_manager.view_expensetype" in request.user.get_group_permissions %}
             <li {% if 'expenses/' in request.path or 'expense-types/' in request.path %}class="active" {% endif %}>
                 <a href="">
-                    <span class="nav-label">Expences</span>
+                    <span class="nav-label">Expences & Types</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "store_manager.view_expensetype" in request.user.get_group_permissions %}
+                    <li {% if 'expense-types/' in request.path %}class="active" {% endif %}>
+                        <a href="{% url 'customadmin:expensetype-list' %}">Types</a>
+                    </li>
+                    {% endif %}
+                    {% if perms.users or "store_manager.view_expense" in request.user.get_group_permissions %}
                         <li {% if 'expenses/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:expense-list' %}">Expenses</a>
                         </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
-                    <li {% if 'expense-types/' in request.path %}class="active" {% endif %}>
-                        <a href="{% url 'customadmin:expensetype-list' %}">Expense Types</a>
-                    </li>
-                    {% endif %}
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "store_manager.view_coupon" in request.user.get_group_permissions or "store_manager.view_plan" in request.user.get_group_permissions %}
             <li {% if 'coupons/' in request.path or 'plans/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Coupons & Plans</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "store_manager.view_coupon" in request.user.get_group_permissions %}
                         <li {% if 'coupons/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:coupon-list' %}">Coupons</a>
                         </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "store_manager.view_plan" in request.user.get_group_permissions %}
                     <li {% if 'plans/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:plan-list' %}">Plans</a>
                     </li>
@@ -120,19 +119,19 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "store_manager.view_store" in request.user.get_group_permissions or "store_manager.view_storeproduct" in request.user.get_group_permissions %}
             <li {% if 'stores/' in request.path or '/store-products/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Stores & Products</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "store_manager.view_store" in request.user.get_group_permissions %}
                         <li {% if 'stores/' in request.path %}class="active" {% endif %}>
                             <a href="{% url 'customadmin:store-list' %}">Stores</a>
                         </li>
                     {% endif %}
-                    {% if perms.users or request.user|has_group:"manager" %}
+                    {% if perms.users or "store_manager.view_storeproduct" in request.user.get_group_permissions %}
                     <li {% if '/store-products/' in request.path %}class="active" {% endif %}>
                         <a href="{% url 'customadmin:storeproduct-list' %}">Store Products</a>
                     </li>
@@ -140,21 +139,21 @@
                 </ul>
             </li>
             {% endif %}
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "delivery_agent.view_deliveryboy" in request.user.get_group_permissions %}
             <li {% if 'delivery-boys/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:deliveryboy-list' %}">
                     <span class="nav-label">Delivery Boys</span>
                 </a>
             </li>
             {% endif %}
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "delivery_agent.view_deliverychage" in request.user.get_group_permissions %}
             <li {% if 'delivery-charges/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:deliverycharge-list' %}">
                     <span class="nav-label">Delivery Charges</span>
                 </a>
             </li>
             {% endif %}    
-            {% if perms.users or request.user|has_group:"manager" %}
+            {% if perms.users or "store_manager.view_order" in request.user.get_group_permissions %}
             <li {% if 'orders/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:order-list' %}">
                     <span class="nav-label">Orders</span>

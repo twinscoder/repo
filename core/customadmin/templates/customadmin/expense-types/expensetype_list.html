@@ -25,12 +25,14 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Name</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -38,7 +40,7 @@
                         {% for o in object_list %}
                         <tr>
                             <td>{{ o.name }}</td>
-                            </td>
+                            <td>{% show_check o.is_active %}</td>
                             <td class="row-actions">
                                 {% include "customadmin/partials/list_row_actions.html" %}
                             </td>

@@ -27,7 +27,7 @@ from ..models import Category, SubCategory
 class CategoryListView(MyListView):
     # paginate_by = 25
     model = Category
-    queryset = model.objects.all()
+    queryset = model.objects.none()
     template_name = "customadmin/categories/category_list.html"
     permission_required = ("store_manager.view_category",)
 
@@ -63,6 +63,12 @@ class CategoryAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
         """Get actions column markup."""
 
         t = get_template("customadmin/partials/list_basic_actions.html")
+        return t.render({"obj": obj, "opts": self.model._meta})
+
+    def _get_image(self, obj, **kwargs):
+        """Get actions column markup."""
+
+        t = get_template("customadmin/categories/partials/list_image.html")
         return t.render({"obj": obj})
 
     def filter_queryset(self, qs):
@@ -79,7 +85,9 @@ class CategoryAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
             data.append(
                 {
                     "name": o.name,
-                    # "actions": self._get_actions(o),
+                    "image": self._get_image(o),
+                    "status": o.is_active,
+                    "actions": self._get_actions(o),
                 }
             )
         return data

@@ -125,5 +125,6 @@ class MyCustomerAddressForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["customer"].queryset = Customer.objects.filter(is_active=True)
         for field in self.fields:
             self.fields[field].required = True

@@ -156,23 +156,26 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
                 // Ajax for pagination
-                // processing: true,
-                // serverSide: true,
-                // ajax: {
-                //     url: window.pagination_url,
-                //     type: 'get',
-                //     beforeSend: function(xhr) {                      
-                //         xhr.setRequestHeader(
-                //             "X-CSRFToken",
-                //             $("input[name=csrfmiddlewaretoken]").val()
-                //           );
-                //     },
-                // },
-                // columns: [
-                //     { data: 'name', name: 'name' },
-                //     // { data: 'actions', name: 'actions' },
-                // ],
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                          );
+                    },
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'image', name: 'image' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },
