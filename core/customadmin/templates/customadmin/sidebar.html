@@ -6,7 +6,7 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <a href="{% url 'customadmin:index' %}" class="home-logo-link">
-                <img class="nav-image" src="{% static 'img/logo.png' %}" width="100%" />
+                    <img class="nav-image" src="{% static 'img/logo.png' %}" width="100%" />
                 </a>
             </li>
             {% if perms.users or "user.view_user" in request.user.get_group_permissions or "auth.view_group" in request.user.get_group_permissions %}
@@ -30,7 +30,7 @@
             </li>
             {% endif %}
             {% if perms.users or "customer.view_customer" in request.user.get_group_permissions  or "customer.view_customeraddress" in request.user.get_group_permissions or "customer.view_membership" in request.user.get_group_permissions %}
-            <li {% if 'customers/' in request.path or 'customer-addresses/' in request.path %}class="active" {% endif %}>
+            <li {% if 'customers/' in request.path or 'customer-addresses/' in request.path or 'memberships/' in request.path %}class="active" {% endif %}>
                 <a href="">
                     <span class="nav-label">Customers</span>
                     <span class="fa arrow"></span>
@@ -157,6 +157,13 @@
             <li {% if 'orders/' in request.path %}class="active" {% endif %}>
                 <a href="{% url 'customadmin:order-list' %}">
                     <span class="nav-label">Orders</span>
+                </a>
+            </li>
+            {% endif %}    
+            {% if perms.users %}
+            <li>
+                <a href="#">
+                    <span class="nav-label">Settings</span>
                 </a>
             </li>
             {% endif %}    

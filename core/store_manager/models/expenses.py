@@ -62,7 +62,7 @@ class Expense(ActivityTracking):
     is_active = models.BooleanField(default=True, verbose_name=_("Status"))
 
     def __str__(self):
-        return self.name
+        return f"{self.type.name} - {self.is_active}"
 
     class Meta:
         verbose_name = "Expense"

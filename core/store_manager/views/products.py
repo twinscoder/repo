@@ -65,22 +65,49 @@ class ProductAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequired
         """Get actions column markup."""
         # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        can_update = (
+            True
+            if "store_manager.change_storeproduct"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        can_delete = (
+            True
+            if "store_manager.delete_storeproduct"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        return t.render(
+            {
+                "obj": obj,
+                "opts": self.model._meta,
+                "can_update": can_update,
+                "can_delete": can_delete,
+            }
+        )
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
         # If a search term, filter the query
         if self.search:
-            return qs.filter()
+            return qs.filter(
+                Q(name__icontains=self.search)
+                | Q(category__name__icontains=self.search)
+            )
         return qs
 
     def prepare_results(self, qs):
         # Create row data for datatables
         data = []
         for o in qs:
-            data.append({})
+            data.append(
+                {
+                    "name": o.name,
+                    "category": o.category.name,
+                    "status": o.is_active,
+                    "actions": self._get_actions(o),
+                }
+            )
         return data
 
 
@@ -92,7 +119,7 @@ class ProductAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequired
 class StoreProductListView(MyListView):
     # paginate_by = 25
     model = StoreProduct
-    queryset = model.objects.all()
+    queryset = model.objects.none()
     template_name = "customadmin/products/storeproduct_list.html"
     permission_required = ("store_manager.view_storeproduct",)
 
@@ -124,31 +151,40 @@ class StoreProductAjaxPagination(
     https://bitbucket.org/pigletto/django-datatables-view."""
 
     model = StoreProduct
-    queryset = Product.objects.all().order_by("-created_at")
-
-    def _get_is_superuser(self, obj):
-        """Get boolean column markup."""
-        t = get_template("customadmin/partials/list_boolean.html")
-        return t.render({"bool_val": obj.is_superuser})
+    queryset = StoreProduct.objects.all().order_by("-created_at")
 
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
         # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        can_update = (
+            True
+            if "store_manager.change_storeproduct"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        can_delete = (
+            True
+            if "store_manager.delete_storeproduct"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        return t.render(
+            {
+                "obj": obj,
+                "opts": self.model._meta,
+                "can_update": can_update,
+                "can_delete": can_delete,
+            }
+        )
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
         # If a search term, filter the query
         if self.search:
             return qs.filter(
-                # Q(username__icontains=self.search)
-                # | Q(first_name__icontains=self.search)
-                # | Q(last_name__icontains=self.search)
-                # | Q(state__icontains=self.search)
-                # | Q(year__icontains=self.search)
+                Q(store__name__icontains=self.search)
+                | Q(product__name__icontains=self.search)
             )
         return qs
 
@@ -158,12 +194,10 @@ class StoreProductAjaxPagination(
         for o in qs:
             data.append(
                 {
-                    # "username": o.username,
-                    # "first_name": o.first_name,
-                    # "last_name": o.last_name,
-                    # "is_superuser": self._get_is_superuser(o),
-                    # "modified": o.modified.strftime("%b. %d, %Y, %I:%M %p"),
-                    # "actions": self._get_actions(o),
+                    "store": o.store.name,
+                    "product": o.product.name,
+                    "status": o.is_active,
+                    "actions": self._get_actions(o),
                 }
             )
         return data

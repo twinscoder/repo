@@ -8,16 +8,9 @@
 {% block page_content %}
     {% csrf_token %}
 
-     {% include "customadmin/includes/list_header_card.html" with title="Create new groups" subtitle="Organize permissions into groups. User specific permissions will alwasy take precedence." show_button=True %}
+     {% include "customadmin/includes/list_header_card.html" with title="Create new groups" subtitle="Organize permissions into groups. User specific permissions will always take precedence." show_button=True %}
 
     <div class="ibox float-e-margins">
-        {% comment %} <div class="ibox-title">
-            <div class="ibox-tools">
-                {% if has_add_permission %}
-                <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Add {{ opts.verbose_name|capfirst }}</a>
-                {% endif %}
-            </div>
-        </div> {% endcomment %}
 
         <div class="ibox-content">
             <div class="table-responsive">
@@ -59,7 +52,7 @@
 <script src="{% static 'customadmin/js/userroles.js' %}"></script>
 
 <script>
-    {% comment %} var pagination_url = "{% url opts|admin_urlname:'list-ajax' %}"; {% endcomment %}
+    var pagination_url = "{% url opts|admin_urlname:'list-ajax' %}";
     $(function () {
         userroles.groups.index();
     });

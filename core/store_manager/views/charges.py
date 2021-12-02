@@ -60,29 +60,39 @@ class DeliveryChargeAjaxPagination(
     model = DeliveryCharge
     queryset = DeliveryCharge.objects.all().order_by("-created_at")
 
-    def _get_is_superuser(self, obj):
-        """Get boolean column markup."""
-        t = get_template("customadmin/partials/list_boolean.html")
-        return t.render({"bool_val": obj.is_superuser})
-
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
         # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        can_update = (
+            True
+            if "store_manager.change_deliverycharge"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        can_delete = (
+            True
+            if "store_manager.delete_deliverycharge"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        return t.render(
+            {
+                "obj": obj,
+                "opts": self.model._meta,
+                "can_update": can_update,
+                "can_delete": can_delete,
+            }
+        )
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
         # If a search term, filter the query
         if self.search:
             return qs.filter(
-                # Q(username__icontains=self.search)
-                # | Q(first_name__icontains=self.search)
-                # | Q(last_name__icontains=self.search)
-                # | Q(state__icontains=self.search)
-                # | Q(year__icontains=self.search)
+                Q(min_amount__icontains=self.search)
+                | Q(max_amount__icontains=self.search)
+                | Q(charge_amount__icontains=self.search)
             )
         return qs
 
@@ -92,12 +102,10 @@ class DeliveryChargeAjaxPagination(
         for o in qs:
             data.append(
                 {
-                    # "username": o.username,
-                    # "first_name": o.first_name,
-                    # "last_name": o.last_name,
-                    # "is_superuser": self._get_is_superuser(o),
-                    # "modified": o.modified.strftime("%b. %d, %Y, %I:%M %p"),
-                    # "actions": self._get_actions(o),
+                    "min_amount": o.min_amount,
+                    "max_amount": o.max_amount,
+                    "charge_amount": o.charge_amount,
+                    "actions": self._get_actions(o),
                 }
             )
         return data

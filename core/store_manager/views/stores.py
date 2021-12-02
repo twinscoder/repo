@@ -24,7 +24,7 @@ class StoreListView(MyListView):
     # paginate_by = 25
     ordering = ["name"]
     model = Store
-    # queryset = model.objects.exclude(username="manifestingest")
+    queryset = model.objects.none()
     template_name = "customadmin/stores/store_list.html"
     permission_required = ("store_manager.view_store",)
 
@@ -56,24 +56,35 @@ class StoreAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVi
     model = Store
     queryset = Store.objects.all().order_by("name")
 
-    def _get_is_superuser(self, obj):
-        """Get boolean column markup."""
-        t = get_template("customadmin/partials/list_boolean.html")
-        return t.render({"bool_val": obj.is_superuser})
-
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
-        # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        can_update = (
+            True
+            if "store_manager.change_store" in self.request.user.get_group_permissions()
+            else False
+        )
+        can_delete = (
+            True
+            if "store_manager.delete_store" in self.request.user.get_group_permissions()
+            else False
+        )
+        return t.render(
+            {
+                "obj": obj,
+                "opts": self.model._meta,
+                "can_update": can_update,
+                "can_delete": can_delete,
+            }
+        )
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
         # If a search term, filter the query
         if self.search:
-            return qs.filter()
+            return qs.filter(
+                Q(name__icontains=self.search) | Q(phone__icontains=self.search)
+            )
         return qs
 
     def prepare_results(self, qs):
@@ -82,11 +93,8 @@ class StoreAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVi
         for o in qs:
             data.append(
                 {
-                    "username": o.username,
-                    "first_name": o.first_name,
-                    "last_name": o.last_name,
-                    "is_superuser": self._get_is_superuser(o),
-                    # "modified": o.modified.strftime("%b. %d, %Y, %I:%M %p"),
+                    "name": o.name,
+                    "phone": o.phone,
                     "actions": self._get_actions(o),
                 }
             )
