@@ -23,6 +23,8 @@ class MyExpenseTypeForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].required = True
+
+
 class MyExpenseForm(forms.ModelForm):
     """Custom UserChangeForm."""
 
@@ -38,7 +40,7 @@ class MyExpenseForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['type'] = Expense.objects.filter(is_active=True)
-        self.fields['store'] = Store.objects.filter(is_active=True)
+        self.fields["type"].queryset = ExpenseType.objects.filter(is_active=True)
+        self.fields["store"].queryset = Store.objects.filter(is_active=True)
         for field in self.fields:
             self.fields[field].required = True

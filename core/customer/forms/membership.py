@@ -2,6 +2,9 @@
 
 import datetime
 from django import forms
+
+from core.customer.models.customers import Customer
+from core.store_manager.models.plans import Plan
 from ..models import Membership
 from core.customadmin.utils import membership_card_generator
 
@@ -21,13 +24,17 @@ class MyMembershipCreationForm(forms.ModelForm):
             "is_active",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["customer"].queryset = Customer.objects.filter(is_active=True)
+        self.fields["plan"].queryset = Plan.objects.filter(is_active=True)
+        for field in self.fields:
+            self.fields[field].required = True
+
     def save(self, commit=True):
         instance = super().save(commit=False)
 
         if commit:
-            # days = instance.plan.days + instance.plan.months * 30
-            # instance.start_date = datetime.datetime.now
-            # instance.end_date = datetime.timedelta(days=days)
             instance.save()
             instance.card_number = membership_card_generator(instance.id)
             instance.save()
@@ -45,3 +52,10 @@ class MyMembershipChangeForm(forms.ModelForm):
             "plan",
             "is_active",
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["customer"].queryset = Customer.objects.filter(is_active=True)
+        self.fields["plan"].queryset = Plan.objects.filter(is_active=True)
+        for field in self.fields:
+            self.fields[field].required = True

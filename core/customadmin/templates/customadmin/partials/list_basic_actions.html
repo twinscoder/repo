@@ -1,10 +1,10 @@
 {% load misc_filters %}
 
-{% if has_view_permission or has_change_permission or has_delete_permission %}
+{% if has_view_permission or has_change_permission or has_delete_permission or can_update %}
+    <a href="{% url opts|admin_urlname:'update' obj.pk|admin_urlquote %}" title="Edit" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></a>
 {% endif %}
-    <a href="{% url opts|admin_urlname:'delete' obj.pk|admin_urlquote %}" title="Edit" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></a>
 
-{% if has_delete_permission %}
+{% if has_delete_permission or can_delete %}
     <a data-title="{{ obj }}" title="Delete" href="{% url opts|admin_urlname:'delete' obj.pk|admin_urlquote %}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash"></i></a>
 {% endif %}
 

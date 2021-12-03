@@ -1,0 +1,1 @@
+<button type="button" onclick="changeStatus({{obj.pk}}, '{{obj.username|capfirst}}')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">{% if obj.is_active %}Active{% else %}Deactive{% endif %}</button>

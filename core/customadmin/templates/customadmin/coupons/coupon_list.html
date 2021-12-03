@@ -43,7 +43,7 @@
                         <tr>
                             <td>{{ o.code }}</td>
                             <td>{{ o.discount_type }}</td>
-                            <td>{{ o.is_active }}</td>
+                            <td>{% show_check o.is_active %}</td>
                             </td>
                             <td class="row-actions">
                                 {% include "customadmin/partials/list_row_actions.html" %}

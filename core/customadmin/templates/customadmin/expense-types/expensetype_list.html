@@ -11,13 +11,6 @@
     {% include "customadmin/includes/list_header_card.html" with title="Create a new expense type" subtitle="Create a new expense type." show_button=True %}
 
     <div class="ibox float-e-margins">
-        {% comment %} <div class="ibox-title">
-            <div class="ibox-tools">
-                {% if perms.users.add_user %}
-                <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Add {{ opts.verbose_name|capfirst }}</a>
-                {% endif %}
-            </div>
-        </div> {% endcomment %}
 
         <div class="ibox-content">
             <div class="table-responsive">
@@ -25,12 +18,14 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Name</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -38,7 +33,7 @@
                         {% for o in object_list %}
                         <tr>
                             <td>{{ o.name }}</td>
-                            </td>
+                            <td>{% show_check o.is_active %}</td>
                             <td class="row-actions">
                                 {% include "customadmin/partials/list_row_actions.html" %}
                             </td>

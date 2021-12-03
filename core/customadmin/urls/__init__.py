@@ -194,7 +194,7 @@ urlpatterns = [
         name="category-delete",
     ),
     path(
-        "categories/ajax-stores",
+        "categories/ajax-categories/",
         store_manager_views.CategoryAjaxPagination.as_view(),
         name="category-list-ajax",
     ),

@@ -29,7 +29,7 @@ class UserListView(MyListView):
     # paginate_by = 25
     ordering = ["username"]
     model = User
-    queryset = model.objects.all()
+    queryset = model.objects.none()
     template_name = "customadmin/adminuser/user_list.html"
     permission_required = ("users.view_user",)
 
@@ -95,26 +95,27 @@ class UserAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVie
     model = User
     queryset = User.objects.all().order_by("-created_at")
 
-    def _get_is_superuser(self, obj):
-        """Get boolean column markup."""
-        t = get_template("customadmin/partials/list_boolean.html")
-        return t.render({"bool_val": obj.is_superuser})
-
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
         t = get_template("customadmin/partials/list_basic_actions.html")
-        user_perms = {
-            "view_perm": True
-            if self.request.user.has_perm("%s.%s" % ("core", "view_invite"))
-            else False,
-            "change_perm": True
-            if self.request.user.has_perm("%s.%s" % ("core", "change_invite"))
-            else False,
-            "delete_perm": True
-            if self.request.user.has_perm("%s.%s" % ("core", "delete_invite"))
-            else False,
-        }
-        return t.render({"obj": obj, "user_perms": user_perms})
+        can_update = (
+            True
+            if "user.change_user" in self.request.user.get_group_permissions()
+            else False
+        )
+        can_delete = (
+            True
+            if "user.delete_user" in self.request.user.get_group_permissions()
+            else False
+        )
+        return t.render(
+            {
+                "obj": obj,
+                "opts": self.model._meta,
+                "can_update": can_update,
+                "can_delete": can_delete,
+            }
+        )
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
@@ -122,8 +123,8 @@ class UserAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVie
         if self.search:
             return qs.filter(
                 Q(username__icontains=self.search)
-                | Q(first_name__icontains=self.search)
-                | Q(last_name__icontains=self.search)
+                | Q(email__icontains=self.search)
+                | Q(role__icontains=self.search)
             )
         return qs
 
@@ -134,10 +135,8 @@ class UserAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredVie
             data.append(
                 {
                     "username": o.username,
-                    "first_name": o.first_name,
-                    "last_name": o.last_name,
-                    "is_superuser": self._get_is_superuser(o),
-                    # "modified": o.modified.strftime("%b. %d, %Y, %I:%M %p"),
+                    "email": o.email,
+                    "role": o.role,
                     "actions": self._get_actions(o),
                 }
             )

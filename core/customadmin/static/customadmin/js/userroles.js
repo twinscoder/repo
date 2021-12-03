@@ -18,26 +18,24 @@ var userroles = {
                 },],
 
                 // Ajax for pagination
-                // processing: true,
-                // serverSide: true,
-                // ajax: {
-                //     url: window.pagination_url,
-                //     type: 'get',
-                //     beforeSend: function(xhr) {                      
-                //         xhr.setRequestHeader(
-                //             "X-CSRFToken",
-                //             $("input[name=csrfmiddlewaretoken]").val()
-                //           );
-                //     },
-                // },
-                // columns: [
-                //     { data: 'username', name: 'username' },
-                //     { data: 'first_name', name: 'first_name' },
-                //     { data: 'last_name', name: 'last_name' },
-                //     { data: 'is_superuser', name: 'is_superuser' },
-                //     // { data: 'modified', name: 'modified' },
-                //     { data: 'actions', name: 'actions' }
-                // ],
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                          );
+                    },
+                },
+                columns: [
+                    { data: 'username', name: 'username' },
+                    { data: 'email', name: 'email' },
+                    { data: 'role', name: 'role' },
+                    { data: 'actions', name: 'actions' }
+                ],
             });
 
         },
@@ -72,7 +70,25 @@ var userroles = {
                 columnDefs: [{
                     orderable: false,
                     targets: -1
-                },]
+                },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                          );
+                    },
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'actions', name: 'actions' }
+                ],
             });
         },
 
@@ -103,20 +119,24 @@ var userroles = {
                 },],
 
                 // Ajax for pagination
-                // processing: true,
-                // serverSide: true,
-                // ajax: {
-                //     url: window.pagination_url,
-                //     type: 'get',
-                // },
-                // columns: [
-                //     { data: 'username', name: 'username' },
-                //     { data: 'first_name', name: 'first_name' },
-                //     { data: 'last_name', name: 'last_name' },
-                //     { data: 'is_superuser', name: 'is_superuser' },
-                //     // { data: 'modified', name: 'modified' },
-                //     { data: 'actions', name: 'actions' }
-                // ],
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                          );
+                    },
+                },
+                columns: [
+                    { data: 'username', name: 'username' },
+                    { data: 'email', name: 'email' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' }
+                ],
             });
 
         },
@@ -156,23 +176,26 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
                 // Ajax for pagination
-                // processing: true,
-                // serverSide: true,
-                // ajax: {
-                //     url: window.pagination_url,
-                //     type: 'get',
-                //     beforeSend: function(xhr) {                      
-                //         xhr.setRequestHeader(
-                //             "X-CSRFToken",
-                //             $("input[name=csrfmiddlewaretoken]").val()
-                //           );
-                //     },
-                // },
-                // columns: [
-                //     { data: 'name', name: 'name' },
-                //     // { data: 'actions', name: 'actions' },
-                // ],
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                          );
+                    },
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'image', name: 'image' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },
@@ -190,6 +213,24 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                          );
+                    },
+                },
+                columns: [
+                    { data: 'customer', name: 'customer' },
+                    { data: 'actions', name: 'actions' }
+                ],
             });
 
         },
@@ -207,6 +248,27 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'parent_category', name: 'parent_category' },
+                    { data: 'image', name: 'image' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },
@@ -224,6 +286,26 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'min_amount', name: 'min_amount' },
+                    { data: 'max_amount', name: 'max_amount' },
+                    { data: 'charge_amount', name: 'charge_amount' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },
@@ -302,6 +384,25 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'type', name: 'type' },
+                    { data: 'store', name: 'store' },
+                    { data: 'amount', name: 'amount' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },
@@ -319,6 +420,25 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },
@@ -353,6 +473,25 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'phone', name: 'phone' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },
@@ -377,11 +516,27 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+                
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'category', name: 'category' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
-
-        },
-        details: function () {
-
         },
 
     },
@@ -396,10 +551,27 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
-            });
 
-        },
-        details: function () {
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'store', name: 'store' },
+                    { data: 'product', name: 'product' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' },
+                ],
+            });
 
         },
 
@@ -455,6 +627,26 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                          );
+                    },
+                },
+                columns: [
+                    { data: 'customer', name: 'customer' },
+                    { data: 'plan', name: 'plan' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' }
+                ],
             });
 
         },
@@ -471,6 +663,25 @@ var userroles = {
                     orderable: false,
                     targets: -1
                 },],
+
+                // Ajax for pagination
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: window.pagination_url,
+                    type: 'get',
+                    beforeSend: function(xhr) {                      
+                        xhr.setRequestHeader(
+                            "X-CSRFToken",
+                            $("input[name=csrfmiddlewaretoken]").val()
+                            );
+                    },
+                },
+                columns: [
+                    { data: 'username', name: 'username' },
+                    { data: 'status', name: 'status' },
+                    { data: 'actions', name: 'actions' },
+                ],
             });
 
         },

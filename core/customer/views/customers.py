@@ -46,7 +46,7 @@ class CustomerListView(MyListView):
     # paginate_by = 25
     ordering = ["username"]
     model = Customer
-    queryset = model.objects.all()
+    queryset = model.objects.none()
     template_name = "customadmin/customers/customer_list.html"
     permission_required = ("customer.view_customer",)
 
@@ -78,19 +78,44 @@ class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
     model = Customer
     queryset = Customer.objects.all().order_by("-created_at")
 
+    def _get_status(self, obj, **kwargs):
+        """Get actions column markup."""
+        t = get_template("customadmin/customers/partials/display_status.html")
+        return t.render(
+            {
+                "obj": obj,
+            }
+        )
+
     def _get_actions(self, obj, **kwargs):
         """Get actions column markup."""
-        # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        can_update = (
+            True
+            if "customer.change_customer" in self.request.user.get_group_permissions()
+            else False
+        )
+        can_delete = (
+            True
+            if "customer.delete_customer" in self.request.user.get_group_permissions()
+            else False
+        )
+        return t.render(
+            {
+                "obj": obj,
+                "opts": self.model._meta,
+                "can_update": can_update,
+                "can_delete": can_delete,
+            }
+        )
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
         # If a search term, filter the query
         if self.search:
-            return qs.filter(Q(username__icontains=self.search))
+            return qs.filter(
+                Q(username__icontains=self.search) | Q(email__icontains=self.search)
+            )
         return qs
 
     def prepare_results(self, qs):
@@ -100,6 +125,9 @@ class CustomerAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequire
             data.append(
                 {
                     "username": o.username,
+                    "email": o.email,
+                    "status": self._get_status(o),
+                    "actions": self._get_actions(o),
                 }
             )
         return data
@@ -150,20 +178,42 @@ class CustomerAddressAjaxPagination(
         """Get actions column markup."""
         # ctx = super().get_context_data(**kwargs)
         t = get_template("customadmin/partials/list_basic_actions.html")
-        # ctx.update({"obj": obj})
-        # print(ctx)
-        return t.render({"o": obj})
+        can_update = (
+            True
+            if "customer.change_customeraddress"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        can_delete = (
+            True
+            if "customer.delete_customeraddress"
+            in self.request.user.get_group_permissions()
+            else False
+        )
+        return t.render(
+            {
+                "obj": obj,
+                "opts": self.model._meta,
+                "can_update": can_update,
+                "can_delete": can_delete,
+            }
+        )
 
     def filter_queryset(self, qs):
         """Return the list of items for this view."""
         # If a search term, filter the query
         if self.search:
-            return qs.filter()
+            return qs.filter(Q(customer__username__icontains=self.search))
         return qs
 
     def prepare_results(self, qs):
         # Create row data for datatables
         data = []
         for o in qs:
-            data.append({})
+            data.append(
+                {
+                    "customer": o.customer.username,
+                    "actions": self._get_actions(o),
+                }
+            )
         return data
